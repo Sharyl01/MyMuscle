@@ -1,6 +1,6 @@
-export const LAUNCH_AT_UTC_ISO = "2026-05-15T19:00:00.000Z";
+export const LAUNCH_AT_UTC_ISO = "2026-09-04T19:00:00.000Z";
 export const LAUNCH_AT_UTC_MS = Date.parse(LAUNCH_AT_UTC_ISO);
-export const LAUNCH_DISPLAY = "15 May 2026, 19:00 UTC";
+export const LAUNCH_DISPLAY = "4 September 2026, 19:00 UTC";
 
 export type TimeUnit = {
   label: string;
