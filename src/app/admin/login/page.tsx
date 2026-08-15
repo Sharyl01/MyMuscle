@@ -11,9 +11,14 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function AdminLoginPage() {
+export default async function AdminLoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ password?: string }>;
+}) {
   const identity = await getAdminIdentity();
   if (identity) redirect("/admin");
+  const { password } = await searchParams;
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-12">
@@ -51,7 +56,7 @@ export default async function AdminLoginPage() {
             registratie voor dit dashboard.
           </p>
 
-          <LoginForm />
+          <LoginForm passwordUpdated={password === "updated"} />
         </section>
       </div>
     </main>
