@@ -120,8 +120,22 @@ export function LoginForm({ passwordUpdated = false }: { passwordUpdated?: boole
   const [recoveryError, setRecoveryError] = useState<string | null>(null);
 
   useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
     const hash = new URLSearchParams(window.location.hash.slice(1));
-    if (hash.get("type") !== "recovery") return;
+    const isRecoveryCallback =
+      query.has("code") || hash.get("type") === "recovery";
+    const callbackError =
+      query.get("error_description") ?? hash.get("error_description");
+
+    if (!isRecoveryCallback && !callbackError) return;
+
+    if (callbackError) {
+      window.history.replaceState(null, "", "/admin/login");
+      const errorTimer = window.setTimeout(() => {
+        setRecoveryError("Deze herstel-link is ongeldig of verlopen.");
+      }, 0);
+      return () => window.clearTimeout(errorTimer);
+    }
 
     let active = true;
     const supabase = createClient();
@@ -131,10 +145,12 @@ export function LoginForm({ passwordUpdated = false }: { passwordUpdated?: boole
       if (!active) return;
 
       if (error || !data.session) {
+        window.history.replaceState(null, "", "/admin/login");
         setRecoveryError("Deze herstel-link is ongeldig of verlopen.");
         return;
       }
 
+      window.history.replaceState(null, "", "/admin/login");
       setRecoveryReady(true);
     };
 
