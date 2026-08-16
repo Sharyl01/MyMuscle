@@ -39,6 +39,64 @@ const platformLabels: Record<string, string> = {
   unknown: "Onbekend",
 };
 
+const appCategoryDefinitions = [
+  {
+    key: "overview",
+    label: "Overzicht",
+    featureKeys: [
+      "weekly_overview",
+      "workout_logging",
+      "workout_presets",
+      "training_plan",
+    ],
+  },
+  {
+    key: "exercises",
+    label: "Exercises",
+    featureKeys: ["exercise_search", "exercise_detail"],
+  },
+  {
+    key: "muscle-model",
+    label: "Spiermodel",
+    featureKeys: ["muscle_model", "recovery_mode"],
+  },
+  {
+    key: "pr-log",
+    label: "PR-log",
+    featureKeys: ["personal_records", "progress_overview", "total_progress"],
+  },
+  {
+    key: "groups",
+    label: "Groepen",
+    featureKeys: ["community"],
+  },
+  {
+    key: "badges",
+    label: "Badges",
+    featureKeys: ["badges"],
+  },
+  {
+    key: "wardrobe",
+    label: "Wardrobe",
+    featureKeys: ["wardrobe"],
+  },
+  {
+    key: "settings",
+    label: "Settings",
+    featureKeys: [],
+  },
+] as const;
+
+type AppCategoryMetric = {
+  key: string;
+  label: string;
+  features: FeatureMetric[];
+  events: number;
+  sharePercentage: number;
+  lastUsedAt: string | null;
+  sortOrder: number;
+};
+
 const formatDate = (value: string) => {
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? "—" : dateFormatter.format(date);
@@ -188,25 +246,89 @@ function ActivityChart({ daily }: { daily: DailyMetric[] }) {
   );
 }
 
+function buildAppCategoryMetrics(features: FeatureMetric[]): AppCategoryMetric[] {
+  const assignedFeatureKeys = new Set<string>(
+    appCategoryDefinitions.flatMap((category) => category.featureKeys),
+  );
+  const totalEvents = features.reduce((sum, feature) => sum + feature.events, 0);
+  const categories: AppCategoryMetric[] = appCategoryDefinitions.map(
+    (category, sortOrder) => {
+      const categoryFeatures = features
+        .filter((feature) =>
+          category.featureKeys.some((featureKey) => featureKey === feature.featureKey),
+        )
+        .sort((a, b) => b.events - a.events || b.users - a.users);
+      const events = categoryFeatures.reduce((sum, feature) => sum + feature.events, 0);
+      const lastUsedAt = categoryFeatures.reduce<string | null>((latest, feature) => {
+        if (!feature.lastUsedAt) return latest;
+        if (!latest) return feature.lastUsedAt;
+        return Date.parse(feature.lastUsedAt) > Date.parse(latest)
+          ? feature.lastUsedAt
+          : latest;
+      }, null);
+
+      return {
+        key: category.key,
+        label: category.label,
+        features: categoryFeatures,
+        events,
+        sharePercentage: totalEvents ? Math.round((events / totalEvents) * 1000) / 10 : 0,
+        lastUsedAt,
+        sortOrder,
+      };
+    },
+  );
+  const unassignedFeatures = features.filter(
+    (feature) => !assignedFeatureKeys.has(feature.featureKey),
+  );
+
+  if (unassignedFeatures.length) {
+    const events = unassignedFeatures.reduce((sum, feature) => sum + feature.events, 0);
+    const lastUsedAt = unassignedFeatures.reduce<string | null>((latest, feature) => {
+      if (!feature.lastUsedAt) return latest;
+      if (!latest) return feature.lastUsedAt;
+      return Date.parse(feature.lastUsedAt) > Date.parse(latest)
+        ? feature.lastUsedAt
+        : latest;
+    }, null);
+
+    categories.push({
+      key: "other",
+      label: "Overig",
+      features: unassignedFeatures.sort(
+        (a, b) => b.events - a.events || b.users - a.users,
+      ),
+      events,
+      sharePercentage: totalEvents ? Math.round((events / totalEvents) * 1000) / 10 : 0,
+      lastUsedAt,
+      sortOrder: appCategoryDefinitions.length,
+    });
+  }
+
+  return categories.sort(
+    (a, b) => b.events - a.events || a.sortOrder - b.sortOrder,
+  );
+}
+
 function FeatureTable({ features }: { features: FeatureMetric[] }) {
-  const maxEvents = Math.max(1, ...features.map((feature) => feature.events));
+  const categories = buildAppCategoryMetrics(features);
+  const maxEvents = Math.max(1, ...categories.map((category) => category.events));
 
   return (
     <div className="mt-5 overflow-x-auto">
       <table className="w-full min-w-[760px] border-separate border-spacing-0 text-left">
         <thead>
           <tr className="text-xs uppercase tracking-[0.16em] text-slate-500">
-            <th className="border-b border-white/8 px-3 py-3 font-semibold">Functie</th>
+            <th className="border-b border-white/8 px-3 py-3 font-semibold">Apponderdeel</th>
             <th className="border-b border-white/8 px-3 py-3 font-semibold">Gebruik</th>
             <th className="border-b border-white/8 px-3 py-3 text-right font-semibold">Events</th>
-            <th className="border-b border-white/8 px-3 py-3 text-right font-semibold">Gebruikers</th>
             <th className="border-b border-white/8 px-3 py-3 text-right font-semibold">Aandeel</th>
             <th className="border-b border-white/8 px-3 py-3 text-right font-semibold">Laatst</th>
           </tr>
         </thead>
         <tbody>
-          {features.map((feature, index) => (
-            <tr key={feature.featureKey} className="group text-sm text-slate-300">
+          {categories.map((category, index) => (
+            <tr key={category.key} className="group text-sm text-slate-300">
               <td className="border-b border-white/6 px-3 py-4">
                 <div className="flex items-start gap-3">
                   <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/5 font-display text-xs text-slate-400">
@@ -214,10 +336,12 @@ function FeatureTable({ features }: { features: FeatureMetric[] }) {
                   </span>
                   <span>
                     <span className="block font-semibold text-white">
-                      {feature.displayName}
+                      {category.label}
                     </span>
                     <span className="mt-1 block text-xs text-slate-500">
-                      {feature.category}
+                      {category.features.length
+                        ? category.features.map((feature) => feature.displayName).join(" · ")
+                        : "Nog niet gekoppeld aan een meting"}
                     </span>
                   </span>
                 </div>
@@ -226,21 +350,18 @@ function FeatureTable({ features }: { features: FeatureMetric[] }) {
                 <div className="h-2 overflow-hidden rounded-full bg-white/6">
                   <div
                     className="h-full rounded-full bg-[linear-gradient(90deg,#34d399,#60a5fa)]"
-                    style={{ width: `${(feature.events / maxEvents) * 100}%` }}
+                    style={{ width: `${(category.events / maxEvents) * 100}%` }}
                   />
                 </div>
               </td>
               <td className="border-b border-white/6 px-3 py-4 text-right font-semibold text-slate-100">
-                {numberFormatter.format(feature.events)}
+                {numberFormatter.format(category.events)}
               </td>
               <td className="border-b border-white/6 px-3 py-4 text-right">
-                {numberFormatter.format(feature.users)}
-              </td>
-              <td className="border-b border-white/6 px-3 py-4 text-right">
-                {feature.sharePercentage}%
+                {category.sharePercentage}%
               </td>
               <td className="border-b border-white/6 px-3 py-4 text-right text-xs text-slate-500">
-                {formatDateTime(feature.lastUsedAt)}
+                {formatDateTime(category.lastUsedAt)}
               </td>
             </tr>
           ))}
@@ -496,10 +617,10 @@ export function AdminDashboard({
         <section className="surface-card mt-6 rounded-2xl p-5 sm:p-7">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-              Functieranglijst
+              Categorieranglijst
             </p>
             <h2 className="font-display mt-2 text-2xl font-semibold text-white">
-              Meest tot minst gebruikt
+              Apponderdelen van meest tot minst gebruikt
             </h2>
           </div>
           <FeatureTable features={analytics.features} />
