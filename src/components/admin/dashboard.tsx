@@ -315,58 +315,138 @@ function FeatureTable({ features }: { features: FeatureMetric[] }) {
   const maxEvents = Math.max(1, ...categories.map((category) => category.events));
 
   return (
-    <div className="mt-5 overflow-x-auto">
-      <table className="w-full min-w-[760px] border-separate border-spacing-0 text-left">
-        <thead>
-          <tr className="text-xs uppercase tracking-[0.16em] text-slate-500">
-            <th className="border-b border-white/8 px-3 py-3 font-semibold">Apponderdeel</th>
-            <th className="border-b border-white/8 px-3 py-3 font-semibold">Gebruik</th>
-            <th className="border-b border-white/8 px-3 py-3 text-right font-semibold">Events</th>
-            <th className="border-b border-white/8 px-3 py-3 text-right font-semibold">Aandeel</th>
-            <th className="border-b border-white/8 px-3 py-3 text-right font-semibold">Laatst</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categories.map((category, index) => (
-            <tr key={category.key} className="group text-sm text-slate-300">
-              <td className="border-b border-white/6 px-3 py-4">
-                <div className="flex items-start gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/5 font-display text-xs text-slate-400">
+    <div className="mt-5">
+      <div className="hidden grid-cols-[minmax(230px,1fr)_minmax(120px,0.6fr)_80px_80px_24px] gap-4 px-4 pb-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 lg:grid xl:grid-cols-[minmax(230px,1fr)_minmax(120px,0.6fr)_80px_80px_140px_24px]">
+        <span>Apponderdeel</span>
+        <span>Gebruik</span>
+        <span className="text-right">Events</span>
+        <span className="text-right">Aandeel</span>
+        <span className="hidden text-right xl:block">Laatst</span>
+        <span className="sr-only">Open details</span>
+      </div>
+
+      <div className="space-y-3">
+        {categories.map((category, index) => {
+          const maxFeatureEvents = Math.max(
+            1,
+            ...category.features.map((feature) => feature.events),
+          );
+
+          return (
+            <details
+              key={category.key}
+              className="group overflow-hidden rounded-xl border border-white/8 bg-black/15 open:border-emerald-300/20 open:bg-white/[0.025]"
+            >
+              <summary className="grid cursor-pointer list-none grid-cols-[minmax(0,1fr)_24px] items-center gap-4 px-4 py-4 text-sm text-slate-300 transition hover:bg-white/[0.035] focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-emerald-300/70 sm:grid-cols-[minmax(0,1fr)_80px_24px] lg:grid-cols-[minmax(230px,1fr)_minmax(120px,0.6fr)_80px_80px_24px] xl:grid-cols-[minmax(230px,1fr)_minmax(120px,0.6fr)_80px_80px_140px_24px] [&::-webkit-details-marker]:hidden">
+                <span className="flex min-w-0 items-start gap-3">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/5 font-display text-xs text-slate-400">
                     {index + 1}
                   </span>
-                  <span>
+                  <span className="min-w-0">
                     <span className="block font-semibold text-white">
                       {category.label}
                     </span>
-                    <span className="mt-1 block text-xs text-slate-500">
+                    <span className="mt-1 block truncate text-xs text-slate-500">
                       {category.features.length
-                        ? category.features.map((feature) => feature.displayName).join(" · ")
+                        ? `${category.features.length} gemeten ${category.features.length === 1 ? "onderdeel" : "onderdelen"}`
                         : "Nog niet gekoppeld aan een meting"}
                     </span>
                   </span>
+                </span>
+
+                <span className="hidden lg:block">
+                  <span className="block h-2 overflow-hidden rounded-full bg-white/6">
+                    <span
+                      className="block h-full rounded-full bg-[linear-gradient(90deg,#34d399,#60a5fa)]"
+                      style={{ width: `${(category.events / maxEvents) * 100}%` }}
+                    />
+                  </span>
+                </span>
+                <span className="hidden text-right font-semibold text-slate-100 sm:block">
+                  {numberFormatter.format(category.events)}
+                </span>
+                <span className="hidden text-right lg:block">
+                  {category.sharePercentage}%
+                </span>
+                <span className="hidden text-right text-xs text-slate-500 xl:block">
+                  {formatDateTime(category.lastUsedAt)}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="text-center text-lg text-slate-500 transition group-open:rotate-180 group-open:text-emerald-200"
+                >
+                  ⌄
+                </span>
+              </summary>
+
+              {category.features.length ? (
+                <div className="border-t border-white/8 bg-black/15 px-4 pb-4 pt-2">
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[720px] border-separate border-spacing-0 text-left">
+                      <thead>
+                        <tr className="text-[11px] uppercase tracking-[0.14em] text-slate-600">
+                          <th className="px-3 py-3 font-semibold">Onderdeel</th>
+                          <th className="px-3 py-3 font-semibold">Gebruik binnen categorie</th>
+                          <th className="px-3 py-3 text-right font-semibold">Events</th>
+                          <th className="px-3 py-3 text-right font-semibold">Gebruikers</th>
+                          <th className="px-3 py-3 text-right font-semibold">Binnen categorie</th>
+                          <th className="px-3 py-3 text-right font-semibold">Laatst</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {category.features.map((feature, featureIndex) => {
+                          const categoryPercentage = category.events
+                            ? Math.round((feature.events / category.events) * 1000) / 10
+                            : 0;
+
+                          return (
+                            <tr key={feature.featureKey} className="text-sm text-slate-400">
+                              <td className="border-t border-white/6 px-3 py-3.5">
+                                <span className="mr-2 text-xs text-slate-600">
+                                  {featureIndex + 1}.
+                                </span>
+                                <span className="font-semibold text-slate-200">
+                                  {feature.displayName}
+                                </span>
+                              </td>
+                              <td className="w-[25%] border-t border-white/6 px-3 py-3.5">
+                                <span className="block h-1.5 overflow-hidden rounded-full bg-white/6">
+                                  <span
+                                    className="block h-full rounded-full bg-emerald-300/70"
+                                    style={{
+                                      width: `${(feature.events / maxFeatureEvents) * 100}%`,
+                                    }}
+                                  />
+                                </span>
+                              </td>
+                              <td className="border-t border-white/6 px-3 py-3.5 text-right font-semibold text-slate-200">
+                                {numberFormatter.format(feature.events)}
+                              </td>
+                              <td className="border-t border-white/6 px-3 py-3.5 text-right">
+                                {numberFormatter.format(feature.users)}
+                              </td>
+                              <td className="border-t border-white/6 px-3 py-3.5 text-right">
+                                {categoryPercentage}%
+                              </td>
+                              <td className="border-t border-white/6 px-3 py-3.5 text-right text-xs text-slate-500">
+                                {formatDateTime(feature.lastUsedAt)}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </td>
-              <td className="w-[28%] border-b border-white/6 px-3 py-4">
-                <div className="h-2 overflow-hidden rounded-full bg-white/6">
-                  <div
-                    className="h-full rounded-full bg-[linear-gradient(90deg,#34d399,#60a5fa)]"
-                    style={{ width: `${(category.events / maxEvents) * 100}%` }}
-                  />
-                </div>
-              </td>
-              <td className="border-b border-white/6 px-3 py-4 text-right font-semibold text-slate-100">
-                {numberFormatter.format(category.events)}
-              </td>
-              <td className="border-b border-white/6 px-3 py-4 text-right">
-                {category.sharePercentage}%
-              </td>
-              <td className="border-b border-white/6 px-3 py-4 text-right text-xs text-slate-500">
-                {formatDateTime(category.lastUsedAt)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              ) : (
+                <p className="border-t border-white/8 bg-black/15 px-5 py-5 text-sm leading-6 text-slate-500">
+                  Voor {category.label} wordt nog geen apart analytics-event opgeslagen.
+                </p>
+              )}
+            </details>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -622,6 +702,9 @@ export function AdminDashboard({
             <h2 className="font-display mt-2 text-2xl font-semibold text-white">
               Apponderdelen van meest tot minst gebruikt
             </h2>
+            <p className="mt-2 text-sm text-slate-500">
+              Klik op een apponderdeel om de onderliggende functies te analyseren.
+            </p>
           </div>
           <FeatureTable features={analytics.features} />
         </section>
