@@ -1,4 +1,5 @@
 import { AppShowcase } from "@/components/landing/app-showcase";
+import { WebsiteVisitTracker } from "@/components/analytics/website-visit-tracker";
 import { CountdownTimer } from "@/components/landing/countdown-timer";
 import { CtaLink } from "@/components/landing/cta-link";
 import { LandingBackground } from "@/components/landing/landing-background";
@@ -6,6 +7,7 @@ import { ModeVisualization } from "@/components/landing/mode-visualization";
 import { SectionHeading } from "@/components/landing/section-heading";
 import { SiteFooter } from "@/components/landing/site-footer";
 import { SiteHeader } from "@/components/landing/site-header";
+import { WaitlistButton } from "@/components/landing/waitlist-button";
 import { LAUNCH_DISPLAY } from "@/lib/launch";
 
 const featureCards = [
@@ -110,6 +112,7 @@ const audienceSegments = [
 export default function Home() {
   return (
     <main className="relative overflow-hidden">
+      <WebsiteVisitTracker />
       <LandingBackground />
       <SiteHeader />
 
@@ -140,12 +143,9 @@ export default function Home() {
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <CtaLink href="#download">Download App</CtaLink>
-              <CtaLink
-                href="mailto:support@mymuscle.app?subject=Join%20the%20MyMuscle%20waitlist"
-                variant="secondary"
-              >
+              <WaitlistButton variant="secondary">
                 Join Waitlist
-              </CtaLink>
+              </WaitlistButton>
             </div>
 
             <div className="mt-10 grid gap-3 sm:grid-cols-3">
@@ -352,9 +352,9 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-4 sm:flex-row lg:flex-col">
-              <CtaLink href="mailto:support@mymuscle.app?subject=Join%20the%20MyMuscle%20waitlist">
+              <WaitlistButton>
                 Join the Waitlist
-              </CtaLink>
+              </WaitlistButton>
               <CtaLink href="mailto:support@mymuscle.app" variant="secondary">
                 Contact Support
               </CtaLink>
