@@ -20,7 +20,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[linear-gradient(135deg,#f8fafc,#a7f3d0_44%,#7dd3fc)] px-6 py-3 text-sm font-extrabold text-zinc-950 transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60"
+      className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[linear-gradient(135deg,#f8fafc,#a7f3d0_44%,#7dd3fc)] px-6 py-3 text-sm font-extrabold !text-zinc-950 transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60"
     >
       {pending ? "Joining…" : "Join the waitlist"}
     </button>
