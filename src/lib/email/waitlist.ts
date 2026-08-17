@@ -31,6 +31,8 @@ export async function sendWaitlistConfirmation(email: string) {
         "",
         "We’ll email you when the app is almost ready to launch, so you’ll be among the first to know.",
         "",
+        "To make sure you don't miss our launch email, add noreply@mymuscle.app to your contacts and check your spam folder.",
+        "",
         "Keep training smart,",
         "MyMuscle",
         "",
@@ -42,6 +44,7 @@ export async function sendWaitlistConfirmation(email: string) {
             <div style="font-size:13px;font-weight:700;letter-spacing:2px;color:#6ee7b7;text-transform:uppercase">MyMuscle</div>
             <h1 style="font-size:30px;line-height:1.2;margin:18px 0;color:#fff">You’re on the waitlist.</h1>
             <p style="font-size:16px;line-height:1.7;color:#cbd5e1;margin:0 0 18px">Thanks for joining MyMuscle. We’ll email you when the app is almost ready to launch, so you’ll be among the first to know.</p>
+            <p style="font-size:14px;line-height:1.7;color:#94a3b8;margin:0 0 18px">To make sure you don’t miss our launch email, add <strong style="color:#e2e8f0">noreply@mymuscle.app</strong> to your contacts and check your spam folder.</p>
             <p style="font-size:16px;line-height:1.7;color:#cbd5e1;margin:0">Keep training smart,<br><strong style="color:#fff">MyMuscle</strong></p>
             <p style="font-size:13px;line-height:1.6;color:#64748b;margin:30px 0 0">Questions? Email <a href="mailto:support@mymuscle.app" style="color:#7dd3fc">support@mymuscle.app</a>.</p>
           </div>
