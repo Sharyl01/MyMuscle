@@ -6,7 +6,7 @@ type CtaLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
 
 const variantClasses = {
   primary:
-    "bg-[linear-gradient(135deg,#f8fafc,#a7f3d0_44%,#7dd3fc)] font-extrabold !text-zinc-950 shadow-[0_18px_50px_rgba(45,212,191,0.2)] ring-1 ring-white/60 hover:brightness-110",
+    "bg-[linear-gradient(135deg,#0f766e,#0891b2)] font-extrabold !text-white shadow-[0_16px_42px_rgba(8,145,178,0.2)] ring-1 ring-cyan-200/25 hover:brightness-110",
   secondary:
     "border border-white/12 bg-white/[0.035] font-semibold text-white hover:border-emerald-300/35 hover:bg-white/[0.07]",
 };

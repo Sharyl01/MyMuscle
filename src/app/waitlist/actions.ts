@@ -34,7 +34,8 @@ export async function joinWaitlist(
   if (error?.code === "23505") {
     return {
       status: "success",
-      message: "This email is already on the waitlist. You’re all set.",
+      message:
+        "This email is already on the waitlist. If you missed our confirmation, check your spam folder.",
     };
   }
 
@@ -53,7 +54,7 @@ export async function joinWaitlist(
   return {
     status: "success",
     message: confirmationSent
-      ? "You’re on the list. Check your inbox for confirmation."
+      ? "You’re on the list. Check your inbox for confirmation — and your spam folder if it’s not there."
       : "You’re on the list. We’ll email you when MyMuscle is almost live.",
   };
 }
