@@ -2,16 +2,7 @@
 
 import { sendWaitlistConfirmation } from "@/lib/email/waitlist";
 import { createClient } from "@/lib/supabase/server";
-
-export type WaitlistState = {
-  status: "idle" | "success" | "error";
-  message: string;
-};
-
-export const initialWaitlistState: WaitlistState = {
-  status: "idle",
-  message: "",
-};
+import type { WaitlistState } from "@/lib/waitlist/state";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

@@ -4,11 +4,9 @@ import Link from "next/link";
 import { useActionState, useEffect, useId, useState, type ReactNode } from "react";
 import { createPortal, useFormStatus } from "react-dom";
 
-import {
-  initialWaitlistState,
-  joinWaitlist,
-} from "@/app/waitlist/actions";
+import { joinWaitlist } from "@/app/waitlist/actions";
 import { CtaButton } from "@/components/landing/cta-link";
+import { initialWaitlistState } from "@/lib/waitlist/state";
 
 type WaitlistButtonProps = {
   children?: ReactNode;

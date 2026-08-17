@@ -12,14 +12,15 @@ export async function sendWaitlistConfirmation(email: string) {
     .update(`mymuscle-waitlist:${email}`)
     .digest("hex");
 
-  const response = await fetch(RESEND_ENDPOINT, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-      "Idempotency-Key": `waitlist-${idempotencyKey}`,
-    },
-    body: JSON.stringify({
+  try {
+    const response = await fetch(RESEND_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        "Idempotency-Key": `waitlist-${idempotencyKey}`,
+      },
+      body: JSON.stringify({
       from:
         process.env.WAITLIST_FROM_EMAIL ??
         "MyMuscle <noreply@mymuscle.app>",
@@ -45,18 +46,24 @@ export async function sendWaitlistConfirmation(email: string) {
             <p style="font-size:13px;line-height:1.6;color:#64748b;margin:30px 0 0">Questions? Email <a href="mailto:support@mymuscle.app" style="color:#7dd3fc">support@mymuscle.app</a>.</p>
           </div>
         </div>`,
-    }),
-    cache: "no-store",
-  });
+      }),
+      cache: "no-store",
+    });
 
-  if (!response.ok) {
-    const detail = await response.text();
-    console.error("Waitlist confirmation could not be sent", {
-      status: response.status,
-      detail: detail.slice(0, 500),
+    if (!response.ok) {
+      const detail = await response.text();
+      console.error("Waitlist confirmation could not be sent", {
+        status: response.status,
+        detail: detail.slice(0, 500),
+      });
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Waitlist confirmation request failed", {
+      message: error instanceof Error ? error.message : "Unknown error",
     });
     return false;
   }
-
-  return true;
 }
