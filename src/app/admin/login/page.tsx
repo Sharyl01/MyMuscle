@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { LoginForm } from "@/components/admin/login-form";
 import { LandingBackground } from "@/components/landing/landing-background";
 import { getAdminIdentity } from "@/lib/admin/auth";
+import { hasPendingChallenge } from "@/lib/admin/two-factor";
 
 export const metadata: Metadata = {
   title: "Admin login",
@@ -18,7 +19,10 @@ export default async function AdminLoginPage({
 }) {
   const identity = await getAdminIdentity();
   if (identity) redirect("/admin");
-  const { password } = await searchParams;
+  const [{ password }, verificationPending] = await Promise.all([
+    searchParams,
+    hasPendingChallenge(),
+  ]);
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-12">
@@ -56,7 +60,10 @@ export default async function AdminLoginPage({
             registratie voor dit dashboard.
           </p>
 
-          <LoginForm passwordUpdated={password === "updated"} />
+          <LoginForm
+            passwordUpdated={password === "updated"}
+            initialVerificationPending={verificationPending}
+          />
         </section>
       </div>
     </main>

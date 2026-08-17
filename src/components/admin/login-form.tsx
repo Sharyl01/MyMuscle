@@ -3,14 +3,25 @@
 import { FormEvent, useActionState, useEffect, useState } from "react";
 
 import {
+  cancelAdminVerification,
   login,
   requestPasswordReset,
+  verifyAdminCode,
   type LoginState,
   type PasswordResetRequestState,
+  type VerificationState,
 } from "@/app/admin/actions";
 import { createClient } from "@/lib/supabase/client";
 
-const initialState: LoginState = { error: null, username: "" };
+const initialState: LoginState = {
+  error: null,
+  username: "",
+  verificationPending: false,
+};
+const initialVerificationState: VerificationState = {
+  error: null,
+  active: true,
+};
 const initialResetState: PasswordResetRequestState = {
   error: null,
   sent: false,
@@ -109,8 +120,19 @@ function RecoveryForm() {
   );
 }
 
-export function LoginForm({ passwordUpdated = false }: { passwordUpdated?: boolean }) {
-  const [state, formAction, pending] = useActionState(login, initialState);
+export function LoginForm({
+  passwordUpdated = false,
+  initialVerificationPending = false,
+}: {
+  passwordUpdated?: boolean;
+  initialVerificationPending?: boolean;
+}) {
+  const [state, formAction, pending] = useActionState(login, {
+    ...initialState,
+    verificationPending: initialVerificationPending,
+  });
+  const [verificationState, verificationAction, verificationPending] =
+    useActionState(verifyAdminCode, initialVerificationState);
   const [resetState, resetAction, resetPending] = useActionState(
     requestPasswordReset,
     initialResetState,
@@ -179,6 +201,76 @@ export function LoginForm({ passwordUpdated = false }: { passwordUpdated?: boole
         >
           Nieuwe resetmail aanvragen
         </button>
+      </div>
+    );
+  }
+
+  const showVerification =
+    verificationState.active && state.verificationPending;
+
+  if (showVerification) {
+    return (
+      <div className="mt-8 space-y-5">
+        <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-4">
+          <p className="text-sm font-semibold text-emerald-100">
+            Controleer je e-mail
+          </p>
+          <p className="mt-1 text-sm leading-6 text-emerald-100/70">
+            We hebben vanaf noreply@mymuscle.app een zescijferige code naar
+            het gekoppelde e-mailadres gestuurd. De code is 10 minuten geldig.
+          </p>
+        </div>
+
+        <form action={verificationAction} className="space-y-5">
+          <div>
+            <label
+              htmlFor="verificationCode"
+              className="text-sm font-semibold text-slate-200"
+            >
+              Verificatiecode
+            </label>
+            <input
+              id="verificationCode"
+              name="verificationCode"
+              type="text"
+              required
+              minLength={6}
+              maxLength={6}
+              inputMode="numeric"
+              pattern="[0-9]{6}"
+              autoComplete="one-time-code"
+              autoFocus
+              className="mt-2 w-full rounded-xl border border-white/12 bg-black/30 px-4 py-3.5 text-center font-mono text-2xl tracking-[0.35em] text-white outline-none transition placeholder:text-slate-700 focus:border-emerald-300/60 focus:ring-4 focus:ring-emerald-400/10"
+              placeholder="000000"
+            />
+          </div>
+
+          {verificationState.error ? (
+            <p
+              role="alert"
+              className="rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm text-red-100"
+            >
+              {verificationState.error}
+            </p>
+          ) : null}
+
+          <button
+            type="submit"
+            disabled={verificationPending}
+            className="flex w-full items-center justify-center rounded-xl bg-[linear-gradient(120deg,#facc15,#34d399_52%,#60a5fa)] px-5 py-3.5 font-display text-sm font-bold text-zinc-950 shadow-[0_16px_45px_rgba(52,211,153,0.2)] transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60"
+          >
+            {verificationPending ? "Code controleren…" : "Code bevestigen"}
+          </button>
+        </form>
+
+        <form action={cancelAdminVerification}>
+          <button
+            type="submit"
+            className="w-full text-sm font-semibold text-slate-400 transition hover:text-white"
+          >
+            Terug naar inloggen
+          </button>
+        </form>
       </div>
     );
   }
@@ -290,6 +382,15 @@ export function LoginForm({ passwordUpdated = false }: { passwordUpdated?: boole
           placeholder="••••••••••••"
         />
       </div>
+
+      {!verificationState.active && verificationState.error ? (
+        <p
+          role="alert"
+          className="rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm text-red-100"
+        >
+          {verificationState.error}
+        </p>
+      ) : null}
 
       {state.error ? (
         <p
