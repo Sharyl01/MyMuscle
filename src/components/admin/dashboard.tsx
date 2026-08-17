@@ -616,7 +616,20 @@ export function AdminDashboard({
           </div>
         ) : null}
 
-        <section className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <section className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <MetricCard
+            eyebrow="Websitebezoeken"
+            value={analytics.totals.websiteVisits}
+            description={`${numberFormatter.format(analytics.totals.websitePageviews)} paginaweergaven in ${analytics.periodDays} dagen.`}
+            trend={analytics.totals.websiteVisitsChangePercentage}
+            accent="bg-cyan-300"
+          />
+          <MetricCard
+            eyebrow="Waitlist totaal"
+            value={analytics.totals.totalWaitlistSignups}
+            description={`${numberFormatter.format(analytics.totals.waitlistSignups)} nieuwe inschrijvingen in ${analytics.periodDays} dagen.`}
+            accent="bg-pink-400"
+          />
           <MetricCard
             eyebrow="Functie-events"
             value={analytics.totals.events}

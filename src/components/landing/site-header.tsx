@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CtaLink } from "@/components/landing/cta-link";
+import { WaitlistButton } from "@/components/landing/waitlist-button";
 
 const navigationItems = [
   { label: "Features", href: "#features" },
@@ -44,13 +44,12 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <CtaLink
-          href="mailto:support@mymuscle.app?subject=Join%20the%20MyMuscle%20waitlist"
+        <WaitlistButton
           variant="secondary"
           className="hidden sm:inline-flex"
         >
           Join Waitlist
-        </CtaLink>
+        </WaitlistButton>
       </div>
     </header>
   );

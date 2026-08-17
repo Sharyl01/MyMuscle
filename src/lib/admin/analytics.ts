@@ -12,6 +12,12 @@ export type AnalyticsTotals = {
   previousUniqueUsers: number;
   eventsChangePercentage: number | null;
   usersChangePercentage: number | null;
+  websiteVisits: number;
+  websitePageviews: number;
+  previousWebsiteVisits: number;
+  websiteVisitsChangePercentage: number | null;
+  waitlistSignups: number;
+  totalWaitlistSignups: number;
 };
 
 export type FeatureMetric = {
@@ -96,6 +102,12 @@ const parseAnalytics = (value: unknown): ProductAnalytics => {
       usersChangePercentage: asNullableNumber(
         totals.users_change_percentage,
       ),
+      websiteVisits: 0,
+      websitePageviews: 0,
+      previousWebsiteVisits: 0,
+      websiteVisitsChangePercentage: null,
+      waitlistSignups: 0,
+      totalWaitlistSignups: 0,
     },
     features: asArray(source.features).map((entry) => {
       const metric = asRecord(entry);
@@ -140,13 +152,37 @@ const parseAnalytics = (value: unknown): ProductAnalytics => {
 export async function loadProductAnalytics(days: number): Promise<DashboardData> {
   const identity = await requireAdmin();
   const supabase = await createClient();
-  const { data, error } = await supabase.rpc("get_product_analytics", {
-    p_days: days,
-  });
+  const [productResult, websiteResult] = await Promise.all([
+    supabase.rpc("get_product_analytics", { p_days: days }),
+    supabase.rpc("get_website_analytics", { p_days: days }),
+  ]);
 
-  if (error) {
-    throw new Error(`Dashboarddata kon niet worden geladen: ${error.message}`);
+  if (productResult.error) {
+    throw new Error(
+      `Dashboarddata kon niet worden geladen: ${productResult.error.message}`,
+    );
   }
 
-  return { identity, analytics: parseAnalytics(data) };
+  if (websiteResult.error) {
+    throw new Error(
+      `Websitegegevens konden niet worden geladen: ${websiteResult.error.message}`,
+    );
+  }
+
+  const analytics = parseAnalytics(productResult.data);
+  const website = asRecord(websiteResult.data);
+  analytics.totals.websiteVisits = asNumber(website.website_visits);
+  analytics.totals.websitePageviews = asNumber(website.website_pageviews);
+  analytics.totals.previousWebsiteVisits = asNumber(
+    website.previous_website_visits,
+  );
+  analytics.totals.websiteVisitsChangePercentage = asNullableNumber(
+    website.website_visits_change_percentage,
+  );
+  analytics.totals.waitlistSignups = asNumber(website.waitlist_signups);
+  analytics.totals.totalWaitlistSignups = asNumber(
+    website.total_waitlist_signups,
+  );
+
+  return { identity, analytics };
 }
