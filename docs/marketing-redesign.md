@@ -14,7 +14,9 @@ changes the website; the mobile app is used as a reference.
 - The model supports mouse/touch picking and rotation, keyboard muscle selection,
   keyboard rotation, reset, reduced motion and a fallback without WebGL.
 - Overview, progress, records and groups share the height of the longest section
-  at the current viewport. Badges and the model section size independently.
+  on desktop. At widths up to 800px, each chapter fits its own content to avoid
+  empty space above the text and below the screenshots. Badges and the model
+  section size independently.
 - PR, groups, comparison and analysis use actual app captures with isolated example
   data. The recovery video loads on interaction and pauses offscreen.
 - Badges reveal the app's male/female achievement requirements.
@@ -42,7 +44,7 @@ require the sibling Fitnessapp28-11-2025 checkout. Tests are excluded from the
 production TypeScript build so Vercel requires only the website repository.
 
 Coverage includes model interactions, cumulative load, badges, screenshots,
-recovery video contents, equal section heights, mobile layouts, countdown,
+recovery video contents, equal desktop heights, compact mobile layouts, countdown,
 waitlist states and focus, metadata, legal routes, admin protection and WCAG A/AA.
 Browser artifacts and local environment files are ignored by Git.
 

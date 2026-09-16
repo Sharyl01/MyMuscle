@@ -215,10 +215,12 @@ for (const width of [360, 430, 768, 1280, 1920]) {
   test(`responsive layout and media at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 1000 });
     await home(page);
-    await expect.poll(async () => {
-      const heights = await page.locator("#overview,#progress,#records,#community").evaluateAll(sections => sections.map(section => section.getBoundingClientRect().height));
-      return Math.max(...heights) - Math.min(...heights);
-    }).toBeLessThanOrEqual(1);
+    if (width > 800) {
+      await expect.poll(async () => {
+        const heights = await page.locator("#overview,#progress,#records,#community").evaluateAll(sections => sections.map(section => section.getBoundingClientRect().height));
+        return Math.max(...heights) - Math.min(...heights);
+      }).toBeLessThanOrEqual(1);
+    }
     for (const id of [
       "overview",
       "progress",
@@ -241,6 +243,20 @@ for (const width of [360, 430, 768, 1280, 1920]) {
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
     ).toBe(true);
+    if (width <= 800) {
+      const spacing = await page.locator("#overview,#progress,#records,#community").evaluateAll(sections => sections.map(section => {
+        const label = section.firstElementChild!.getBoundingClientRect();
+        const title = section.querySelector("h2")!.getBoundingClientRect();
+        const screen = section.querySelector("figure")!.getBoundingClientRect();
+        return { aboveTitle: title.top - label.bottom, belowScreen: section.getBoundingClientRect().bottom - screen.bottom };
+      }));
+      for (const gap of spacing) {
+        expect(gap.aboveTitle).toBeGreaterThanOrEqual(0);
+        expect(gap.aboveTitle).toBeLessThanOrEqual(40);
+        expect(gap.belowScreen).toBeGreaterThanOrEqual(0);
+        expect(gap.belowScreen).toBeLessThanOrEqual(66);
+      }
+    }
     expect(
       await page
         .locator("main img")

@@ -238,12 +238,12 @@
  .badgeButton:hover img,.badgeButton:focus-visible img,.badgeButton[aria-expanded="true"] img,.productScreen>a:hover { transform:none; }
 }
 
-/* Matching chapter sizes; screenshots keep their original proportions. */
+/* Match desktop chapter sizes; mobile sections fit their content. */
 .storySection { --preview-width:400px; display:grid; grid-template-rows:auto 1fr; min-height:var(--story-height,1320px); }
 .storySection .productScreen { max-width:var(--preview-width); }
 @media(max-width:800px) {
- .storySection { --preview-width:min(400px,88vw); }
- .storySection>.overviewGrid,.storySection>.progressGrid,.storySection>.recordsGrid,.storySection>.communityGrid { align-content:center; }
+ .storySection { --preview-width:min(400px,88vw); min-height:0; grid-template-rows:auto auto; }
+ .storySection>.overviewGrid,.storySection>.progressGrid,.storySection>.recordsGrid,.storySection>.communityGrid { align-content:start; }
  .storySection .sectionCopy { grid-row:1; }
  .storySection .productScreen { grid-row:2; align-self:center; }
 }
