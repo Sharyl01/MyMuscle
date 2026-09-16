@@ -1,0 +1,2 @@
+# Preserve the app engine snapshots exactly, including their original line endings.
+src/lib/app-training/** -text

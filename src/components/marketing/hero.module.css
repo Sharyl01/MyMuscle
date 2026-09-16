@@ -1,0 +1,204 @@
+.hero { max-width:1700px; margin:auto; padding:38px 4.5% 66px; display:grid; grid-template-columns:minmax(260px,.85fr) minmax(0,2fr); gap:32px; align-items:center; }
+.appIntroduction { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; gap:28px; padding:18px max(4.5%,calc((100% - 1547px)/2)); background:#101110; border-bottom:1px solid #ffffff20; color:#eef0e8; }
+.appIdentity { min-width:0; text-align:center; transform:translateY(5px); }
+.appCategory { color:#b6c1ac; font-size:9px; font-weight:650; letter-spacing:.19em; line-height:1.6; }
+.appName { font-size:clamp(43px,3.8vw,62px); font-weight:650; letter-spacing:-.065em; line-height:1.18; color:#fff; text-shadow:0 1px 2px #52614acc,0 2px 9px #65765ca6,0 0 22px #fff,0 0 42px #ffffffa6; }
+.appName>span { color:#fff; }
+.appDescription { margin-top:8px!important; color:#b6c1ac; font-size:11px; line-height:1.6; }
+.storeAvailability { justify-self:end; }
+.storeAvailability>p { font-size:11px; color:#b6c1ac; text-align:right; letter-spacing:.025em; margin-bottom:12px!important; }
+.releaseCountdown { justify-self:start; display:flex; flex-direction:column; gap:16px; }
+.releaseCountdown>span { color:#b6c1ac; font-size:9px; letter-spacing:.12em; line-height:1.5; font-weight:650; }
+.releaseCountdown>span>small { display:block; color:#b6c1ac; font-weight:450; font-size:10px; letter-spacing:0; margin-top:7px; }
+.releaseCountdown>div { display:flex; gap:16px; }
+.releaseCountdown>div>span { display:grid; min-width:35px; text-align:center; }
+.releaseCountdown b { color:#e8eddc; font-size:31px; line-height:1; font-weight:550; letter-spacing:-.055em; font-variant-numeric:tabular-nums; }
+.releaseCountdown>div small { color:#b6c1ac; font-size:8px; text-transform:uppercase; letter-spacing:.1em; margin-top:7px; }
+.storeBadges { display:flex; gap:12px; }
+.storeBadge { display:flex; align-items:center; gap:10px; min-height:60px; padding:11px 14px; border:1px solid #293025; border-radius:13px; background:linear-gradient(150deg,#333a2e,#141b12); box-shadow:inset 0 1px #ffffff12,0 5px 12px #42523620; transition:background .25s,border-color .25s,transform .25s; color:#f0f1e9; }
+.storeBadge:hover { border-color:#d3ddbd88; background:#262d23; transform:translateY(-2px); }
+.storeBadge>svg { flex-shrink:0; width:28px; height:32px; }
+.storeBadge small { display:block; font-size:10px; line-height:1.35; color:#b9c2af; }
+.storeBadge strong { display:block; font-size:21px; line-height:1.2; font-weight:550; letter-spacing:-.035em; white-space:nowrap; }
+.editorial { align-self:center; padding-bottom:25px; }
+.editorial h1 { font-size:clamp(66px,6.1vw,100px); line-height:1.03; letter-spacing:-.06em; margin:27px 0 30px; font-weight:600; }
+.editorial h1 span { color:#b8bdb0; }
+.heroLead span { display:block; }
+.heroLead { font-size:21px; line-height:1.7; color:#b8bfb1; letter-spacing:-.025em; }
+.editorial[data-active="true"] h1 { font-size:clamp(50px,4.2vw,68px); color:#bec2b8; }
+.editorial[data-active="true"] .heroLead { font-size:17px; }
+.context { min-height:155px; margin-top:36px; max-width:370px; }
+.context[data-active="true"] { padding:25px 0 20px 23px; border-left:2px solid var(--feedback-color); background:linear-gradient(90deg,color-mix(in srgb,var(--feedback-color) 7%,transparent),transparent); }
+.context .contextLabel { display:flex; gap:9px; align-items:center; margin-bottom:17px; font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--feedback-color); }
+.contextLabel i { width:7px; height:7px; border-radius:50%; background:currentColor; box-shadow:0 0 14px currentColor; }
+.context h2 { font-size:clamp(34px,3.1vw,48px); line-height:1.1; letter-spacing:-.045em; margin-bottom:18px; color:var(--feedback-color); text-shadow:0 0 10px color-mix(in srgb,var(--feedback-color) 45%,transparent),0 0 28px color-mix(in srgb,var(--feedback-color) 25%,transparent); }
+.context p { font-size:16px; color:#c6cdc0; line-height:1.7; }
+.contextTitle { animation:contextIn .35s ease both; }
+.loadSteps { display:flex; gap:4px; margin-top:22px; max-width:230px; }
+.loadDetail { display:block; color:#aeb8a6; font-size:11px; margin-top:12px; text-transform:capitalize; }
+.loadSteps span { flex:1; height:3px; border-radius:2px; background:#ffffff20; }
+.loadSteps span[data-filled="true"] { background:var(--feedback-color); }
+.experience { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(270px,1fr); align-items:center; gap:8px; min-width:0; }
+.modelStage { position:relative; height:700px; min-width:0; isolation:isolate; }
+.modelStage::before { content:""; position:absolute; inset:-3% -12% 10%; border-radius:50%; background:radial-gradient(ellipse 46% 44% at 50% 50%,#d5dfc918 0%,#d5dfc90b 38%,#d5dfc900 78%); filter:blur(18px); pointer-events:none; z-index:-1; }
+.modelStage::after { content:""; position:absolute; bottom:85px; left:14%; width:72%; height:45px; border-radius:50%; border:1px solid #c4d5b91c; background:radial-gradient(ellipse,#adbfa612,transparent 70%); box-shadow:0 12px 26px #0005; z-index:-1; pointer-events:none; }
+.modelGround { position:absolute; bottom:96px; left:24%; width:52%; height:18px; border-radius:50%; background:#000c; filter:blur(9px); z-index:-1; }
+.modelCanvas { position:absolute; inset:30px -10% 88px; z-index:2; opacity:0; transition:opacity .45s ease; }
+.modelCanvas[data-ready="true"] { opacity:1; }
+.modelCanvas canvas { display:block; width:100%; height:100%; touch-action:pan-y; cursor:grab; }
+.modelCanvas canvas:active { cursor:grabbing; }
+.neutralLoading { position:absolute; inset:15% 10% 18%; display:grid; place-items:center; }
+.neutralLoading span { width:58%; height:75%; background:linear-gradient(180deg,#cbd3c214,#cbd3c206); border-radius:45%; filter:blur(35px); }
+.modelCaption { position:absolute; bottom:65px; text-align:center; left:0; right:0; font-size:11px; line-height:1.5; color:#b3bdab; z-index:3; pointer-events:none; }
+.rotationControls { position:absolute; left:50%; bottom:11px; transform:translateX(-50%); display:flex; align-items:center; gap:8px; z-index:3; }
+.rotationControls button { border:0; background:transparent; width:44px; height:44px; font-size:25px; }
+.rotationControls span { font-size:11px; color:#aeb8a6; }
+.modelLegend { display:none; }
+.controls { position:relative; z-index:4; width:100%; min-width:0; scroll-margin-top:95px; }
+.profilePicker { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:5px 8px 10px; font-size:11px; color:#b4bfae; }
+.profilePicker select { max-width:160px; min-height:44px; background:#171d18; color:#d5decd; border:1px solid #ffffff25; border-radius:8px; padding:0 8px; font-size:12px; }
+.mobileFeedback,.viewModel { display:none; }
+.panelEyebrow { display:block; font-size:10px; letter-spacing:.12em; color:#9daebe; font-weight:600; }
+.startPreview { padding:22px 12px 24px 18px; }
+.startPreview h3 { font-size:27px; letter-spacing:-.045em; line-height:1.22; font-weight:600; margin:17px 0!important; }
+.startPreview>p:not(.panelEyebrow) { color:#adb8a7; font-size:14px; line-height:1.7; }
+.quickMuscles { margin-top:28px; display:grid; }
+.quickMuscles button { display:flex; align-items:center; justify-content:space-between; padding:13px 0; min-height:48px; border:0; border-bottom:1px solid #ffffff20; background:transparent; font-size:14px; text-align:left; }
+.quickMuscles button span { color:#acb6a4; }
+.quickMuscles button:hover { color:#d4e4c7; border-color:#a7b49b; }
+.workoutPanel,.savedWorkout { border:1px solid #35434c; background:#111820; border-radius:20px; padding:21px; box-shadow:0 20px 45px #0002; }
+.panelHeader { display:flex; justify-content:space-between; gap:10px; align-items:center; border-bottom:1px solid #ffffff16; padding-bottom:16px; }
+.panelHeader h3 { font-size:24px; letter-spacing:-.04em; font-weight:600; margin-top:7px!important; }
+.panelEyebrow { font-size:9px; }
+.closePanel { width:44px; height:44px; border:1px solid #ffffff18; background:#ffffff04; border-radius:50%; font-size:23px!important; color:#bdcbd6!important; }
+.exerciseList { margin-top:21px; }
+.exerciseList>p { font-size:13px; color:#b1c0cc; margin-bottom:14px!important; }
+.exerciseList>button { display:flex; align-items:center; width:100%; text-align:left; gap:10px; background:#19232d; color:#e9eef2; border:1px solid #344350; border-radius:12px; padding:14px 11px; min-height:67px; margin-top:10px; }
+.exerciseList>button:hover { background:#263747; border-color:#78a7c4; }
+.exerciseNumber { font-size:10px; color:#9aadbb; }
+.exerciseList strong { font-size:14px; font-weight:500; flex:1; }
+.exerciseList>button>span:last-child { font-size:24px; }
+.panelNote { font-size:11px; line-height:1.6; color:#a0afba; display:block; margin-top:21px; }
+.backToExercises { background:none; border:0; color:#acbecd!important; font-size:12px!important; min-height:44px; padding:12px 0; text-align:left; }
+.exerciseTitle { font-size:19px; letter-spacing:-.025em; margin:0 0 18px; font-weight:600; color:#edf2f5; }
+.workoutInputs { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.workoutInputs label { display:block; padding:12px; background:#1a242e; border:1px solid #384752; border-radius:12px; color:#b4c3cf; font-size:12px; }
+.workoutInputs label>span { float:right; color:#9dafbc; }
+.workoutInputs input { display:block; background:none; border:0; color:#f2f6f8; padding:6px 0 0; font-size:26px; font-weight:500; width:100%; min-height:42px; outline-offset:3px!important; font-variant-numeric:tabular-nums; }
+.bodyweightField { display:flex; flex-direction:column; gap:5px; font-size:12px; color:#b4c3cf; padding:12px 5px; }
+.bodyweightField strong { font-size:25px; color:#eff4f7; font-weight:500; }
+.bodyweightField strong small { font-size:12px; }
+.bodyweightField>small { font-size:10px; }
+.effortLabel { display:block; font-size:12px; color:#b4c3cf; margin-top:19px; }
+.effortLabel output { float:right; color:#e1ebf0; }
+.effortLabel input { display:block; width:100%; margin:9px 0 0; height:30px; accent-color:#72b8d6; cursor:pointer; }
+.effortScale { display:flex; justify-content:space-between; font-size:10px; color:#a6b7c3; }
+.addSet { display:flex; justify-content:center; align-items:center; gap:5px; width:100%; background:#315b70; color:#f5f9fa!important; border:1px solid #5a8499; min-height:46px; border-radius:11px; margin-top:18px; font-size:13px!important; font-weight:600!important; }
+.addSet:hover { background:#406f84; }
+.setList { margin:19px 0; }
+.setListHeading { display:flex; justify-content:space-between; font-size:10px; letter-spacing:.08em; color:#a7b9c5; }
+.emptySets { font-size:12px; color:#9fafba; padding-top:12px; }
+.setRow { display:flex; align-items:center; gap:10px; border-bottom:1px solid #ffffff12; min-height:44px; }
+.setRow>span { font-size:11px; color:#9fb2bf; }
+.setRow strong { flex:1; font-size:13px; font-weight:500; }
+.setRow small { color:#a7bbc8; font-size:11px; }
+.setRow button { width:36px; height:44px; background:none; border:0; font-size:20px; color:#eeacac!important; }
+.saveWorkout { display:flex; justify-content:space-between; align-items:center; width:100%; min-height:48px; background:#8fbfa5; color:#092318!important; border:1px solid #bad5c3; border-radius:12px; font-size:13px!important; font-weight:650!important; padding:12px 15px; }
+.saveWorkout:hover { background:#acd2ba; }
+.saveWorkout:disabled { opacity:.45; }
+.inputError { font-size:12px; line-height:1.5; color:#f2aaaa; padding-top:10px; }
+.savedIcon { display:grid; place-items:center; width:46px; height:46px; background:#8fbfa51a; color:#abd4bc; border:1px solid #8fbfa54a; border-radius:50%; margin-bottom:22px; }
+.savedWorkout h3 { font-size:25px; font-weight:600; letter-spacing:-.04em; margin:14px 0 22px!important; }
+.savedWorkout [role="status"] { padding:20px 0; border-top:1px solid #ffffff20; }
+.savedWorkout strong { font-size:15px; font-weight:500; }
+.savedWorkout [role="status"] p { font-size:12px; color:#a8bbc5; margin:9px 0 14px!important; }
+.savedWorkout [role="status"]>span { display:block; font-size:14px; color:#cbd9dd; padding-bottom:7px; }
+.demoTools { display:flex; align-items:center; justify-content:flex-end; gap:12px; margin-top:12px; padding:0 8px; }
+.demoTools select { min-height:44px; width:100%; background:#101110; border:0; color:#b4bfae; font-size:11px; max-width:135px; }
+.demoTools button { min-height:44px; border:0; background:none; color:#b4bfae; font-size:11px; }
+.demoNote { color:#96a48e; font-size:10px; text-align:center; margin-top:4px!important; line-height:1.6; }
+.srOnly { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+@keyframes contextIn { from { opacity:.2; transform:translateY(4px); } to { opacity:1; transform:none; } }
+@media(min-width:1600px) { .modelStage { height:770px; } }
+@media(max-width:1150px) {
+ .appIntroduction { gap:18px; padding:18px 4%; }
+ .appName { font-size:44px; }
+ .appDescription { max-width:220px; margin-left:auto!important; margin-right:auto!important; }
+ .storeBadges { flex-direction:column; gap:8px; }
+ .storeBadge { min-height:50px; padding:8px 13px; }
+ .storeAvailability>p { font-size:10px; }
+ .hero { grid-template-columns:1fr 1.8fr; gap:12px; padding-left:4%; padding-right:4%; }
+ .editorial h1 { font-size:66px; }
+ .experience { grid-template-columns:1fr; }
+ .modelStage { height:610px; }
+ .controls { max-width:430px; justify-self:center; }
+ .startPreview { padding-top:0; }
+ .startPreview h3 { font-size:24px; }
+ .startPreview h3 br { display:none; }
+ .quickMuscles { display:flex; gap:22px; margin-top:12px; }
+ .quickMuscles button { flex:1; }
+ .workoutPanel { padding:24px; }
+ .context { min-height:145px; }
+}
+@media(max-width:800px) {
+ .hero { grid-template-columns:1fr; padding:44px 6% 42px; gap:0; }
+ .appIntroduction { grid-template-columns:1fr; gap:20px; padding:20px 6%; }
+ .appIdentity { grid-row:1; }
+ .appName { font-size:52px; }
+ .appCategory { font-size:8px; letter-spacing:.14em; }
+ .appDescription { font-size:12px; max-width:290px; }
+ .releaseCountdown { justify-self:center; align-items:center; text-align:center; }
+ .releaseCountdown>div { gap:24px; }
+ .releaseCountdown b { font-size:34px; }
+ .storeAvailability { width:100%; justify-self:center; }
+ .storeAvailability>p { text-align:center; }
+ .storeBadges { flex-direction:row; gap:10px; justify-content:center; }
+ .storeBadge { flex:1; padding:11px 13px; gap:10px; }
+ .editorial { padding:0; }
+ .editorial h1 { font-size:clamp(62px,11vw,90px); margin:20px 0 23px; }
+ .heroLead { font-size:19px; line-height:1.6; }
+ .heroLead span { display:inline; }
+ .context { min-height:0; max-width:540px; margin:0; }
+ .context[data-active="true"] { margin-top:26px; padding:18px 20px; }
+ .context h2 { font-size:34px; margin-bottom:12px; }
+ .context p { font-size:15px; }
+ .editorial[data-active="true"] h1 { font-size:52px; }
+ .experience { margin-top:0; }
+ .modelStage { height:500px; }
+ .modelCanvas { inset:20px 0 88px; }
+ .controls { max-width:500px; width:100%; }
+ .startPreview { padding:15px 0 20px; }
+ .demoTools { padding:0; }
+ .demoTools select,.demoTools button { font-size:13px; }
+ .demoTools select,.profilePicker select { font-size:16px; }
+ .profilePicker { font-size:12px; margin:8px 0 12px; }
+ .mobileFeedback { display:block; font-size:15px; color:#c5d5cc; line-height:1.6; margin:-5px 0 20px!important; }
+ .viewModel { display:flex; align-items:center; justify-content:center; gap:12px; width:100%; min-height:48px; background:#ffffff05; border:1px solid #8fbfa550; border-radius:12px; color:#c9ddcb; font-size:14px; margin:12px 0; }
+ .demoNote { font-size:11px; }
+ .panelEyebrow { font-size:11px; }
+ .workoutInputs input { font-size:30px; }
+ .exerciseList strong { font-size:16px; }
+ .exerciseTitle { font-size:23px; }
+ .addSet,.saveWorkout { font-size:15px!important; min-height:50px; }
+ .panelNote,.effortLabel,.backToExercises { font-size:13px!important; }
+}
+@media(max-width:480px) {
+ .hero { padding-top:35px; }
+ .appName { font-size:49px; }
+ .appIntroduction { padding:20px 6%; }
+ .storeBadge { padding:10px 8px; gap:7px; }
+ .storeBadge>svg { width:21px; height:27px; }
+ .storeBadge strong { font-size:16px; }
+ .storeBadge small { font-size:8px; }
+ .editorial h1 { font-size:clamp(60px,16vw,74px); }
+ .heroLead { font-size:17px; }
+ .modelStage { height:450px; }
+ .modelCanvas { inset:20px 0 82px; }
+ .workoutPanel,.savedWorkout { padding:21px; border-radius:18px; }
+ .startPreview h3 { font-size:25px; }
+
+}
+@media(prefers-reduced-motion:reduce) { .hero * { animation:none!important; transition:none!important; } }
+
+.appBrand { display:inline-flex; align-items:center; justify-content:center; gap:13px; }
+.appBrand>img { width:40px; height:46px; }

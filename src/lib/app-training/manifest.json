@@ -1,0 +1,7 @@
+{
+  "lib/training/constants.ts": "738b8f2bdc29fef696060f9f1ae1b538be3ec924acc60e92134185a15ebd8cff",
+  "lib/training/utils.ts": "06594874d3c5ff0e9af2406a23f831ea238c232188b8b9b49147fec13daf4a92",
+  "lib/training/loadSpectrum.ts": "abb2611160617ae9a869ff6c28780f34213a0da83264a0d67a56a4eeea655840",
+  "constants/muscleStatusColors.ts": "83ade1ce3636ad468627826e1c9408adc441b5b94d14645c693674ab6b38b8c3",
+  "lib/bodyModel/maleModel.ts": "9714a49ef0f3deb6fd4c11689905ccee1d3cb967cd64f421d88d20162fdff6fa"
+}
