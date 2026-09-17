@@ -1,0 +1,80 @@
+{
+  "version": "2026-09-17-draft",
+  "status": "Concept — nog niet voor publieke release",
+  "sections": [
+    {
+      "title": "Wie verantwoordelijk is",
+      "body": [
+        "MyMuscle wordt aangeboden door Apphletes VOF, handelend onder de naam MyMuscle, gevestigd in Den Haag, Nederland. KvK-nummer: 42133988. Voor privacyvragen, meldingen en verwijderverzoeken kun je ons bereiken via support@mymuscle.app."
+      ]
+    },
+    {
+      "title": "Account, training en lichaamsgegevens",
+      "body": [
+        "Bij registratie verwerken we je account-ID, e-mailadres, inlogmethode en de profielgegevens die je opgeeft, zoals gebruikersnaam, naam, leeftijd, geslacht, lengte, gewicht, trainingsdoel en ervaring. Apple of Google verzorgt de gekozen externe login; MyMuscle ontvangt geen wachtwoord van die dienst.",
+        "We bewaren je ingevoerde trainingen, oefeningen, sets, herhalingen, gewichten, notities, rustdagen, PR’s, gewichtsgeschiedenis, trainingsplanning, presets en appinstellingen. Die gegevens gebruiken we om je logboek te synchroniseren en voortgang, trainingsbelasting en herstelinschattingen te tonen. Herstelinschattingen zijn geen medische metingen of diagnoses.",
+        "Inlogtokens worden op ondersteunde iOS- en Android-builds in beveiligde toestelopslag bewaard. Andere lokale appcaches vallen daar niet automatisch onder. Beveilig ook je toestel met een toegangscode."
+      ]
+    },
+    {
+      "title": "Apple Health",
+      "body": [
+        "Koppelen is optioneel. Na jouw toestemming leest MyMuscle slaapduur en lichaamsgewicht voor herstel en voortgang. De koppeling schrijft geen gegevens naar Apple Health. Ontkoppelen stopt nieuwe uitlezingen en wist de lokale Health-cache; je kunt de systeemtoestemming ook in Apple Health intrekken.",
+        "Gegevens die gezondheid onthullen vragen naast een gewone AVG-grondslag ook een uitzondering voor bijzondere persoonsgegevens. De exacte grondslagen en eventuele aanvullende toestemmingsflow voor handmatig ingevoerde gegevens en afgeleide herstelgegevens moeten vóór publieke introductie worden vastgesteld. Deze verklaring is op zichzelf geen toestemming."
+      ]
+    },
+    {
+      "title": "Groepen, profielen en berichten",
+      "body": [
+        "Andere gebruikers kunnen je gebruikersnaam zien. In groepen tonen we je groepsrol en toegestane trainingsstatistieken. In publieke groepen kan een voorvertoning ook zichtbaar zijn voor ingelogde niet-leden. Privégroepen beperken het ledenoverzicht tot toegestane deelnemers; geslacht voor groepsranglijsten wordt alleen gedeeld binnen je actieve groep.",
+        "Je kunt de zichtbaarheid van je PR-profiel en badge-profiel aanpassen. Deze keuzes verbergen niet automatisch alle overige groepsstatistieken, zoals totaalscore en activiteit. E-mailadres, echte naam, leeftijd, lengte en lichaamsgewicht worden niet als algemene sociale profielvelden aangeboden.",
+        "Directe berichten en gedeelde presets zijn beschikbaar voor de deelnemers. Blokkeren voorkomt nieuwe directe berichten, vriendschapsverzoeken en uitnodigingen door die gebruiker, ook bij een gedeelde groep. Een blokkade verwijdert bestaande berichten niet automatisch. Berichten zijn niet end-to-end versleuteld."
+      ]
+    },
+    {
+      "title": "Meldingen en moderatie",
+      "body": [
+        "Als je een gebruiker, groep of ontvangen bericht meldt, bewaren we de reden, jouw toelichting, relevante identificatoren en een kopie van de gemelde inhoud voor beoordeling. Voeg geen onnodige gevoelige gegevens toe.",
+        "Alleen aangewezen moderators krijgen toegang tot de meldingenlijst. Je identiteit wordt niet aan de gemelde gebruiker getoond. Moderators kunnen inhoud verwijderen en hun besluit vastleggen. We gebruiken meldingen voor gebruikersveiligheid en het onderzoeken van misbruik. Voor zover meldingen gezondheidsgegevens bevatten, moet ook hiervoor een passende uitzondering zijn vastgesteld."
+      ]
+    },
+    {
+      "title": "Optionele gebruiksstatistieken",
+      "body": [
+        "Gebruiksstatistieken staan in deze appversie standaard uit. Je kunt ze inschakelen via Profiel → Privacy en veiligheid. De keuze geldt per account en toestel en heeft geen invloed op toegang tot trainingsfuncties.",
+        "Bij inschakeling verwerken we gebeurtenissen zoals geopende functies, platform, appversie, een sessie-ID en beperkte interactiegegevens. Ze zijn gekoppeld aan je account-ID en dus niet anoniem. Trainingsgewichten, berichtinhoud en e-mailadres horen niet in deze gebeurtenissen. Uitschakelen stopt nieuwe gebeurtenissen; eerdere gegevens kun je via support laten verwijderen. Noodzakelijke technische beveiligingslogs staan los van deze keuze."
+      ]
+    },
+    {
+      "title": "Website, leveranciers en doorgiften",
+      "body": [
+        "Op mymuscle.app kun je je e-mailadres op de wachtlijst zetten. De website registreert paginaweergaven en browsersessies met een willekeurige sessiecode. De eigen bezoekentabel slaat geen IP-adres of user-agent op; hosting- en beveiligingsdiensten kunnen zulke technische gegevens wel verwerken.",
+        "Supabase levert de appdatabase, authenticatie en bestandsopslag. Het hoofdproject staat in de regio Frankfurt, Duitsland (gecontroleerd op 17 september 2026). Vercel host de website. Apple en Google verwerken gegevens als je hun beschikbare login- of Health-diensten gebruikt. De app gebruikt Google voor automatische vertaling van toegestane vaste interface-teksten; privéberichten en meldingen worden niet voor automatische vertaling aangeboden.",
+        "We verkopen geen persoonsgegevens. De volledige verwerkersketen, e-mailleverancier, verwerkersovereenkomsten en eventuele doorgiften buiten de EER worden vóór publicatie bevestigd. Een Europese projectregio sluit doorgiften door ondersteunende diensten niet automatisch uit. Bij doorgiften zijn een toepasselijk adequaatheidsbesluit of passende waarborgen nodig."
+      ]
+    },
+    {
+      "title": "Bewaren en verwijderen",
+      "body": [
+        "Je account- en trainingsgegevens blijven beschikbaar zolang je je account gebruikt. Bij bevestigde accountverwijdering worden de bijbehorende actieve account-, trainings-, profiel- en berichtgegevens en je opgeslagen avatars verwijderd. Een groep met andere actieve leden krijgt een nieuwe host; een lege groep wordt verwijderd.",
+        "Accountverwijdering kan niet worden teruggedraaid. De app wacht op serverbevestiging voordat lokale gegevens worden gewist. Bij een storing kun je opnieuw proberen. Alleen de app verwijderen van je toestel verwijdert je online account niet.",
+        "Meldingen en bewijs kunnen na accountverwijdering nog nodig zijn voor misbruikonderzoek of rechtsvorderingen. Bewaartermijnen voor meldingen, gebruiksstatistieken, technische logs, supportverzoeken en backups moeten vóór publicatie concreet worden vastgesteld en uitgevoerd. Er wordt geen onmiddellijke verwijdering uit iedere backup beloofd."
+      ]
+    },
+    {
+      "title": "Jouw rechten en contact",
+      "body": [
+        "Je kunt via support@mymuscle.app vragen om inzage, correctie, verwijdering of, waar van toepassing, gegevensoverdraagbaarheid en beperking. Bij verwerking op basis van toestemming kun je die intrekken; bij gerechtvaardigd belang kun je bezwaar maken. Intrekking maakt eerdere rechtmatige verwerking niet onrechtmatig.",
+        "We controleren je identiteit op een passende manier en vragen niet standaard om een identiteitsbewijs. In beginsel reageren we binnen één maand; als een toegestane verlenging nodig is, informeren we je. Je kunt een klacht indienen bij de Autoriteit Persoonsgegevens of je bevoegde lokale toezichthouder.",
+        "Verwijder je account via Profiel → Account verwijderen, of vraag verwijdering aan via mymuscle.app/delete-account zonder de app opnieuw te installeren."
+      ]
+    },
+    {
+      "title": "Leeftijd, landen en wijzigingen",
+      "body": [
+        "MyMuscle is bedoeld voor gebruikers vanaf 13 jaar. De landen voor de publieke introductie zijn nog niet vastgesteld. Een minimumleeftijd van 13 jaar vervangt geen ouderlijke toestemming wanneer die nodig is. De toestemmingsaanpak voor minderjarigen moet vóór hun deelname aan tests of de publieke introductie worden afgerond.",
+        "Deze tekst is een concept voor beoordeling en wordt vóór publicatie aangevuld op basis van de definitieve inrichting. Bij wezenlijke wijzigingen informeren we gebruikers en vragen we opnieuw toestemming waar dat nodig is."
+      ]
+    }
+  ]
+}
