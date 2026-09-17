@@ -54,7 +54,7 @@ export function OverviewExperience() {
     setHovered(false);
     setPinned(index === 1);
     if (index === 1) setLoaded(true);
-    if (matchMedia("(max-width: 800px)").matches) screen.current?.scrollIntoView({ behavior: reduced ? "instant" : "smooth", block: "center" });
+    if (matchMedia("(max-width: 800px)").matches) screen.current?.scrollIntoView({ behavior: reduced ? "instant" : "smooth", block: "nearest" });
   }
 
   return <div className={s.overviewGrid}>

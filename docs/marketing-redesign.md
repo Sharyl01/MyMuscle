@@ -14,14 +14,20 @@ changes the website; the mobile app is used as a reference.
 - The model supports mouse/touch picking and rotation, keyboard muscle selection,
   keyboard rotation, reset, reduced motion and a fallback without WebGL.
 - Overview, progress, records and groups share the height of the longest section
-  on desktop. At widths up to 800px, each chapter fits its own content to avoid
-  empty space above the text and below the screenshots. Badges and the model
-  section size independently.
-- PR, groups, comparison and analysis use actual app captures with isolated example
+  on desktop. At widths up to 800px, chapters use a stable viewport minimum height
+  and native proximity scroll snap. Expanded content can grow and scroll normally;
+  reduced motion, focused inputs and the waitlist dialog disable snapping.
+- The mobile muscle demo keeps the complete model visible and places its compact
+  workout form below the model and title. All exercise and set controls remain available.
+- PR Log presents three selectable example records. Details show the achievement
+  date, lifted weight, repetitions and bodyweight at the time of the record.
+- Groups, comparison and analysis use actual app captures with isolated example
   data. The recovery video loads on interaction and pauses offscreen.
-- Badges reveal the app's male/female achievement requirements.
-- The final waitlist section uses the badges' light background. The footer shows
-  the business details supplied by the owner.
+- Badges reveal the app's male/female achievement requirements. The gallery shows
+  Bronze Pull-up, Gold Bench Press and Platinum Ratio Squat (1.6 times bodyweight).
+- The final waitlist section uses the badges' light background and explains that
+  the website is a demo of the fuller app experience. The footer shows the business
+  details supplied by the owner and remains reachable as the final mobile snap target.
 - Release is configured for 25 September 2026 at 18:00 UTC. Countdown boundaries
   and the completed state are tested. Store download URLs are not yet configured.
 

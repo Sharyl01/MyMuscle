@@ -118,6 +118,9 @@
 .finalCta .cta span { background:#ffffff0d; }
 .finalCta .countdownLabel,.finalCta .countdownLabel small,.finalCta .clock small { color:#62654f; }
 .finalNote { font-size:14px; color:#575d4c; margin-top:22px!important; }
+.demoSummary { max-width:490px; margin:-14px auto 34px!important; }
+.demoSummary strong { display:block; font-size:20px; line-height:1.4; font-weight:550; letter-spacing:-.035em; color:#354936; }
+.demoSummary span { display:block; margin-top:10px; font-size:14px; line-height:1.7; color:#575d4c; }
 .countdown { display:flex; flex-direction:column; align-items:center; gap:24px; }
 .countdownLabel { font-size:13px; color:#b7c1ac; }
 .countdownLabel small { display:block; font-size:14px; margin-top:9px; color:#d1d8c8; }
@@ -238,12 +241,75 @@
  .badgeButton:hover img,.badgeButton:focus-visible img,.badgeButton[aria-expanded="true"] img,.productScreen>a:hover { transform:none; }
 }
 
-/* Match desktop chapter sizes; mobile sections fit their content. */
+/* Match desktop chapter sizes. */
 .storySection { --preview-width:400px; display:grid; grid-template-rows:auto 1fr; min-height:var(--story-height,1320px); }
 .storySection .productScreen { max-width:var(--preview-width); }
 @media(max-width:800px) {
- .storySection { --preview-width:min(400px,88vw); min-height:0; grid-template-rows:auto auto; }
- .storySection>.overviewGrid,.storySection>.progressGrid,.storySection>.recordsGrid,.storySection>.communityGrid { align-content:start; }
- .storySection .sectionCopy { grid-row:1; }
- .storySection .productScreen { grid-row:2; align-self:center; }
+ /* Scope the document scroller to this route, including after client navigation. */
+ :global(html):has(.site) { scroll-snap-type:y proximity; scroll-padding-top:0; }
+ :global(html):has(.site input:focus),:global(html):has(.waitlistDialog) { scroll-snap-type:none; }
+ .site { overflow:visible; }
+ .site main>section[id] { min-height:100svh; scroll-margin-top:0; scroll-snap-align:start; scroll-snap-stop:normal; }
+ .section { padding:28px 6%; }
+ .sectionTop { margin-bottom:22px; }
+ .sectionTop .eyebrow,.sectionCategory { font-size:9px; letter-spacing:.06em; }
+ .section h2 { font-size:clamp(30px,7.7vw,46px); line-height:1.12; }
+ .storySection { --preview-width:clamp(100px,calc((100svh - 380px)*.4),250px); grid-template-rows:auto auto; align-content:center; }
+ .overviewGrid,.recordsGrid,.communityGrid,.progressGrid { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px; align-content:center; }
+ .storySection .sectionCopy { display:contents; }
+ .sectionCopy>h2,.sectionCopy>p { grid-column:1/-1; }
+ .sectionCopy>p { font-size:14px; line-height:1.6; margin-top:0; }
+ .sectionCopy>.productStatement { font-size:18px; line-height:1.5; margin-top:0; max-width:360px; }
+ .storySection .productScreen { min-width:0; align-self:center; }
+ .productBar { font-size:8px; padding:0 0 8px; gap:8px; letter-spacing:.04em; }
+ .productScreen>a,.recoveryPlayer { padding:4px; border-radius:18px; }
+ .productScreen img { border-radius:14px; }
+ .recoveryPlayer video { top:4px; left:4px; width:calc(100% - 8px); height:calc(100% - 8px); border-radius:14px; }
+ .productScreen figcaption { flex-wrap:wrap; justify-content:center; gap:0 10px; padding-top:6px; font-size:10px; text-align:center; }
+ .productScreen figcaption a { min-height:44px; display:inline-flex; align-items:center; }
+ .overviewFeatures { margin-top:0; gap:4px; align-self:center; }
+ .overviewFeatures button { min-height:54px; padding:10px 8px; gap:7px; }
+ .overviewFeatures strong { font-size:13px; line-height:1.4; margin-bottom:0; }
+ .overviewFeatures strong+span { font-size:12px; line-height:1.5; margin-top:8px; }
+ .overviewFeatures button[aria-pressed="false"] strong+span { display:none; }
+ .featureNumber { font-size:9px; padding-top:3px; }
+ .featureArrow { display:none; }
+ .recoveryPlayHint { bottom:14px; gap:5px; white-space:normal; width:calc(100% - 16px); justify-content:center; padding:7px; font-size:10px; text-align:center; }
+ .recoveryInstruction { font-size:10px; line-height:1.5; margin-top:4px!important; }
+ .progressMetric { margin-top:0; padding-top:16px; align-self:center; }
+ .progressMetric>strong { font-size:clamp(40px,10vw,66px); }
+ .progressMetric p { font-size:12px; line-height:1.5; margin:10px 0 6px; }
+ .progressMetric small { display:block; font-size:11px; line-height:1.5; }
+ .recordsGrid .productScreen { grid-column:1/-1; grid-row:4; }
+ .detailLine { grid-column:1/-1; grid-row:3; margin-top:0; gap:8px; font-size:11px; }
+ .communityDetails { margin-top:0; gap:12px; font-size:13px; line-height:1.5; }
+ .communityDetails span { min-width:0; padding-bottom:10px; }
+ .recordsGrid { gap:12px; }
+ .achievements { display:flex; flex-direction:column; justify-content:center; }
+ .achievements>p { margin-top:16px; font-size:14px; }
+ .badgeGallery { gap:10px; padding:28px 0 12px; }
+ .bronzeBadge,.platinumBadge { margin-top:24px!important; }
+ .badgeGallery figcaption { padding-top:14px; }
+ .badgeGallery figcaption strong { font-size:12px; margin-top:4px; }
+ .badgeAction { min-height:32px; display:grid; place-items:center; padding:6px; font-size:9px; }
+ .badgeRequirement { margin-top:12px; padding:16px; gap:12px; }
+ .badgeRequirement h3 { font-size:20px; margin:6px 0; }
+ .badgeRequirement p { font-size:12px; }
+ .badgeRequirement dl { gap:32px; }
+ .badgeRequirement dd { font-size:24px; }
+ .badgeRequirement .badgeRequirementNote { padding-top:10px; font-size:11px; }
+ .achievementLine { margin-top:20px; padding-top:16px; gap:18px; font-size:11px; }
+ .finalCta { display:flex; flex-direction:column; align-items:center; justify-content:center; }
+ .finalCta h2 { margin:16px 0 20px; }
+ .finalLogo { width:44px; height:49px; margin-bottom:14px; }
+ .finalCta .cta { margin-top:24px; min-height:54px; padding:12px 22px; }
+ .finalCta .countdown { gap:16px; }
+ .finalCta .finalNote { margin-top:14px!important; }
+ .demoSummary { max-width:380px; margin:-6px auto 24px!important; }
+ .demoSummary strong { font-size:17px; }
+ .demoSummary span { font-size:12px; line-height:1.6; margin-top:7px; }
+ .footer { position:relative; background:#101110; scroll-snap-align:end; }
+}
+@media(max-width:800px) and (prefers-reduced-motion:reduce) {
+ :global(html):has(.site) { scroll-snap-type:none; scroll-behavior:auto; }
 }

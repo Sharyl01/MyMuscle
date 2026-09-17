@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { RecordCollection } from "./record-collection";
 import { ProductScreen } from "./product-screen";
 import { LaunchCountdown } from "./launch-countdown";
 import { WaitlistCta } from "./waitlist-cta";
@@ -34,7 +35,7 @@ export function PersonalRecords() {
         <span className={s.sectionCategory}>PERSONAL RECORDS</span>
       </div>
       <div className={s.recordsGrid}>
-        <ProductScreen src="/marketing/pr-app-hd.webp" label="PR Log" width={1290} height={3120} alt="Actual MyMuscle PR Log showing Bench Press 80 kg, Dumbbell Bench Press 32.5 kg, Squat 110 kg and Deadlift 140 kg" />
+        <RecordCollection />
         <div className={s.sectionCopy}>
           <span className={s.recordMark} aria-hidden="true">
             ↗
@@ -139,6 +140,7 @@ export function FinalCta() {
         <br />
         <span>Become stronger.</span>
       </h2>
+      <p className={s.demoSummary}><strong>A preview of what’s possible.</strong><span>This website is an interactive demo. Discover more tools, deeper insights and the full MyMuscle experience in the app.</span></p>
       <LaunchCountdown />
       <WaitlistCta />
       <p className={s.finalNote}>Be first to hear what’s next for MyMuscle.</p>

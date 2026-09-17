@@ -21,7 +21,10 @@ export function InteractiveHero() {
 
   function select(group: MuscleGroup) {
     setSelected(group); setLastWorkout(null); setPanelKey(previous => previous + 1);
-    if (window.matchMedia("(max-width: 800px)").matches) requestAnimationFrame(() => controls.current?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" }));
+    if (window.matchMedia("(max-width: 800px)").matches) requestAnimationFrame(() => {
+      const panel = controls.current;
+      if (panel && panel.getBoundingClientRect().bottom > window.innerHeight) panel.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "nearest" });
+    });
   }
   function save(workout: PreviewWorkout) {
     const ts = Date.now();

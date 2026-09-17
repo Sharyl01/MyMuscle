@@ -202,3 +202,75 @@
 
 .appBrand { display:inline-flex; align-items:center; justify-content:center; gap:13px; }
 .appBrand>img { width:40px; height:46px; }
+
+/* Mobile chapters use a stable viewport, and grow when the demo needs more room. */
+@media(max-width:800px) {
+ .appIntroduction { min-height:100svh; align-content:center; gap:32px; padding-block:max(28px,env(safe-area-inset-top)) max(28px,env(safe-area-inset-bottom)); scroll-snap-align:start; }
+ .hero { min-height:100svh; padding:24px 6%; align-content:center; gap:16px; }
+ .editorial h1,.editorial[data-active="true"] h1 { font-size:clamp(36px,9vw,54px); line-height:1.06; margin:0 0 10px; }
+ .editorial h1 br { display:none; }
+ .editorial h1 span::before { content:" "; white-space:pre; }
+ .heroLead,.editorial[data-active="true"] .heroLead { font-size:clamp(13px,3.5vw,17px); line-height:1.5; }
+ /* The selected muscle is named in the panel; saved feedback is also shown there. */
+ .context,.context[data-active="true"] { position:absolute; width:1px; height:1px; min-height:0; padding:0; margin:0; overflow:hidden; clip-path:inset(50%); }
+ .experience { gap:16px; }
+ .modelStage { height:clamp(230px,42svh,390px); width:100%; }
+ .modelCanvas { inset:0 0 62px; }
+ .modelStage::before { inset:0 0 10%; }
+ .modelStage::after { bottom:62px; height:22px; left:23%; width:54%; }
+ .modelGround { bottom:66px; height:12px; left:32%; width:36%; }
+ .modelCaption { bottom:45px; font-size:11px; }
+ .rotationControls { bottom:0; }
+ .controls { max-width:500px; scroll-margin-top:16px; }
+ .startPreview { padding:0; }
+ .startPreview h3 { font-size:clamp(21px,5.5vw,28px); margin:8px 0!important; }
+ .startPreview>p:not(.panelEyebrow) { font-size:13px; line-height:1.5; }
+ .panelEyebrow { font-size:9px; }
+ .quickMuscles { margin-top:8px; gap:18px; }
+ .quickMuscles button { min-height:44px; padding:10px 0; }
+ .demoTools { margin-top:2px; }
+ .demoTools button { font-size:11px; }
+ .workoutPanel,.savedWorkout { padding:16px; border-radius:18px; }
+ .panelHeader { padding-bottom:8px; }
+ .panelHeader h3 { font-size:21px; margin-top:3px!important; }
+ .exerciseList { margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+ .exerciseList>p { grid-column:1/-1; margin-bottom:0!important; }
+ .exerciseList>button { margin:0; min-height:64px; padding:10px; gap:7px; }
+ .exerciseList strong { font-size:13px; line-height:1.4; }
+ .exerciseList .panelNote { grid-column:1/-1; margin-top:0; font-size:11px!important; }
+ .hero:has(.setForm,.savedWorkout) { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px; padding-block:16px; }
+ .hero:has(.setForm,.savedWorkout) .editorial { grid-column:2; grid-row:1; }
+ .hero:has(.setForm,.savedWorkout) .editorial h1 { font-size:clamp(27px,6vw,40px); }
+ .hero:has(.setForm,.savedWorkout) .editorial h1 br { display:block; }
+ .hero:has(.setForm,.savedWorkout) .editorial h1 span::before { content:none; }
+ .hero:has(.setForm,.savedWorkout) .heroLead { font-size:12px; }
+ .hero:has(.setForm,.savedWorkout) .experience { display:contents; }
+ .hero:has(.setForm,.savedWorkout) .modelStage { grid-column:1; grid-row:1; height:clamp(160px,25svh,240px); }
+ .hero:has(.setForm,.savedWorkout) .modelCaption { font-size:9px; bottom:44px; }
+ .hero:has(.setForm,.savedWorkout) .controls { grid-column:1/-1; grid-row:2; }
+ .workoutPanel:has(.setForm) { display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:8px; }
+ .workoutPanel:has(.setForm) .panelHeader,.setForm,.setList,.workoutPanel>.saveWorkout { grid-column:1/-1; }
+ .workoutPanel:has(.setForm)>.backToExercises { grid-column:2; grid-row:2; }
+ .workoutPanel:has(.setForm)>.exerciseTitle { grid-column:1; grid-row:2; align-self:center; margin:0; font-size:16px; }
+ .backToExercises { min-height:44px; padding:10px 0; font-size:12px!important; }
+ .exerciseTitle { font-size:18px; margin:0 0 10px; }
+ .workoutInputs { gap:10px; }
+ .workoutInputs label { padding:8px 10px; }
+ .workoutInputs input { font-size:22px; min-height:36px; padding-top:2px; }
+ .bodyweightField { padding:8px 5px; }
+ .setForm { display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:16px; }
+ .workoutInputs,.inputError { grid-column:1/-1; }
+ .effortLabel { margin-top:12px; grid-column:1; font-size:12px!important; }
+ .effortLabel input { margin-top:4px; }
+ .effortScale { grid-column:1; }
+ .addSet { grid-column:2; grid-row:2/4; align-self:center; padding:10px 12px; margin-top:12px; min-height:44px; font-size:13px!important; }
+ .setList { margin:12px 0; }
+ .emptySets { padding-top:6px; }
+ .saveWorkout { min-height:44px; font-size:13px!important; padding:10px 12px; }
+ .savedIcon { width:36px; height:36px; margin-bottom:10px; }
+ .savedWorkout h3 { font-size:23px; margin:8px 0 12px!important; }
+ .mobileFeedback { font-size:13px; line-height:1.5; margin:0 0 12px!important; }
+ .savedWorkout [role="status"] { padding:12px 0; }
+ .savedWorkout [role="status"] p { margin:6px 0 8px!important; }
+ .viewModel { min-height:44px; margin:8px 0; font-size:13px; }
+}

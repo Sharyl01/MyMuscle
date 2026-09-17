@@ -1,0 +1,68 @@
+.records { width:100%; min-width:0; align-self:center; }
+.recordStage { display:flex; align-items:flex-start; gap:18px; padding:30px 0 20px; transition:transform .7s ease; }
+.records[data-revealed="pending"] .recordStage { transform:translateY(12px); }
+.recordButton { flex:1; min-width:0; background:none; border:0; padding:0; text-align:center; border-radius:22px; color:#eceee6; }
+.recordButton:nth-child(2) { margin-top:-18px; }
+.recordFace { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:210px; gap:17px; border-radius:26px; border:1px solid #a899633b; background:radial-gradient(ellipse at 35% 0,#dac48618,transparent 70%),linear-gradient(150deg,#1c242b,#0b1117); box-shadow:inset 0 1px #ffffff16,0 18px 35px #0004; transition:transform .35s,border-color .35s,box-shadow .35s; }
+.recordFace svg { width:32px; height:36px; color:#dac486; }
+.recordFace strong { font-size:clamp(36px,3.5vw,54px); font-weight:550; line-height:1.1; letter-spacing:-.055em; color:#efeee6; }
+.recordFace small { font-size:.32em; margin-left:5px; font-weight:450; color:#d5c79f; letter-spacing:0; }
+.recordType { font-size:9px; letter-spacing:.12em; color:#c1b691; }
+.recordName { display:block; font-size:16px; font-weight:500; letter-spacing:-.025em; margin-top:18px; }
+.recordAction { display:block; font-size:11px; color:#b4bea9; margin-top:8px; }
+.recordButton[aria-expanded="true"] .recordFace { border-color:#d2bc7b; box-shadow:inset 0 1px #ffffff20,0 12px 40px #cbb87d14; }
+.recordButton[aria-expanded="true"] .recordAction { color:#dfce9e; }
+.detailSpace { min-height:209px; margin-top:16px; display:grid; align-items:center; }
+.recordDetails { border:1px solid #ffffff20; border-radius:18px; padding:22px 24px; background:#ffffff03; animation:detailReveal .25s ease both; }
+.detailHeading { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+.detailHeading h3 { font-size:20px; font-weight:550; letter-spacing:-.03em; }
+.detailHeading>span { font-size:8px; letter-spacing:.08em; color:#c6b687; }
+.recordDetails dl { display:grid; grid-template-columns:1.6fr 1fr .55fr 1.1fr; gap:16px; margin:20px 0; }
+.recordDetails dt { font-size:11px; color:#adb7a4; margin-bottom:7px; }
+.recordDetails dd { margin:0; font-size:22px; color:#eeeee5; font-weight:500; letter-spacing:-.03em; }
+.recordDetails time { font-size:16px; white-space:nowrap; }
+.recordDetails dd small { font-size:13px; }
+.recordDetails>p { border-top:1px solid #ffffff15; padding-top:12px; font-size:11px; color:#bac4b0; }
+.recordHint { text-align:center; font-size:18px; font-weight:450; letter-spacing:-.025em; color:#d5ddcc; }
+.recordHint>span { display:block; font-size:12px; line-height:1.6; color:#aeb9a2; margin-top:10px; letter-spacing:0; }
+.records .visualCaption { text-align:center; font-size:10px; color:#a9b49c; padding-top:16px; }
+@keyframes detailReveal { from { opacity:.3; transform:translateY(5px); } to { opacity:1; transform:none; } }
+@media(hover:hover) and (pointer:fine) {
+ .recordButton:hover .recordFace { transform:translateY(-5px); border-color:#cbb77b; box-shadow:inset 0 1px #ffffff20,0 22px 40px #0005; }
+}
+@media(max-width:1100px) and (min-width:801px) {
+ .recordStage { gap:10px; }
+ .recordFace { min-height:180px; }
+ .recordFace strong { font-size:36px; }
+ .recordName { font-size:13px; }
+ .recordDetails { padding:18px; }
+}
+@media(max-width:800px) {
+ .records { grid-column:1/-1; grid-row:4; max-width:540px; justify-self:center; }
+ .recordStage { gap:10px; padding:20px 0 12px; }
+ .recordButton:nth-child(2) { margin-top:-10px; }
+ .recordFace { min-height:clamp(118px,30vw,164px); gap:10px; border-radius:18px; }
+ .recordFace svg { width:24px; height:27px; }
+ .recordFace strong { font-size:clamp(29px,8vw,44px); }
+ .recordFace small { margin-left:3px; }
+ .recordType { font-size:7px; letter-spacing:.07em; }
+ .recordName { font-size:12px; margin-top:12px; }
+ .recordAction { font-size:10px; margin-top:5px; }
+ .detailSpace { min-height:150px; margin-top:8px; }
+ .recordDetails { padding:12px 14px; border-radius:14px; }
+ .detailHeading h3 { font-size:16px; }
+ .detailHeading>span { font-size:7px; }
+ .recordDetails dl { gap:8px; margin:14px 0; }
+ .recordDetails dt { font-size:10px; margin-bottom:4px; }
+ .recordDetails dd { font-size:19px; }
+ .recordDetails time { font-size:12px; }
+ .recordDetails>p { font-size:10px; padding-top:8px; }
+ .recordHint { font-size:15px; }
+ .recordHint>span { font-size:11px; margin-top:7px; }
+ .records .visualCaption { font-size:9px; padding-top:10px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .records * { animation:none!important; transition:none!important; }
+ .recordButton:hover .recordFace { transform:none; }
+ .records[data-revealed="pending"] .recordStage { transform:none; }
+}
