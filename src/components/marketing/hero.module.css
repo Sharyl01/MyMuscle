@@ -215,6 +215,8 @@
  .context,.context[data-active="true"] { position:absolute; width:1px; height:1px; min-height:0; padding:0; margin:0; overflow:hidden; clip-path:inset(50%); }
  .experience { gap:16px; }
  .modelStage { height:clamp(230px,42svh,390px); width:100%; }
+ /* Give the model the space previously occupied by the mobile quick-start panel. */
+ .hero:not(:has(.workoutPanel,.savedWorkout)) .modelStage { height:clamp(280px,calc(100svh - 220px),780px); }
  .modelCanvas { inset:0 0 62px; }
  .modelStage::before { inset:0 0 10%; }
  .modelStage::after { bottom:62px; height:22px; left:23%; width:54%; }
@@ -226,7 +228,11 @@
  .startPreview h3 { font-size:clamp(21px,5.5vw,28px); margin:8px 0!important; }
  .startPreview>p:not(.panelEyebrow) { font-size:13px; line-height:1.5; }
  .panelEyebrow { font-size:9px; }
- .quickMuscles { margin-top:8px; gap:18px; }
+ .quickMuscles,.startPreview .panelEyebrow,.startPreview h3 { display:none; }
+ /* Keep an alternative way to try the demo when WebGL cannot render the model. */
+ .hero:has([data-model-status="fallback"]) .quickMuscles { display:flex; margin-top:8px; gap:18px; }
+ .hero:has([data-model-status="fallback"]) .startPreview .panelEyebrow,.hero:has([data-model-status="fallback"]) .startPreview h3 { display:block; }
+ .hero:has([data-model-status="fallback"]) .modelStage { height:clamp(230px,42svh,390px); }
  .quickMuscles button { min-height:44px; padding:10px 0; }
  .demoTools { margin-top:2px; }
  .demoTools button { font-size:11px; }
@@ -245,7 +251,7 @@
  .hero:has(.setForm,.savedWorkout) .editorial h1 span::before { content:none; }
  .hero:has(.setForm,.savedWorkout) .heroLead { font-size:12px; }
  .hero:has(.setForm,.savedWorkout) .experience { display:contents; }
- .hero:has(.setForm,.savedWorkout) .modelStage { grid-column:1; grid-row:1; height:clamp(160px,25svh,240px); }
+ .hero:has(.setForm,.savedWorkout) .modelStage { grid-column:1; grid-row:1; height:clamp(220px,32svh,320px); }
  .hero:has(.setForm,.savedWorkout) .modelCaption { font-size:9px; bottom:44px; }
  .hero:has(.setForm,.savedWorkout) .controls { grid-column:1/-1; grid-row:2; }
  .workoutPanel:has(.setForm) { display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:8px; }

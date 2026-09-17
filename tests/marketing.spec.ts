@@ -188,8 +188,8 @@ test("mobile touch rotates without selecting, and tap selects a muscle", async (
     false,
   );
   await expect(
-    page.getByRole("heading", { name: "One muscle. Your first set." }),
-  ).toBeAttached();
+    page.getByText("Tap a muscle to explore its exercises.", { exact: true }),
+  ).toBeVisible();
   await page.getByRole("button", { name: "Reset demo" }).click();
   await page.locator("canvas").scrollIntoViewIfNeeded();
   const tapBox = (await page.locator("canvas").boundingBox())!;

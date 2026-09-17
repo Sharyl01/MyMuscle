@@ -15,10 +15,11 @@ changes the website; the mobile app is used as a reference.
   keyboard rotation, reset, reduced motion and a fallback without WebGL.
 - Overview, progress, records and groups share the height of the longest section
   on desktop. At widths up to 800px, chapters use a stable viewport minimum height
-  and native proximity scroll snap. Expanded content can grow and scroll normally;
+  and native mandatory scroll snap with normal snap stops. Expanded content can grow and scroll normally;
   reduced motion, focused inputs and the waitlist dialog disable snapping.
-- The mobile muscle demo keeps the complete model visible and places its compact
-  workout form below the model and title. All exercise and set controls remain available.
+- The mobile muscle demo gives the complete model the available viewport space.
+  Muscle selection happens on the model; quick-selection buttons appear only if WebGL fails.
+  Its compact workout form sits below the model and title. All exercise and set controls remain available.
 - PR Log presents three selectable example records. Details show the achievement
   date, lifted weight, repetitions and bodyweight at the time of the record.
 - Groups, comparison and analysis use actual app captures with isolated example

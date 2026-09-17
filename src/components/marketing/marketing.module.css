@@ -246,7 +246,7 @@
 .storySection .productScreen { max-width:var(--preview-width); }
 @media(max-width:800px) {
  /* Scope the document scroller to this route, including after client navigation. */
- :global(html):has(.site) { scroll-snap-type:y proximity; scroll-padding-top:0; }
+ :global(html):has(.site) { scroll-snap-type:y mandatory; scroll-padding-top:0; }
  :global(html):has(.site input:focus),:global(html):has(.waitlistDialog) { scroll-snap-type:none; }
  .site { overflow:visible; }
  .site main>section[id] { min-height:100svh; scroll-margin-top:0; scroll-snap-align:start; scroll-snap-stop:normal; }
