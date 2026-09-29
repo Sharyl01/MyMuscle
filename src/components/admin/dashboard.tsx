@@ -30,6 +30,7 @@ const eventLabels: Record<string, string> = {
   workout_logged: "Workout gelogd",
   preset_applied: "Preset toegepast",
   personal_record_logged: "PR toegevoegd",
+  technical_error: "Technische fout",
 };
 
 const platformLabels: Record<string, string> = {
@@ -584,6 +585,8 @@ export function AdminDashboard({
             <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-400 sm:text-base">
               Vergelijk bereik en frequentie per functie. Gebruik dit als signaal voor
               premiumtests of vereenvoudiging, niet als enige beslisfactor.
+              Nieuwe appgebeurtenissen komen alleen van accounts met optionele toestemming;
+              deze cijfers vertegenwoordigen dus niet automatisch alle gebruikers.
             </p>
           </div>
 

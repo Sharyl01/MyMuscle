@@ -8,14 +8,12 @@ import {
   resolveAdminEmail,
 } from "@/lib/admin/credentials";
 import {
-  MAX_ADMIN_CODE_ATTEMPTS,
   clearSupabaseAuthCookies,
   clearTwoFactorCookies,
   createPendingChallenge,
   deletePendingChallenge,
   getPendingChallenge,
-  pendingCodeMatches,
-  recordFailedAttempt,
+  verifyPendingChallenge,
   setPendingChallenge,
   setVerifiedChallenge,
 } from "@/lib/admin/two-factor";
@@ -89,11 +87,15 @@ export async function login(
   }
 
   try {
-    const { challenge, code } = createPendingChallenge({
+    const { data: claimsData, error: claimsError } = await supabase.auth.getClaims();
+    const sessionId = claimsData?.claims?.session_id;
+    if (claimsError || typeof sessionId !== "string") throw new Error("Session verification failed");
+    const { challenge, code } = await createPendingChallenge({
       userId: signInData.user.id,
       username,
       email,
       session: signInData.session,
+      sessionId,
     });
     const emailSent = await sendAdminVerificationCode({
       email,
@@ -145,11 +147,15 @@ export async function verifyAdminCode(
     return { error: VERIFICATION_EXPIRED_MESSAGE, active: false };
   }
 
-  if (!pendingCodeMatches(challenge, code)) {
-    const remainsActive = await recordFailedAttempt(challenge);
+  let verification: { verified: boolean; remaining: number };
+  try { verification = await verifyPendingChallenge(challenge, code); }
+  catch { return { error: "Verificatie is tijdelijk niet beschikbaar. Probeer opnieuw.", active: true }; }
+  if (!verification.verified) {
+    const remainsActive = verification.remaining > 0;
+    if (!remainsActive) await deletePendingChallenge();
     return {
       error: remainsActive
-        ? `Onjuiste code. Je hebt nog ${MAX_ADMIN_CODE_ATTEMPTS - challenge.attempts - 1} poging(en).`
+        ? `Onjuiste code. Je hebt nog ${verification.remaining} poging(en).`
         : "Te veel onjuiste pogingen. Log opnieuw in.",
       active: remainsActive,
     };
@@ -174,7 +180,7 @@ export async function verifyAdminCode(
 
   const [{ data: isAdmin, error: adminError }, claimsResult] =
     await Promise.all([
-      supabase.rpc("is_product_admin"),
+      supabase.rpc("admin_session_verified_v1"),
       supabase.auth.getClaims(),
     ]);
   const sessionId = claimsResult.data?.claims?.session_id;

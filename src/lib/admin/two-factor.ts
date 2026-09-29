@@ -7,10 +7,12 @@ import {
   createHmac,
   randomBytes,
   randomInt,
+  randomUUID,
   timingSafeEqual,
 } from "node:crypto";
 import type { Session } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
+import { createServiceClient } from "@/lib/supabase/service";
 
 const PENDING_COOKIE = "mymuscle_admin_2fa_pending";
 const VERIFIED_COOKIE = "mymuscle_admin_2fa_verified";
@@ -21,6 +23,7 @@ export const ADMIN_CODE_LENGTH = 6;
 export const MAX_ADMIN_CODE_ATTEMPTS = 5;
 
 type PendingChallenge = {
+  challengeId: string;
   kind: "pending";
   version: 1;
   userId: string;
@@ -103,22 +106,25 @@ const hashCode = (nonce: string, code: string) =>
     .update(`${nonce}:${code}`, "utf8")
     .digest("base64url");
 
-export function createPendingChallenge({
+export async function createPendingChallenge({
   userId,
   username,
   email,
   session,
+  sessionId,
 }: {
   userId: string;
   username: string;
   email: string;
   session: Session;
+  sessionId: string;
 }) {
   const code = randomInt(0, 10 ** ADMIN_CODE_LENGTH)
     .toString()
     .padStart(ADMIN_CODE_LENGTH, "0");
   const nonce = randomBytes(18).toString("base64url");
   const challenge: PendingChallenge = {
+    challengeId: randomUUID(),
     kind: "pending",
     version: 1,
     userId,
@@ -132,6 +138,10 @@ export function createPendingChallenge({
     expiresAt: Date.now() + CHALLENGE_LIFETIME_SECONDS * 1000,
   };
 
+  const { error } = await createServiceClient().rpc("admin_challenge_create_v1", {
+    challenge_id: challenge.challengeId, actor: userId, session_id: sessionId, code_hash: challenge.codeHash,
+  });
+  if (error) throw new Error("Admin challenge could not be created");
   return { challenge, code };
 }
 
@@ -154,12 +164,12 @@ export async function getPendingChallenge(): Promise<PendingChallenge | null> {
     challenge.kind !== "pending" ||
     challenge.version !== 1 ||
     challenge.expiresAt <= Date.now() ||
-    challenge.attempts < 0 ||
-    challenge.attempts >= MAX_ADMIN_CODE_ATTEMPTS
+    typeof challenge.challengeId !== "string"
   ) {
     return null;
   }
-  return challenge;
+  const { data, error } = await createServiceClient().rpc("admin_challenge_status_v1", { challenge_id: challenge.challengeId });
+  return !error && data === true ? challenge : null;
 }
 
 export async function hasPendingChallenge() {
@@ -178,14 +188,12 @@ export function pendingCodeMatches(
   return actual.length === expected.length && timingSafeEqual(actual, expected);
 }
 
-export async function recordFailedAttempt(challenge: PendingChallenge) {
-  const attempts = challenge.attempts + 1;
-  if (attempts >= MAX_ADMIN_CODE_ATTEMPTS) {
-    await deletePendingChallenge();
-    return false;
-  }
-  await setPendingChallenge({ ...challenge, attempts });
-  return true;
+export async function verifyPendingChallenge(challenge: PendingChallenge, code: string) {
+  const { data, error } = await createServiceClient().rpc("admin_challenge_verify_v1", {
+    challenge_id: challenge.challengeId, submitted_hash: hashCode(challenge.nonce, code),
+  });
+  if (error) throw new Error("Admin verification is unavailable");
+  return data as { verified: boolean; remaining: number };
 }
 
 export async function deletePendingChallenge() {
