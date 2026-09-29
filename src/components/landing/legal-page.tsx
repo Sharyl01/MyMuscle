@@ -33,6 +33,7 @@ export function LegalPage({ title, updatedAt, sections }: LegalPageProps) {
             {title}
           </h1>
           <p className="mt-4 text-sm text-slate-400">Last updated {updatedAt}</p>
+          <Link href="/delete-account" className="mt-5 inline-block text-sm text-emerald-200 underline underline-offset-4">Request account and data deletion</Link>
 
           <div className="mt-10 space-y-8">
             {sections.map((section) => (

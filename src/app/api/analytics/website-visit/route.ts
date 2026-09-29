@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { submitWebsiteEvent } from "@/lib/security/website-ingress";
 
 const UUID_PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -28,16 +28,11 @@ export async function POST(request: Request) {
     return new Response(null, { status: 400 });
   }
 
-  const supabase = await createClient();
-  const { error } = await supabase
-    .from("website_visits")
-    .insert({ session_id: sessionId, path });
-
-  if (error) {
-    console.error("Website visit could not be stored", {
-      code: error.code,
-      message: error.message,
-    });
+  try {
+    const result = await submitWebsiteEvent("visit", { session_id: sessionId, path });
+    if (result.limited) return new Response(null, { status: 429 });
+    if (result.invalid) return new Response(null, { status: 400 });
+  } catch {
     return new Response(null, { status: 500 });
   }
 

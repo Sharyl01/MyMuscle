@@ -28,7 +28,7 @@ export async function getAdminIdentity(): Promise<AdminIdentity | null> {
   }
 
   const { data: isAdmin, error: adminError } = await supabase.rpc(
-    "is_product_admin",
+    "admin_session_verified_v1",
   );
   if (adminError || isAdmin !== true) return null;
 
