@@ -5,5 +5,5 @@ import notice from "./privacy-notice.json";
 export const metadata: Metadata = { title: "Privacy", alternates: { canonical: "/privacy" }, robots: { index: false } };
 
 export default function PrivacyPage() {
-  return <LegalPage title="Privacyverklaring" updatedAt={`${notice.status} · ${notice.version}`} sections={notice.sections} />;
+  return <LegalPage locale="nl" title="Privacyverklaring" updatedAt={`${notice.updatedAt} · ${notice.version}`} sections={notice.sections} />;
 }

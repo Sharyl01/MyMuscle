@@ -1,99 +1,130 @@
 {
-  "version": "2026-09-29-16plus-diagnostics-draft",
-  "status": "Concept — nog niet voor publieke release",
+  "version": "2026-10-15-publicatie-v1",
+  "status": "Privacyverklaring",
+  "updatedAt": "2026-10-15",
+  "language": "nl",
   "sections": [
     {
-      "title": "Wie verantwoordelijk is",
+      "title": "1. Wie verantwoordelijk is",
       "body": [
-        "MyMuscle wordt aangeboden door Apphletes VOF, handelend onder de naam MyMuscle. Ons correspondentieadres is Vreelandsestraat 4, 2574 RX Den Haag, Nederland. KvK-nummer: 42133988. Voor privacyvragen, meldingen en verwijderverzoeken kun je ons bereiken via support@mymuscle.app."
+        "Apphletes VOF, handelend onder de naam MyMuscle, is verantwoordelijk voor de verwerking van persoonsgegevens in MyMuscle en op mymuscle.app. Ons correspondentieadres is Vreelandsestraat 4, 2574 RX Den Haag, Nederland. KvK-nummer: 42133988. Voor privacyvragen en verzoeken kun je mailen naar support@mymuscle.app.",
+        "Deze verklaring beschrijft onze app, website, accountdiensten en support. De volledige Nederlandstalige verklaring heeft in de app en op mymuscle.app/privacy dezelfde tekst en versie."
       ]
     },
     {
-      "title": "Account, training en lichaamsgegevens",
+      "title": "2. Welke gegevens we gebruiken en waar die vandaan komen",
       "body": [
-        "Bij registratie verwerken we je account-ID, e-mailadres, inlogmethode en de profielgegevens die je opgeeft, zoals gebruikersnaam, naam, leeftijd, geslacht, lengte, gewicht, trainingsdoel en ervaring. Apple of Google verzorgt de gekozen externe login; MyMuscle ontvangt geen wachtwoord van die dienst.",
-        "We bewaren je ingevoerde trainingen, oefeningen, sets, herhalingen, gewichten, notities, rustdagen, PR’s, gewichtsgeschiedenis, trainingsplanning, presets en appinstellingen. Die gegevens gebruiken we om je logboek te synchroniseren en voortgang, trainingsbelasting en herstelinschattingen te tonen. Herstelinschattingen zijn geen medische metingen of diagnoses.",
-        "Inlogtokens worden op ondersteunde iOS- en Android-builds in beveiligde toestelopslag bewaard. Andere lokale appcaches vallen daar niet automatisch onder. Beveilig ook je toestel met een toegangscode.",
-        "Voor accountbeheer gebruiken we de gegevens die nodig zijn om onze dienst te leveren. Voor het verwerken van lichaams- en trainingsgegevens en afgeleide herstelinschattingen vragen we apart je uitdrukkelijke toestemming. We leggen je opgegeven leeftijd, de versie van de toestemmingsuitleg, je beslissing en het tijdstip vast. De privacyverklaring lezen of akkoord gaan met communityregels is op zichzelf geen gezondheidstoestemming."
+        "Account en profiel: je account-ID, e-mailadres, inlogmethode, gebruikersnaam, naam en de profielgegevens die je invult, zoals leeftijd, geslacht, lengte, gewicht, ervaring, trainingsdoel en gewenste trainingsfrequentie. Bij inloggen met Apple, Google of Facebook ontvangen we de accountgegevens die deze dienst doorgeeft, zoals een gebruikersidentificatie en e-mailadres. We ontvangen niet je wachtwoord van die dienst.",
+        "Training: oefeningen, sets, herhalingen, gewichten, notities, rustdagen, persoonlijke records, gewichtsgeschiedenis, plannen, presets, instellingen en de daaruit berekende belasting, voortgang en herstelinschattingen. Deze informatie kan iets over je gezondheid zeggen. We behandelen lichaams- en trainingsgegevens daarom als gevoelige gegevens.",
+        "Community: je gekozen profielfoto, groepslidmaatschappen en rollen, vriendschappen, blokkades, gedeelde statistieken, berichten en gedeelde presets. Als iemand inhoud van jou meldt, ontvangen we de betreffende inhoud en meldinformatie van die gebruiker. Zie ook de uitleg over zichtbaarheid en moderatie hieronder.",
+        "Technische gegevens: onder meer platform, appversie, verzoekmomenten en technische verbindingsgegevens die onze diensten en leveranciers nodig hebben om verzoeken af te handelen en misbruik tegen te gaan. Optionele productmetingen staan los van noodzakelijke beveiligingsregistraties.",
+        "Website en support: het e-mailadres dat je op de wachtlijst invult, je verzoeken en correspondentie, en eventuele bijlagen die je zelf verstrekt. Stuur geen identiteitsbewijs, wachtwoord, inloglink, medisch dossier of onnodige gezondheidsinformatie mee. Apple Health en optionele gebruiksstatistieken hebben hieronder een eigen uitleg."
       ]
     },
     {
-      "title": "Fitnessondersteuning, geen medisch advies",
+      "title": "3. Waarom we gegevens verwerken",
       "body": [
-        "MyMuscle is geen medisch hulpmiddel en stelt geen diagnoses. De app behandelt, geneest of voorkomt geen medische aandoeningen. Vraag een zorgverlener om medisch advies, diagnose of behandeling.",
-        "Spierbelasting, herstel en voortgang zijn schattingen op basis van je invoer en rekenregels. Ze kunnen onvolledig of onjuist zijn en garanderen geen veilige training of resultaat. De app beoordeelt geen blessures of medische geschiktheid. Stop bij pijn of onwel worden en pas je training aan je eigen mogelijkheden aan. Scores, ranglijsten en badges zijn geen reden om je grenzen te overschrijden."
+        "Voor het aanmaken, beveiligen en beheren van je account en het leveren van aangevraagde accountfuncties gebruiken we de gegevens die nodig zijn om onze overeenkomst met jou uit te voeren: artikel 6 lid 1 onder b AVG. Voor lichaams- en trainingsgegevens en afgeleide herstelinschattingen vragen we afzonderlijk je uitdrukkelijke toestemming: artikel 6 lid 1 onder a en artikel 9 lid 2 onder a AVG. Een akkoord met voorwaarden of het lezen van deze verklaring vervangt die toestemming niet.",
+        "Optionele gebruiksstatistieken, de Apple Health-koppeling en het ontvangen van de gevraagde wachtlijstberichten zijn gebaseerd op jouw toestemming. Die keuzes zijn afzonderlijk. We vragen aanvullende toestemming wanneer gegevens voor een nieuw doel worden gebruikt waarvoor dat nodig is.",
+        "Voor het afhandelen van een verzoek over onze dienstverlening kan uitvoering van de overeenkomst de grondslag zijn. Voor noodzakelijke beveiliging, het voorkomen van misbruik en de behandeling van gewone support- en moderatiegegevens kunnen we ons beroepen op ons gerechtvaardigde belang: artikel 6 lid 1 onder f AVG. Dat belang is een veilige, betrouwbare dienst en het behandelen van verzoeken en klachten. We beperken de gegevens tot wat daarvoor nodig is en wegen jouw rechten mee. Je kunt tegen verwerking op deze grondslag bezwaar maken.",
+        "Waar we een concrete wettelijke verplichting moeten uitvoeren, geldt artikel 6 lid 1 onder c AVG. Een gerechtvaardigd belang of wettelijke verplichting geeft niet vanzelf toestemming om gezondheidsgegevens te verwerken; daarvoor is daarnaast een toepasselijke uitzondering uit artikel 9 AVG nodig.",
+        "De verplichte velden worden bij het invullen aangegeven. Zonder de benodigde accountgegevens kunnen we geen account leveren; zonder geldige uitdrukkelijke toestemming voor lichaams- en trainingsgegevens zijn persoonlijke trainingsfuncties niet beschikbaar. Accountverwijdering en privacyverzoeken blijven mogelijk. Je hoeft geen optionele statistieken te delen en Apple Health niet te koppelen om de overige trainingsfuncties te gebruiken."
       ]
     },
     {
-      "title": "Apple Health en toestemming intrekken",
+      "title": "4. Apple Health",
       "body": [
-        "Apple Health is alleen beschikbaar op ondersteunde Apple-toestellen, niet in de Android-app. Koppelen is optioneel. Na jouw toestemming leest MyMuscle slaapduur en lichaamsgewicht voor herstel en voortgang. De koppeling schrijft geen gegevens naar Apple Health. Ontkoppelen stopt nieuwe uitlezingen en wist de lokale Health-cache; je kunt de systeemtoestemming ook in Apple Health intrekken.",
-        "In de bijgewerkte app geef je voor het invullen van je trainingsprofiel apart toestemming voor verwerking van lichaams- en trainingsgegevens. Je kunt deze toestemming beheren via Profiel → Privacy en veiligheid → Toestemming voor lichaams- en trainingsgegevens beheren. Bij intrekking pauzeren de trainingsfuncties; bij een verbindingsfout stopt de huidige app de toegang en moet de online intrekking opnieuw worden verwerkt. Intrekken verwijdert bestaande gegevens niet automatisch. Je kunt ook accountverwijdering aanvragen. Eerdere rechtmatige verwerking wordt door intrekking niet onrechtmatig."
+        "Op ondersteunde Apple-toestellen kun je Apple Health vrijwillig koppelen. Na jouw toestemming lezen we slaapduur en lichaamsgewicht voor herstel en voortgang. We schrijven geen gegevens naar Apple Health. De Android-app gebruikt deze Apple Health-koppeling niet.",
+        "Slaap wordt op je toestel verwerkt tot nachtelijke totalen en wordt niet naar onze database gestuurd. Geïmporteerd lichaamsgewicht wordt onderdeel van je gewichtsgeschiedenis en gesynchroniseerde trainingsprofiel in Supabase. We gebruiken Health-gegevens niet voor advertenties, marketing of het volgen van je gedrag voor reclame.",
+        "Ontkoppelen stopt nieuwe uitlezingen en verwijdert de lokale Health-cache. Je kunt de systeemtoestemming ook in Apple Health intrekken. Eerder geïmporteerde gewichten blijven in je trainingsprofiel staan totdat je die gegevens of je account laat verwijderen. Het stoppen van een koppeling verwijdert die eerdere import dus niet automatisch."
       ]
     },
     {
-      "title": "Groepen, profielen en berichten",
+      "title": "5. Wat anderen kunnen zien",
       "body": [
-        "Andere gebruikers kunnen je gebruikersnaam zien. In groepen tonen we je groepsrol en toegestane trainingsstatistieken. In publieke groepen kan een voorvertoning ook zichtbaar zijn voor ingelogde niet-leden. Privégroepen beperken het ledenoverzicht tot toegestane deelnemers; geslacht voor groepsranglijsten wordt alleen gedeeld binnen je actieve groep.",
-        "Je kunt de zichtbaarheid van je PR-profiel en badge-profiel aanpassen. Deze keuzes verbergen niet automatisch alle overige groepsstatistieken, zoals totaalscore en activiteit. E-mailadres, echte naam, leeftijd, lengte en lichaamsgewicht worden niet als algemene sociale profielvelden aangeboden.",
-        "Directe berichten en gedeelde presets zijn beschikbaar voor de deelnemers. Blokkeren voorkomt nieuwe directe berichten, vriendschapsverzoeken en uitnodigingen door die gebruiker, ook bij een gedeelde groep. Een blokkade verwijdert bestaande berichten niet automatisch. Berichten zijn niet end-to-end versleuteld."
+        "Andere gebruikers kunnen je gebruikersnaam en toegestane profielinhoud zien. Binnen groepen zijn je rol, totaalscore, activiteit en de daarvoor toegestane trainingsstatistieken zichtbaar. Een publieke groep kan ook een voorvertoning voor ingelogde niet-leden tonen. Privégroepen beperken het ledenoverzicht tot toegestane deelnemers. Geslacht voor groepsranglijsten wordt alleen binnen je actieve groep gedeeld.",
+        "Voor nieuwe accounts staat het delen van badges en persoonlijke records standaard uit. Je kiest dat apart tijdens de registratie of bij Privacy en veiligheid. Deze keuzes verbergen niet je gebruikersnaam, groepslidmaatschap, totaalscore en activiteit binnen je groepen. E-mailadres, echte naam, leeftijd, lengte en lichaamsgewicht worden niet als algemene sociale profielvelden aangeboden.",
+        "Berichten en gedeelde presets zijn zichtbaar voor de deelnemers. Berichten zijn niet end-to-end versleuteld. Blokkeren stopt nieuw direct contact, vriendschapsverzoeken en uitnodigingen door die gebruiker, ook bij een gedeelde groep. Het verwijdert bestaande berichten niet automatisch.",
+        "Deel geen medische dossiers, diagnoses of andere onnodige gevoelige gegevens over jezelf of anderen. De toestemming voor persoonlijke trainingsfuncties is geen algemene toestemming om je gezondheidsgegevens met andere gebruikers te delen. Bij aanvullende verwerking van gevoelige gegevens voor communityfuncties is daarvoor een afzonderlijke passende grondslag en, waar van toepassing, uitdrukkelijke toestemming nodig."
       ]
     },
     {
-      "title": "Meldingen en moderatie",
+      "title": "6. Profielfoto's, meldingen en moderatie",
       "body": [
-        "Als je een gebruiker, groep of ontvangen bericht meldt, bewaren we de reden, jouw toelichting, relevante identificatoren en een kopie van de gemelde inhoud voor beoordeling. Voeg geen onnodige gevoelige gegevens toe.",
-        "Alleen aangewezen moderators krijgen toegang tot de meldingenlijst. Je identiteit wordt niet aan de gemelde gebruiker getoond. Moderators kunnen inhoud verwijderen en hun besluit vastleggen. We gebruiken meldingen voor gebruikersveiligheid en het onderzoeken van misbruik. Voor zover meldingen gezondheidsgegevens bevatten, moet ook hiervoor een passende uitzondering zijn vastgesteld.",
-        "De aangewezen beheerders controleren de moderatie-inbox en supportverzoeken dagelijks. We bieden geen continu bemande noodhulpdienst. Gebruik bij direct gevaar de lokale hulpdiensten."
+        "Nieuwe profielfoto's worden eerst privé in Supabase opgeslagen. Alleen jij en bevoegde moderators kunnen een nog niet goedgekeurde foto bekijken. Een foto wordt pas gepubliceerd na goedkeuring; je eerdere goedgekeurde foto blijft tijdens de beoordeling staan. Bestandscontrole controleert ondersteunde formaten, niet of een foto naaktbeelden bevat. We sturen foto's niet naar een externe AI-detectiedienst en gebruiken ze niet voor biometrische identificatie.",
+        "Een beperkte automatische tekstfilter kan bepaalde expliciete teksten en links blokkeren. Bevoegde moderators beoordelen meldingen en kunnen inhoud verwijderen, profielinhoud verbergen of het plaatsen van nieuwe community-inhoud tijdelijk beperken. De communityregels leggen uit welke inhoud niet is toegestaan en hoe je kunt melden, blokkeren of bezwaar maken.",
+        "Bij een melding bewaren we de reden, toelichting, relevante identificatoren, een kopie van de gemelde inhoud, het contactadres van de melder en diens verklaring dat de melding naar beste weten juist en volledig is. Dit gebruiken we om de melding te beoordelen, besluiten uit te leggen en misbruik of bezwaar te behandelen. Alleen bevoegde personen krijgen toegang. De identiteit van de melder en interne notities worden niet aan de betrokken gebruiker getoond.",
+        "Na het opslaan kan de app een ingevulde supportmail openen. Jij kiest of je deze mail verstuurt. MyMuscle verzendt die mail niet automatisch; de opgeslagen melding blijft ook zonder mail beschikbaar voor beoordeling. Er wordt geen foto of privaat bericht als e-mailbijlage toegevoegd.",
+        "Je vindt ontvangstbevestigingen en besluiten bij Privacy en veiligheid. Je kunt ook zonder account melden of bezwaar maken via support@mymuscle.app. Vermeld de locatie of identificatie van de inhoud, je uitleg en contactadres; stuur geen illegale afbeeldingen mee. We zijn geen continu bemande noodhulpdienst. Gebruik bij direct gevaar de lokale hulpdiensten."
       ]
     },
     {
-      "title": "Optionele statistieken en technische foutgegevens",
+      "title": "7. Optionele gebruiksstatistieken en foutgegevens",
       "body": [
-        "Bij de start kun je vrijwillig het vakje voor gebruiksstatistieken en beperkte technische foutgegevens aankruisen. Het staat standaard uit. Je kunt de app zonder deze toestemming gebruiken. Je keuze wordt voor je account op de server vastgelegd met de versie van de uitleg, je beslissing en het tijdstip. Je keuze geldt ook op andere toestellen waarop je dit account gebruikt. Een oude, alleen op het toestel opgeslagen keuze schakelt deze verwerking niet automatisch in.",
-        "Na toestemming verwerken we geopende functies en gebeurtenissen zoals het opslaan van een training, platform, appversie, een sessie-ID en beperkte aantallen oefeningen, sets, trainingsdagen en rustdagen. Voor technische fouten gebruiken we alleen vooraf bepaalde foutcodes, momenteel voor problemen bij het synchroniseren van trainingen. Er worden geen volledige crashrapporten, vrije foutteksten, trainingsgewichten, berichtinhoud of e-mailadressen in deze gebeurtenissen opgenomen. Ze zijn gekoppeld aan je account-ID en dus niet anoniem. We gebruiken ze voor het verbeteren van functies en het onderzoeken van technische problemen; de grondslag is je toestemming.",
-        "Je kunt de toestemming intrekken via Profiel → Privacy en veiligheid. Delen stopt direct op dat toestel en, na serverbevestiging, ook op je andere toestellen. Bij een verbindingsfout moet de intrekking opnieuw online worden verwerkt; de app bewaart de intrekking waar mogelijk lokaal en probeert deze opnieuw. Uitzetten verwijdert eerdere gebeurtenissen niet automatisch. Die worden na 90 dagen bij de dagelijkse opruiming verwijderd; je kunt eerder verwijdering vragen via support. Noodzakelijke technische beveiligingslogs van onze leveranciers staan los van deze optionele keuze."
+        "Het selectievakje voor gebruiksstatistieken en beperkte technische foutgegevens is optioneel en staat standaard leeg. Je kunt de app zonder deze toestemming gebruiken. We registreren de versie van de uitleg, je keuze en het tijdstip voor je account. De keuze geldt ook op andere toestellen waarop je dit account gebruikt.",
+        "Alleen na toestemming registreren we geopende functies en gebeurtenissen zoals het opslaan van een training, platform, appversie, een sessie-ID en beperkte aantallen oefeningen, sets, trainingsdagen en rustdagen. Voor technische fouten gebruiken we vooraf bepaalde foutcodes, momenteel voor problemen met trainingssynchronisatie. Gebeurtenissen zijn gekoppeld aan je account-ID en zijn dus niet anoniem.",
+        "Deze gebeurtenissen bevatten geen trainingsgewichten, oefeningnamen, berichtinhoud, e-mailadressen, vrije foutteksten of volledige crashrapporten. Ze worden in Supabase verwerkt om functies te verbeteren en technische problemen te onderzoeken. Het productdashboard toont samengevoegde rapportages; kleine aantallen zijn niet automatisch anoniem.",
+        "Intrekken kan via Profiel → Privacy en veiligheid. Inzenden stopt direct op dat toestel en na serverbevestiging op je andere toestellen. Bij een verbindingsfout moet de online intrekking opnieuw worden verwerkt; de app bewaart die waar mogelijk lokaal en probeert opnieuw. Eerdere gebeurtenissen worden niet automatisch door intrekking gewist. Ze worden na 90 dagen bij de dagelijkse opruiming verwijderd; eerder verwijderen kun je via support aanvragen. Noodzakelijke beveiligingslogs van leveranciers vallen niet onder deze optionele keuze."
       ]
     },
     {
-      "title": "Wie jouw gegevens kan inzien",
+      "title": "8. Website en wachtlijst",
       "body": [
-        "Het MyMuscle-productdashboard toont samengevoegde gebruikscijfers, zoals aantallen gebeurtenissen en gebruikers per functie of platform en aantallen technische fouten. Het biedt geen overzicht met persoonlijke trainingslogboeken, berichten of medische dossiers. Samengevoegde cijfers zijn bij kleine aantallen niet automatisch anoniem.",
-        "Aangewezen databasebeheerders en onze technische leveranciers kunnen voor hun werkzaamheden technisch toegang hebben tot onderliggende persoonsgegevens. Dat betekent niet dat zij alles voor elk doel mogen bekijken. Toegang moet beperkt blijven tot bevoegde personen en gegevens die noodzakelijk zijn voor een toegestaan doel, bijvoorbeeld een door jou ingediend supportverzoek of het onderzoeken van een beveiligingsincident. Toestemming voor statistieken is geen algemene toestemming om je trainingen of berichten door te nemen. Moderators hebben een afzonderlijke taak voor gemelde inhoud."
+        "Als je je aanmeldt voor de wachtlijst, gebruiken we je e-mailadres voor de gevraagde bevestiging en informatie over de lancering van MyMuscle. Je kunt je toestemming intrekken en verwijdering vragen via support@mymuscle.app. Wachtlijstgegevens worden niet automatisch gebruikt voor andere marketingcampagnes.",
+        "De website telt paginaweergaven en browsersessies met een willekeurige sessiecode. Daarvoor wordt een code in sessionStorage van je browser geplaatst. De eigen bezoekentabel bevat geen rechtstreeks IP-adres of user-agent. Voor het beperken van misbruik verwerkt de server wel het IP-adres en maakt daarvan een dagelijks wisselende beveiligingscode. De code en verzoekaantallen worden maximaal twee dagen in de beveiligingstabel bewaard. Dit maakt de verwerking niet automatisch anoniem.",
+        "Hosting- en beveiligingsdiensten kunnen technische verbindingsgegevens, waaronder IP-adressen en verzoekinformatie, verwerken. Beperkte eigen bezoekersmetingen worden gebruikt voor inzicht in het bereik van de website; bij verwerking op basis van gerechtvaardigd belang kun je bezwaar maken. Waar voor opslag of uitlezing op je toestel toestemming vereist is, wordt die vooraf gevraagd."
       ]
     },
     {
-      "title": "Website, leveranciers en doorgiften",
+      "title": "9. Leveranciers, ontvangers en verwerking buiten de EER",
       "body": [
-        "Op mymuscle.app kun je je e-mailadres op de wachtlijst zetten. De website registreert paginaweergaven en browsersessies met een willekeurige sessiecode. De eigen bezoekentabel slaat geen IP-adres of user-agent op; hosting- en beveiligingsdiensten kunnen zulke technische gegevens wel verwerken.",
-        "Supabase levert de appdatabase, authenticatie en bestandsopslag. Het hoofdproject staat in de regio Frankfurt, Duitsland (gecontroleerd op 20 september 2026). Supportmail wordt ontvangen via Private Email van Namecheap. Daar worden je e-mailadres, je bericht en eventuele bijlagen verwerkt om je verzoek te behandelen. Stuur geen identiteitsbewijs, wachtwoord of medisch dossier. Vercel host de website met de privacy- en verwijderinformatie.",
-        "Apple en Google verwerken gegevens als je hun beschikbare login- of Health-diensten gebruikt. De app gebruikt Google voor automatische vertaling van toegestane vaste interface-teksten; privéberichten en meldingen worden niet voor automatische vertaling aangeboden. Bij netwerkverzoeken ontvangen de betreffende diensten ook technische verbindingsgegevens, zoals je IP-adres.",
-        "We verkopen geen persoonsgegevens. Een Europese projectregio sluit verwerking buiten de EER door leveranciers en hun ondersteunende diensten niet automatisch uit. De standaardvoorwaarden van Supabase bevatten een verwerkersovereenkomst met bepalingen voor internationale doorgiften. Vóór publicatie worden de voor onze accounts geldende afspraken en waarborgen voor de overige diensten vastgelegd."
+        "Supabase levert de appdatabase, authenticatie en bestandsopslag. Het hoofdproject staat in Frankfurt, Duitsland. Vercel host de website. Private Email van Namecheap verwerkt onze inkomende supportmail en uitgaande accountmail. Voor wachtlijstbevestigingen kan de website Resend gebruiken wanneer deze verzenddienst is ingeschakeld. Deze diensten verwerken de gegevens die nodig zijn voor hun beschreven taak.",
+        "Bij sommige inlog- en beveiligingsacties gebruiken we Cloudflare Turnstile. Cloudflare kan daarvoor technische gegevens zoals IP-adres, browser- en apparaatgegevens verwerken om geautomatiseerd misbruik te herkennen. We sturen hiervoor geen lichaams- of trainingsgegevens, berichten of ingevulde e-mailadressen naar de controlepagina. Apple, Google en Facebook verwerken ook gegevens volgens hun eigen privacyvoorwaarden wanneer je hun inlogdienst gebruikt.",
+        "Vaste interfaceteksten worden met meegeleverde vertalingen op je toestel vertaald. Je berichten en notities worden daarvoor niet naar een externe vertaaldienst gestuurd. We verkopen geen persoonsgegevens en gebruiken lichaams-, trainings- of Apple Health-gegevens niet voor reclame of marketing.",
+        "Een Europese databasevestiging betekent niet dat elke leverancier of ondersteunende dienst uitsluitend binnen de Europese Economische Ruimte werkt. Leveranciers en hun subverwerkers kunnen gegevens onder meer buiten de EER verwerken. Voor doorgiften waarvoor dat nodig is, zijn passende waarborgen vereist, zoals de Europese standaardcontractbepalingen en aanvullende beschermingsmaatregelen. Je kunt via support@mymuscle.app informatie en een kopie van de toepasselijke waarborgen aanvragen, met bescherming van vertrouwelijke informatie."
       ]
     },
     {
-      "title": "Bewaren en verwijderen",
+      "title": "10. Beveiliging en toegang",
       "body": [
-        "Je account- en trainingsgegevens blijven beschikbaar zolang je je account gebruikt. Bij bevestigde accountverwijdering worden de bijbehorende actieve account-, trainings-, profiel- en berichtgegevens en je opgeslagen avatars verwijderd. Een groep met andere actieve leden krijgt een nieuwe host; een lege groep wordt verwijderd.",
-        "Accountverwijdering kan niet worden teruggedraaid. De app wacht op serverbevestiging voordat lokale gegevens worden gewist. Bij een storing kun je opnieuw proberen. Alleen de app verwijderen van je toestel verwijdert je online account niet.",
-        "Optionele gebruiksstatistieken worden bij de dagelijkse opruiming verwijderd zodra ze ouder zijn dan 90 dagen. Afgehandelde meldingen, inclusief de opgeslagen kopie van gemelde inhoud, worden bij diezelfde opruiming verwijderd zodra de afhandeling langer dan 90 dagen geleden is. Bij een concrete noodzaak voor bewijsbewaring leggen we de reden en een einddatum vast; alleen zolang die uitzondering geldt blijft de melding bewaard. Open meldingen blijven bewaard voor behandeling.",
-        "Toestemmingsregistraties en hun wijzigingsgeschiedenis blijven gekoppeld aan je account en worden bij accountverwijdering uit de actieve database verwijderd. Als een eerder aangemaakt account door de leeftijdsgrens geen toegang krijgt, kun je het account nog steeds laten verwijderen.",
-        "Voor support geldt als bewaarbeleid: verwijderen binnen 12 maanden na afhandeling, tenzij een concreet geschil of een wettelijke verplichting langer bewaren noodzakelijk maakt. De beheerders voeren dit uit in de mailbox. Verwijdering uit de actieve database of mailbox betekent niet dat iedere leveranciersbackup direct wordt gewist. Leveranciers hanteren hun eigen vervalcycli voor technische logs en backups; de accountgebonden termijnen en afspraken over herstel worden vóór publicatie vastgelegd."
+        "We beperken toegang tot accounts en gegevens met toegangscontrole, databasebeveiliging en versleutelde verbindingen. Ondersteunde iOS- en Android-builds bewaren inlogtokens in beveiligde toestelopslag. De app versleutelt lokale lichaams-, trainings- en profielgegevens met een sleutel in beveiligde toestelopslag; de webapp gebruikt daarvoor een browsersleutel die niet exporteerbaar is.",
+        "Bevoegde beheerders en technische leveranciers kunnen voor noodzakelijke werkzaamheden toegang hebben tot onderliggende gegevens, bijvoorbeeld voor een supportverzoek of beveiligingsincident. Dat is geen algemene toestemming om trainingslogboeken of berichten door te nemen. Moderatorinzage in gemelde inhoud heeft een afzonderlijk doel.",
+        "Geen beveiliging sluit ieder risico uit. Beveilig je toestel en account. Een ontgrendelde app of door jou gedeeld exportbestand kan informatie zichtbaar maken. Ontvangen berichten zijn niet end-to-end versleuteld."
       ]
     },
     {
-      "title": "Jouw rechten en contact",
+      "title": "11. Hoelang we gegevens bewaren",
       "body": [
-        "Je kunt via support@mymuscle.app vragen om inzage, correctie, verwijdering of, waar van toepassing, gegevensoverdraagbaarheid en beperking. Bij verwerking op basis van toestemming kun je die intrekken; bij gerechtvaardigd belang kun je bezwaar maken. Intrekking maakt eerdere rechtmatige verwerking niet onrechtmatig.",
-        "We controleren je identiteit op een passende manier en vragen niet standaard om een identiteitsbewijs. In beginsel reageren we binnen één maand; als een toegestane verlenging nodig is, informeren we je. Je kunt een klacht indienen bij de Autoriteit Persoonsgegevens of je bevoegde lokale toezichthouder.",
-        "Verwijder je account via Profiel → Account verwijderen, of vraag verwijdering aan via mymuscle.app/delete-account zonder de app opnieuw te installeren."
+        "Account-, profiel- en trainingsgegevens bewaren we zolang die nodig zijn voor je account en de gevraagde trainingsfuncties. Je kunt gegevens of je account laten verwijderen. Toestemmingsregistraties en wijzigingsgeschiedenis blijven aan je account gekoppeld en worden bij accountverwijdering uit de actieve database verwijderd.",
+        "Optionele appstatistieken: 90 dagen, daarna verwijdering bij de dagelijkse opruiming. Afgehandelde meldingen en besluitregistraties: in beginsel 90 dagen na afhandeling. Open meldingen blijven bewaard zolang behandeling nodig is. Bij noodzakelijke bewijsbewaring leggen we de reden en einddatum vast en bewaren we alleen wat daarvoor nodig is.",
+        "Profielfoto's: je goedgekeurde foto zolang je deze gebruikt. Afgewezen of ingetrokken bestanden worden bij intrekking of moderatie opgeruimd; een mislukte netwerkactie wordt opnieuw geprobeerd. Bij moderatiecontrole worden vervangen foto's opgeruimd vanaf 24 uur na vervanging en onvoltooide uploads vanaf een uur. Bewijs voor een open melding of geldige bewijsbewaring wordt daarvan uitgezonderd. Beoordelingsmetadata wordt in beginsel 90 dagen na afhandeling bewaard.",
+        "Supportmail: maximaal 12 maanden na afhandeling, tenzij een concreet geschil of een wettelijke verplichting langer bewaren noodzakelijk maakt. Wachtlijstgegevens: tot de gevraagde lanceringsberichten zijn afgehandeld of je toestemming intrekt, waarna de gegevens worden verwijderd zodra ze niet meer voor die aanvraag nodig zijn. Websitebezoeken: maximaal 90 dagen. Deze termijnen gelden ook voor door ons gemaakte operationele kopieën, behoudens een vastgelegde noodzakelijke uitzondering.",
+        "Verwijderen uit de actieve dienst wist niet meteen alle herstelkopieën en technische logs bij leveranciers. Die worden afzonderlijk bewaard voor beveiliging en herstel en vervallen volgens de toepasselijke dienstcyclus. Verwijderde gegevens mogen niet opnieuw voor normaal gebruik beschikbaar worden gemaakt als een herstelkopie wordt teruggezet. Vraag via support@mymuscle.app om informatie over de voor jouw gegevens toepasselijke bewaartermijnen en herstelmaatregelen."
       ]
     },
     {
-      "title": "Leeftijd, landen en wijzigingen",
+      "title": "12. Toestemming intrekken en je account verwijderen",
       "body": [
-        "MyMuscle is bedoeld voor gebruikers van 16 jaar en ouder. De eerste publieke introductie is voorzien voor de Europese Unie. We gebruiken de leeftijd die je opgeeft om je toegang te bepalen. Gebruikers jonger dan 16 krijgen geen toegang tot lichaams-, trainings- of communityfuncties. Als je bij de leeftijdskeuze een fout maakt, kun je die op hetzelfde scherm corrigeren voordat je verdergaat. Voor vragen kun je contact opnemen met support@mymuscle.app. Stuur geen identiteitsbewijs of inloggegevens via gewone e-mail. We bieden voorlopig geen route met ouderlijke toestemming voor gebruikers onder 16. Een bestaand account onder 16 kan nog wel worden verwijderd. De opgegeven leeftijd is een eigen verklaring, geen geverifieerd identiteitsbewijs.",
-        "Deze tekst is een concept voor beoordeling en wordt vóór publicatie aangevuld op basis van de definitieve inrichting. Bij wezenlijke wijzigingen informeren we gebruikers en vragen we opnieuw toestemming waar dat nodig is."
+        "Je kunt afzonderlijke toestemmingen beheren bij Profiel → Privacy en veiligheid. Bij intrekking van toestemming voor lichaams- en trainingsgegevens pauzeren de persoonlijke trainingsfuncties. Intrekken maakt eerdere rechtmatige verwerking niet onrechtmatig en is niet automatisch hetzelfde als een verwijderverzoek. Je kunt daarnaast verwijdering aanvragen.",
+        "Verwijder je account via Profiel → Account verwijderen. Ook zonder de app kun je verwijdering aanvragen via mymuscle.app/delete-account of support@mymuscle.app. We controleren op een passende manier of het verzoek bij het account hoort. Stuur geen wachtwoord of identiteitsbewijs via gewone e-mail. Bij een gekoppeld Apple-account kan een nieuwe bevestiging met hetzelfde Apple-account nodig zijn om de Apple-autorisatie in te trekken.",
+        "Bij bevestigde accountverwijdering worden de gekoppelde actieve account-, profiel-, trainings-, foto- en berichtgegevens verwijderd. Een groep met andere actieve leden krijgt een nieuwe host; een lege groep wordt verwijderd. De app wist lokale accountgegevens na serverbevestiging. Alleen de app van je toestel verwijderen wist je online account niet. Een foutmelding betekent dat je opnieuw moet proberen of contact moet opnemen; het openen van een supportmail verwijdert op zichzelf niets.",
+        "Als bepaalde informatie noodzakelijk moet blijven voor een wettelijke verplichting of een concreet geschil, beperken we die bewaring tot het noodzakelijke en informeren we je over de reden en termijn. Door andere gebruikers buiten MyMuscle gemaakte kopieën kunnen we niet zelf verwijderen."
+      ]
+    },
+    {
+      "title": "13. Jouw rechten",
+      "body": [
+        "Je kunt inzage, correctie, verwijdering en, waar van toepassing, beperking of overdraagbaarheid van je gegevens vragen. Bij verwerking op basis van toestemming kun je die intrekken; bij gerechtvaardigd belang kun je bezwaar maken. Mail naar support@mymuscle.app. We controleren je identiteit op een passende manier en vragen niet standaard om een identiteitsbewijs.",
+        "Via Mijn gegevens downloaden kun je opgeslagen appgegevens als JSON-bestand downloaden, inclusief nog niet gesynchroniseerde trainingen op dit toestel. Het bestand bevat niet alle fotobestanden, ontvangen berichten of supportcorrespondentie. Voor aanvullende inzage of een compleet verzoek kun je contact opnemen. De export is niet versleuteld: bewaar hem veilig. Tijdelijke app-exportbestanden worden na delen en bij een volgende start opgeruimd.",
+        "In beginsel reageren we binnen één maand. Als een wettelijk toegestane verlenging nodig is, informeren we je binnen die maand over de reden. Je kunt een klacht indienen bij de Autoriteit Persoonsgegevens via autoriteitpersoonsgegevens.nl of bij de bevoegde toezichthouder in jouw EU-land."
+      ]
+    },
+    {
+      "title": "14. Berekeningen, leeftijd en wijzigingen",
+      "body": [
+        "De app berekent belasting, herstelinschattingen en voortgang uit je invoer en beschikbare gegevens. Het zijn schattingen, geen medische metingen of diagnoses. De automatische tekstfilter en moderatie worden beschreven bij Meldingen en moderatie. Neem contact op als je een uitkomst, beperking of besluit wilt betwisten of laten uitleggen.",
+        "MyMuscle is bedoeld voor gebruikers vanaf 16 jaar. De leeftijd wordt vóór het geven van gezondheidstoestemming gecontroleerd. We bieden geen ouderlijke toestemmingsroute voor gebruikers onder 16. Een bestaand account onder die grens kan wel worden verwijderd. Een ingevulde leeftijd is een eigen verklaring en geen geverifieerd identiteitsbewijs.",
+        "We richten deze versie op de Europese Unie. Bij wezenlijke wijzigingen informeren we gebruikers; als voor een gewijzigde verwerking nieuwe toestemming nodig is, vragen we die vooraf. De datum en versie bovenaan geven aan welke verklaring van toepassing is."
       ]
     }
   ]

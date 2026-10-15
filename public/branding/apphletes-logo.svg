@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 142 32">
+  <path
+    d="M16 3 29 27H3L16 3Zm0 8-5 10h10l-5-10Z"
+    fill="currentColor"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+  />
+  <path d="M20.5 21H27l2 6h-5.6l-2.9-6Z" fill="#D9FF69" />
+  <text
+    x="42"
+    y="22.75"
+    fill="currentColor"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="19.5"
+    font-weight="800"
+    letter-spacing="-1.05"
+  >Apphletes</text>
+</svg>
