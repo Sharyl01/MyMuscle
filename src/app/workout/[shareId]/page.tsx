@@ -18,6 +18,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: { title: `${program.name} | MyMuscle`, description, url, type: "website", siteName: "MyMuscle", images: [{ url: `${SHARE_ORIGIN}/marketing/social-preview.png`, width: 1200, height: 630, alt: "MyMuscle — your training, your way" }] },
     twitter: { card: "summary_large_image", title: `${program.name} | MyMuscle`, description, images: [`${SHARE_ORIGIN}/marketing/social-preview.png`] } };
 }
+const muscleIcons: Record<string, { file: string; scale: number; label: string }> = {
+  chest: { file: "chest", scale: 2.05, label: "Chest" }, back: { file: "back", scale: 2.15, label: "Back" },
+  biceps: { file: "biceps", scale: 3.4, label: "Biceps" }, triceps: { file: "triceps", scale: 2.35, label: "Triceps" },
+  shoulders: { file: "shoulders", scale: 2.4, label: "Shoulders" }, legs: { file: "legs", scale: 2.35, label: "Legs" },
+  core: { file: "core", scale: 1, label: "Core" },
+};
+function MuscleIcon({ muscle }: { muscle?: string }) {
+  const icon = muscle ? muscleIcons[muscle] : undefined;
+  return icon ? <span className={s.muscleIcon}><Image src={`/icons/muscles/${icon.file}.png`} width={28} height={28} alt={icon.label} style={{ transform: `scale(${icon.scale})` }} /></span> : null;
+}
 function Lock() { return <svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><rect x="5" y="10" width="14" height="11" rx="3" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /><path d="M12 14v3" /></svg>; }
 export default async function WorkoutPreviewPage({ params }: Props) {
   const { shareId } = await params, program = await getWorkoutPreview(shareId);
@@ -38,8 +48,8 @@ export default async function WorkoutPreviewPage({ params }: Props) {
       <div className={s.sectionTitle}><h2 id="preview-heading">Your preview</h2><span>Around ⅓ of the plan</span></div>
       {program.previewWorkouts.map(workout => <article className={s.workout} key={workout.day}>
         <div className={s.workoutHeader}><span className={s.eyebrow}>{weekdays[workout.day]}</span><h3>{workout.name}</h3></div>
-        <ol className={s.exercises}>{workout.exercises.map((exercise, index) => <li key={index}><span className={s.number}>{String(index + 1).padStart(2, "0")}</span><div><h4>{exercise.name}</h4>
-          {exercise.sets.length ? exercise.sets.map((set, setIndex) => <p key={setIndex}>Set {setIndex + 1} · {set.durationSeconds ? `${set.durationSeconds}s` : set.reps === set.repMax ? `${set.reps} reps` : `${set.reps}–${set.repMax} reps`} <span>· {set.restSeconds}s rest</span></p>) : <p>Set details available in MyMuscle</p>}
+        <ol className={s.exercises}>{workout.exercises.map((exercise, index) => <li key={index}><span className={s.number}>{String(index + 1).padStart(2, "0")}</span><div className={s.exerciseDetail}><div className={s.exerciseTitle}><h4>{exercise.name}</h4><MuscleIcon muscle={exercise.muscle} /></div>
+          {exercise.sets.length ? exercise.sets.map((set, setIndex) => <p key={setIndex}>{set.analysisRole === "warmup" ? "Warm-up" : "Working set"} {setIndex + 1} · {set.durationSeconds ? `${set.durationSeconds}s` : set.reps === set.repMax ? `${set.reps} reps` : `${set.reps}–${set.repMax} reps`} <span>· Effort {set.effort}/5 · {set.restSeconds}s rest{set.warmupLoadPercent ? ` · ≈ ${set.warmupLoadPercent}% of working load` : ""}</span></p>) : <p>Set details available in MyMuscle</p>}
         </div></li>)}</ol>
         {program.lockedDays.includes(workout.day) ? <div className={s.partial}><Lock /><span>The rest of this session is in MyMuscle</span></div> : null}
       </article>)}

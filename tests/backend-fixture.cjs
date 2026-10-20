@@ -6,9 +6,13 @@ globalThis.fetch = async (input, init) => {
   const url = String(input instanceof Request ? input.url : input);
   if (url.includes("/rest/v1/rpc/workout_public_preview_v1")) {
     const { share_id } = JSON.parse(init?.body || "{}");
+    if (share_id === "33333333-3333-4333-8333-333333333333") return Response.json({ version:1, name:"Typed training test", split:"Upper / Lower", goal:"Hypertrophy", emphasis:["chest"], frequency:4,
+      previewWorkouts:[{day:0,name:"Upper A",exercises:[{name:"Dumbbell Bench Press",muscle:"chest",sets:[
+        {reps:12,repMax:12,effort:0,restSeconds:45,analysisRole:"warmup",warmupLoadPercent:40},
+        {reps:8,repMax:10,effort:4,restSeconds:150,analysisRole:"work"}]}]}],lockedDays:[0,3,4],restDays:[2,5,6],visibleSets:2,hiddenSets:4 });
     if (share_id !== "11111111-1111-4111-8111-111111111111") return Response.json(null);
     return Response.json({ version: 1, name: "Upper / Lower Test", split: "Upper / Lower", goal: "Strength", emphasis: ["chest", "shoulders"], frequency: 3,
-      previewWorkouts: [{ day: 0, name: "Upper A", exercises: [{ name: "Barbell Bench Press", sets: [{ reps: 8, repMax: 12, effort: 2, restSeconds: 90 }] }] }], lockedDays: [2, 4], restDays: [1, 3, 5, 6], visibleSets: 1, hiddenSets: 2 });
+      previewWorkouts: [{ day: 0, name: "Upper A", exercises: [{ name: "Barbell Bench Press", muscle: "chest", sets: [{ reps: 8, repMax: 12, effort: 2, restSeconds: 90 }] }] }], lockedDays: [2, 4], restDays: [1, 3, 5, 6], visibleSets: 1, hiddenSets: 2 });
   }
   if (url.includes("/rest/v1/rpc/website_submit_v1")) {
     const body = JSON.parse(init?.body || "{}");

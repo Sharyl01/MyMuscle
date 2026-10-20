@@ -3,10 +3,10 @@ import { cache } from "react";
 
 export const SHARE_ORIGIN = "https://mymuscle.app";
 export const validShareId = (id: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id);
-type SetTarget = { reps: number; repMax: number; effort: number; restSeconds: number; durationSeconds?: number };
+type SetTarget = { reps: number; repMax: number; effort: number; restSeconds: number; durationSeconds?: number; analysisRole?: "work" | "warmup"; warmupLoadPercent?: number };
 export type WorkoutPreview = {
   name: string; split: string; goal: string; emphasis: string[]; frequency: number;
-  previewWorkouts: { day: number; name: string; exercises: { name: string; sets: SetTarget[] }[] }[];
+  previewWorkouts: { day: number; name: string; exercises: { name: string; muscle?: string; sets: SetTarget[] }[] }[];
   lockedDays: number[]; restDays: number[]; visibleSets: number; hiddenSets: number;
 };
 export const muscleLabels: Record<string, string> = { chest: "Chest", back: "Back", shoulders: "Shoulders", biceps: "Biceps", triceps: "Triceps", quads: "Quadriceps", hamstrings: "Hamstrings", glutes: "Glutes", calves: "Calves", core: "Core" };
@@ -31,9 +31,9 @@ export const getWorkoutPreview = cache(async (id: string): Promise<WorkoutPrevie
   let visible = 0;
   const previewWorkouts = data.previewWorkouts.map((workout: WorkoutPreview["previewWorkouts"][number]) => ({
     day: workout.day, name: workout.name, exercises: workout.exercises.map(exercise => ({
-      name: exercise.name, sets: exercise.sets.map(set => {
+      name: exercise.name, muscle: exercise.muscle && ["chest", "back", "shoulders", "biceps", "triceps", "legs", "core"].includes(exercise.muscle) ? exercise.muscle : undefined, sets: exercise.sets.map(set => {
         visible++;
-        return { reps: set.reps, repMax: set.repMax, effort: set.effort, restSeconds: set.restSeconds, ...(set.durationSeconds ? { durationSeconds: set.durationSeconds } : {}) };
+        return { reps: set.reps, repMax: set.repMax, effort: set.effort, restSeconds: set.restSeconds, ...(set.durationSeconds ? { durationSeconds: set.durationSeconds } : {}), ...(set.analysisRole === "warmup" || set.analysisRole === "work" ? { analysisRole: set.analysisRole } : {}), ...(Number.isInteger(set.warmupLoadPercent) && set.warmupLoadPercent! > 0 && set.warmupLoadPercent! <= 90 && set.analysisRole === "warmup" ? { warmupLoadPercent: set.warmupLoadPercent } : {}) };
       }),
     })),
   }));

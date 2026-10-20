@@ -53,3 +53,21 @@ test("only configured verified platform stores are selected; malformed destinati
     for (const [key, value] of Object.entries({ MYMUSCLE_APP_STORE_URL: original.ios, MYMUSCLE_GOOGLE_PLAY_URL: original.android, MYMUSCLE_ANDROID_CERT_SHA256: original.cert })) { if (value === undefined) delete process.env[key]; else process.env[key] = value; }
   }
 });
+
+
+test("shared programs keep warm-ups, individual effort and a trailing muscle icon readable", async ({ page }) => {
+  for (const width of [320, 390]) {
+    await page.setViewportSize({ width, height:900 });
+    await page.goto('/workout/33333333-3333-4333-8333-333333333333');
+    await expect(page.getByText('Warm-up 1 · 12 reps')).toBeVisible();
+    await expect(page.getByText(/Effort 0\/5.*40% of working load/)).toBeVisible();
+    await expect(page.getByText('Working set 2 · 8–10 reps')).toBeVisible();
+    await expect(page.getByText(/Effort 4\/5/)).toBeVisible();
+    const title=page.getByRole('heading',{name:'Dumbbell Bench Press'});
+    const icon=page.getByRole('img',{name:'Chest',exact:true});
+    await expect(icon).toBeVisible();
+    const a=await title.boundingBox(), b=await icon.locator('..').boundingBox();
+    expect(b!.x).toBeGreaterThan(a!.x+a!.width);
+    expect(await page.locator('body').evaluate(el=>el.scrollWidth>window.innerWidth)).toBe(false);
+  }
+});

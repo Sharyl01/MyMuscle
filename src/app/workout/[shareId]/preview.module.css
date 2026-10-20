@@ -35,3 +35,9 @@
 .open { display:block; padding:18px 0; font-size:12px; text-decoration:underline!important; text-underline-offset:4px; line-height:1.7; }.unlock>.note { font-size:11px; color:#a3a3a3; margin-bottom:10px; line-height:1.75; }
 .footer { padding:40px 0; display:flex; justify-content:space-between; gap:16px; color:#909090; font-size:10px; }
 @media(max-width:400px) { .page { padding:0 18px; }.header { padding:23px 0; }.header .eyebrow { font-size:8px; letter-spacing:.08em; }.header>a { font-size:11px; gap:9px; }.hero { padding-top:45px; }.workout { padding:20px; }.unlock { padding:30px 20px; }.lockBadge { display:none; }.locked { padding:20px; gap:12px; }.open { font-size:11px; } }
+
+.exerciseDetail { flex:1; min-width:0; }
+.exerciseTitle { display:flex; align-items:center; gap:12px; }
+.exerciseTitle h4 { flex:1; min-width:0; overflow-wrap:anywhere; }
+.muscleIcon { width:40px; height:40px; flex-shrink:0; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.muscleIcon img { object-fit:contain; filter:brightness(0); }
