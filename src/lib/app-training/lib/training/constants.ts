@@ -38,6 +38,9 @@ export const MUSCLE_CFG: Record<string, { red: number; overload: number }> = {
   abs: { red: 13, overload: 19 },
   obliques_l: { red: 12, overload: 18 },
   obliques_r: { red: 12, overload: 18 },
+  // Shared lower-body model thresholds; heuristic, not measured recovery.
+  adductors_l: { red: 17, overload: 24 },
+  adductors_r: { red: 17, overload: 24 },
   quads_l: { red: 17, overload: 24 },
   quads_r: { red: 17, overload: 24 },
   calves_l: { red: 16, overload: 23 },
@@ -52,6 +55,8 @@ export const MUSCLE_CFG: Record<string, { red: number; overload: number }> = {
   lat_r: { red: 14, overload: 20 },
   rhomboid_l: { red: 13, overload: 19 },
   rhomboid_r: { red: 13, overload: 19 },
+  infraspinatus_l: { red: 12, overload: 17 },
+  infraspinatus_r: { red: 12, overload: 17 },
   glutes_l: { red: 17, overload: 24 },
   glutes_r: { red: 17, overload: 24 },
   hamstrings_l: { red: 15, overload: 22 },
@@ -62,7 +67,8 @@ export const MUSCLE_CFG: Record<string, { red: number; overload: number }> = {
   triceps_r: { red: 14, overload: 21 },
 };
 
-export type SetEntry = { reps: number; weight: number; effort: number };
+export type SetAnalysisRole = "work" | "warmup";
+export type SetEntry = { reps: number; weight: number; effort: number; /** Explicit hold duration; timed sets have reps=0. Legacy plank reps retain their unknown unit. */ durationSeconds?: number; /** User correction for work-set analysis only; actual load/PR evidence is unchanged. */ analysisRole?: SetAnalysisRole };
 export type LogEntry = {
   id: string;
   ts: number;
@@ -72,7 +78,7 @@ export type LogEntry = {
   weights: Record<string, number>;
 };
 
-export type LogMode = "weighted" | "reps_only";
+export type LogMode = "weighted" | "reps_only" | "timed";
 
 export type Exercise = {
   id: string;
@@ -124,7 +130,7 @@ export const EXERCISE_DB = [
   { id: "dumbbell-decline-fly", name: "Dumbbell Decline Fly", weights: { lower_chest: 0.58, upper_chest: 0.28, front_delt_l: 0.07, front_delt_r: 0.07 } },
   { id: "decline-push-up", name: "Decline Push Up", logMode: "reps_only", weights: { upper_chest: 0.24, lower_chest: 0.4, triceps: 0.22, front_delt_l: 0.07, front_delt_r: 0.07 } },
   { id: "mid-cable-crossover-fly", name: "Mid Cable Crossover Fly", weights: { upper_chest: 0.43, lower_chest: 0.47, front_delt_l: 0.05, front_delt_r: 0.05 } },
-  { id: "ohp", name: "Overhead Press", weights: { front_delt_l: 0.3, front_delt_r: 0.3, side_delt_l: 0.15, side_delt_r: 0.15, traps_front: 0.1 } },
+  { id: "ohp", name: "Overhead Press", weights: { front_delt_l: 0.25, front_delt_r: 0.25, side_delt_l: 0.1, side_delt_r: 0.1, triceps: 0.25, traps_front: 0.05 } },
   { id: "seated-dumbbell-press", name: "Seated Dumbbell Press", aliases: ["Dumbbell Shoulder Press", "Seated DB Shoulder Press", "DB Shoulder Press", "Seated Dumbbell Front Press"], weights: { front_delt_l: 0.28, front_delt_r: 0.28, side_delt_l: 0.17, side_delt_r: 0.17, traps_front: 0.05, triceps: 0.05 } },
   { id: "standing-dumbbell-shoulder-press", name: "Standing Dumbbell Shoulder Press", aliases: ["Standing DB Shoulder Press"], weights: { front_delt_l: 0.27, front_delt_r: 0.27, side_delt_l: 0.16, side_delt_r: 0.16, traps_front: 0.08, triceps: 0.06 } },
   { id: "seated-arnold-press", name: "Seated Arnold Press", aliases: ["Arnold Press", "Arnold Dumbbell Press"], weights: { front_delt_l: 0.3, front_delt_r: 0.3, side_delt_l: 0.14, side_delt_r: 0.14, traps_front: 0.05, triceps: 0.07 } },
@@ -231,7 +237,8 @@ export const EXERCISE_DB = [
   { id: "triceps-pushdown", name: "Cable Triceps Pushdown (Straight Bar)", aliases: ["Triceps Pushdown"], weights: { triceps: 0.9, front_delt_l: 0.05, front_delt_r: 0.05 } },
   { id: "rope-triceps-pushdown", name: "Rope Triceps Pushdown", weights: { triceps: 0.82, front_delt_l: 0.06, front_delt_r: 0.06, forearm_l: 0.03, forearm_r: 0.03 } },
   { id: "reverse-grip-cable-pushdown", name: "Reverse Grip Cable Pushdown", weights: { triceps: 0.78, forearm_l: 0.11, forearm_r: 0.11 } },
-  { id: "single-arm-cable-pushdown", name: "Single Arm Cable Pushdown", weights: { triceps: 0.83, front_delt_l: 0.035, front_delt_r: 0.035, forearm_l: 0.05, forearm_r: 0.05 } },
+  { id: "single-arm-cable-pushdown", name: "One Arm Cable Push Down", aliases: ["Single Arm Cable Pushdown", "Single Arm Cable Push Down", "One Arm Cable Pushdown"], weights: { triceps: 0.83, front_delt_l: 0.035, front_delt_r: 0.035, forearm_l: 0.05, forearm_r: 0.05 } },
+  { id: "single-arm-rope-cable-pushdown", name: "One Arm Cable Push Down (With Rope)", aliases: ["Single Arm Rope Pushdown", "Single Arm Cable Pushdown (With Rope)", "One Arm Cable Pushdown (With Rope)"], weights: { triceps: 0.83, front_delt_l: 0.035, front_delt_r: 0.035, forearm_l: 0.05, forearm_r: 0.05 } },
   { id: "overhead-cable-triceps-extension", name: "Overhead Cable Triceps Extension (Rope or Bar)", weights: { triceps: 0.8, front_delt_l: 0.08, front_delt_r: 0.08, forearm_l: 0.02, forearm_r: 0.02 } },
   { id: "db-kickback", name: "Dumbbell Kickback", weights: { triceps: 0.35, rear_delt_l: 0.15, rear_delt_r: 0.15, traps_back_l: 0.1, traps_back_r: 0.1, forearm_l: 0.075, forearm_r: 0.075 } },
   { id: "cable-kickback", name: "Cable Kickback", weights: { triceps: 0.52, rear_delt_l: 0.12, rear_delt_r: 0.12, traps_back_l: 0.08, traps_back_r: 0.08, forearm_l: 0.04, forearm_r: 0.04 } },
@@ -245,8 +252,8 @@ export const EXERCISE_DB = [
   { id: "leg-raise-lying", name: "Leg Raise (Lying)", logMode: "reps_only", weights: { abs: 0.78, obliques_l: 0.11, obliques_r: 0.11 } },
   { id: "leg-raise", name: "Hanging Leg Raise", logMode: "reps_only", weights: { abs: 0.75, obliques_l: 0.1, obliques_r: 0.1 } },
   { id: "hanging-knee-raise", name: "Hanging Knee Raise", logMode: "reps_only", weights: { abs: 0.7, obliques_l: 0.15, obliques_r: 0.15 } },
-  { id: "plank", name: "Plank", logMode: "reps_only", weights: { abs: 0.5, obliques_l: 0.25, obliques_r: 0.25 } },
-  { id: "side-plank", name: "Side Plank", logMode: "reps_only", weights: { abs: 0.2, obliques_l: 0.4, obliques_r: 0.4 } },
+  { id: "plank", name: "Plank", logMode: "timed", weights: { abs: 0.5, obliques_l: 0.25, obliques_r: 0.25 } },
+  { id: "side-plank", name: "Side Plank", logMode: "timed", weights: { abs: 0.2, obliques_l: 0.4, obliques_r: 0.4 } },
   { id: "cable-crunch", name: "Cable Crunch (Kneeling)", aliases: ["Cable Crunch"], weights: { abs: 0.75, obliques_l: 0.125, obliques_r: 0.125 } },
   { id: "standing-cable-crunch", name: "Standing Cable Crunch", weights: { abs: 0.7, obliques_l: 0.15, obliques_r: 0.15 } },
   { id: "seated-ab-crunch-machine", name: "Seated Ab Crunch Machine", weights: { abs: 0.82, obliques_l: 0.09, obliques_r: 0.09 } },
@@ -254,7 +261,13 @@ export const EXERCISE_DB = [
   { id: "cable-woodchopper-low", name: "Cable Woodchopper (Low to High)", weights: { abs: 0.1, obliques_l: 0.45, obliques_r: 0.45 } },
   { id: "russian-twist", name: "Russian Twist", logMode: "reps_only", weights: { abs: 0.2, obliques_l: 0.4, obliques_r: 0.4 } },
   { id: "ab-roller", name: "Ab Roller", logMode: "reps_only", weights: { abs: 0.7, obliques_l: 0.15, obliques_r: 0.15 } },
-  { id: "squat", name: "Barbell Back Squat", aliases: ["Back Squat"], weights: { quads_l: 0.4, quads_r: 0.4, calves_l: 0.1, calves_r: 0.1 } },
+  // Back squat: conservative model allocation, not measured recruitment/growth percentages.
+  // Glute involvement is supported by Kubo 2019 (PMID 31230110), not these exact coefficients.
+  // Match the existing catalogue convention (symmetrical parts, sum 1). Quads remain dominant;
+  // glutes contribute and calves are a small supporting term. No threshold/formula redesign.
+  // Only new logs use this allocation. Read/edit/sync retain their stored weights_snapshot.
+  // Historical allocations are deliberately not backfilled or silently recoloured.
+  { id: "squat", name: "Barbell Back Squat", aliases: ["Back Squat"], weights: { quads_l: 0.34, quads_r: 0.34, glutes_l: 0.12, glutes_r: 0.12, calves_l: 0.04, calves_r: 0.04 } },
   { id: "front-squat", name: "Front Squat", weights: { quads_l: 0.44, quads_r: 0.44, glutes_l: 0.06, glutes_r: 0.06 } },
   { id: "hack-squat-machine", name: "Hack Squat Machine", weights: { quads_l: 0.38, quads_r: 0.38, glutes_l: 0.08, glutes_r: 0.08, calves_l: 0.04, calves_r: 0.04 } },
   { id: "smith-squat", name: "Smith Machine Squat", weights: { quads_l: 0.32, quads_r: 0.32, glutes_l: 0.14, glutes_r: 0.14, calves_l: 0.03, calves_r: 0.03, lower_back_l: 0.01, lower_back_r: 0.01 } },
@@ -354,7 +367,7 @@ export const EXERCISE_DB = [
   { id: "kneeling-squat", name: "Kneeling Squat", weights: { glutes_l: 0.24, glutes_r: 0.24, hamstrings_l: 0.1, hamstrings_r: 0.1, quads_l: 0.08, quads_r: 0.08, lower_back_l: 0.04, lower_back_r: 0.04, abs: 0.04, obliques_l: 0.02, obliques_r: 0.02 } },
   { id: "prone-flutter-kicks", name: "Prone Flutter Kicks", logMode: "reps_only", weights: { glutes_l: 0.18, glutes_r: 0.18, hamstrings_l: 0.14, hamstrings_r: 0.14, lower_back_l: 0.08, lower_back_r: 0.08, abs: 0.08, obliques_l: 0.06, obliques_r: 0.06 } },
   { id: "hip-abduction-machine", name: "Hip Abduction Machine", weights: { glutes_l: 0.45, glutes_r: 0.45, hamstrings_l: 0.05, hamstrings_r: 0.05 } },
-  { id: "hip-adduction-machine", name: "Hip Adduction Machine", weights: { quads_l: 0.35, quads_r: 0.35, hamstrings_l: 0.12, hamstrings_r: 0.12, glutes_l: 0.03, glutes_r: 0.03 } },
+  { id: "hip-adduction-machine", name: "Hip Adduction Machine", weights: { adductors_l: 0.5, adductors_r: 0.5 } },
   // Conventional deadlift stays on the legacy id so existing PRs/badges/logs keep resolving.
   { id: "barbell-deadlift", name: "Conventional Deadlift", aliases: ["Barbell Deadlift", "Deadlift", "Conventional Barbell Deadlift"], weights: { hamstrings_l: 0.16, hamstrings_r: 0.16, glutes_l: 0.14, glutes_r: 0.14, lower_back_l: 0.12, lower_back_r: 0.12, quads_l: 0.08, quads_r: 0.08 } },
   { id: "romanian-deadlift", name: "Romanian Deadlift", weights: { hamstrings_l: 0.35, hamstrings_r: 0.35, glutes_l: 0.15, glutes_r: 0.15, lower_back_l: 0.075, lower_back_r: 0.075 } },
@@ -364,6 +377,33 @@ export const EXERCISE_DB = [
   { id: "seated-leg-curl-machine", name: "Seated Leg Curl Machine", weights: { hamstrings_l: 0.38, hamstrings_r: 0.38, glutes_l: 0.08, glutes_r: 0.08, calves_l: 0.04, calves_r: 0.04 } },
   { id: "hamstring-curl", name: "Hamstring Curl", weights: { hamstrings_l: 0.5, hamstrings_r: 0.5 } },
   { id: "glute-bridge", name: "Glute Bridge", weights: { glutes_l: 0.5, glutes_r: 0.5, hamstrings_l: 0.1, hamstrings_r: 0.1 } },
+  // Profiles and execution assumptions: docs/exercise-additions-2026-10-13.md.
+  // Unilateral entries follow the existing convention: a completed set includes both sides.
+  { id: "deficit-push-up", name: "Deficit Push-Up", aliases: ["Deficit Push Up", "Deep Push-Up"], logMode: "reps_only", weights: { upper_chest: 0.25, lower_chest: 0.35, front_delt_l: 0.075, front_delt_r: 0.075, triceps: 0.2, abs: 0.05 } },
+  { id: "single-arm-cable-chest-press", name: "Single-Arm Cable Chest Press", aliases: ["Single Arm Cable Chest Press", "One Arm Cable Chest Press"], weights: { upper_chest: 0.25, lower_chest: 0.3, front_delt_l: 0.075, front_delt_r: 0.075, triceps: 0.2, obliques_l: 0.05, obliques_r: 0.05 } },
+  { id: "cable-y-raise", name: "Cable Y Raise", aliases: ["Cable Y-Raise", "Cable Y Raises"], weights: { lower_traps_l: 0.25, lower_traps_r: 0.25, side_delt_l: 0.1, side_delt_r: 0.1, front_delt_l: 0.1, front_delt_r: 0.1, traps_back_l: 0.05, traps_back_r: 0.05 } },
+  { id: "meadows-row", name: "Meadows Row", aliases: ["Landmine Meadows Row", "Meadow Row"], weights: { lat_l: 0.22, lat_r: 0.22, traps_back_l: 0.08, traps_back_r: 0.08, rhomboid_l: 0.05, rhomboid_r: 0.05, rear_delt_l: 0.05, rear_delt_r: 0.05, biceps_l: 0.05, biceps_r: 0.05, forearm_l: 0.03, forearm_r: 0.03, lower_back_l: 0.02, lower_back_r: 0.02 } },
+  { id: "cable-external-rotation", name: "Cable External Rotation", aliases: ["Cable Shoulder External Rotation", "Cable Rotator Cuff External Rotation"], weights: { infraspinatus_l: 0.45, infraspinatus_r: 0.45, rear_delt_l: 0.05, rear_delt_r: 0.05 } },
+  { id: "cable-preacher-curl", name: "Cable Preacher Curl (Supinated Grip)", aliases: ["Cable Preacher Curl", "Supinated Cable Preacher Curl"], weights: { biceps_l: 0.45, biceps_r: 0.45, forearm_l: 0.05, forearm_r: 0.05 } },
+  { id: "incline-cable-curl", name: "Incline Cable Curl", aliases: ["Incline Bench Cable Curl", "Cable Incline Curl"], weights: { biceps_l: 0.45, biceps_r: 0.45, forearm_l: 0.05, forearm_r: 0.05 } },
+  { id: "single-arm-overhead-cable-extension", name: "Single-Arm Overhead Cable Extension", aliases: ["Single Arm Overhead Cable Extension", "One Arm Overhead Cable Triceps Extension"], weights: { triceps: 0.94, forearm_l: 0.03, forearm_r: 0.03 } },
+  { id: "lying-cable-triceps-extension", name: "Lying Cable Triceps Extension", aliases: ["Cable Skull Crusher", "Lying Cable Tricep Extension"], weights: { triceps: 0.94, forearm_l: 0.03, forearm_r: 0.03 } },
+  { id: "ez-bar-french-press", name: "EZ-Bar French Press", aliases: ["EZ Bar French Press", "Seated EZ-Bar Overhead Triceps Extension"], weights: { triceps: 0.94, forearm_l: 0.03, forearm_r: 0.03 } },
+  { id: "pendulum-squat", name: "Pendulum Squat", aliases: ["Pendulum Squat Machine"], weights: { quads_l: 0.35, quads_r: 0.35, glutes_l: 0.15, glutes_r: 0.15 } },
+  { id: "single-leg-leg-press", name: "Single-Leg Leg Press", aliases: ["Single Leg Leg Press", "Unilateral Leg Press", "One Leg Press"], weights: { quads_l: 0.35, quads_r: 0.35, glutes_l: 0.15, glutes_r: 0.15 } },
+  { id: "nordic-hamstring-curl", name: "Nordic Hamstring Curl", aliases: ["Nordic Curl", "Nordic Hamstring", "Russian Leg Curl"], logMode: "reps_only", weights: { hamstrings_l: 0.45, hamstrings_r: 0.45, lower_back_l: 0.025, lower_back_r: 0.025, abs: 0.05 } },
+  { id: "single-leg-romanian-deadlift", name: "Single-Leg Romanian Deadlift", aliases: ["Single Leg Romanian Deadlift", "Single-Leg RDL", "Single Leg RDL"], weights: { hamstrings_l: 0.27, hamstrings_r: 0.27, glutes_l: 0.18, glutes_r: 0.18, lower_back_l: 0.05, lower_back_r: 0.05 } },
+  { id: "hip-thrust-machine", name: "Hip Thrust Machine", aliases: ["Machine Hip Thrust", "Glute Drive Machine"], weights: { glutes_l: 0.45, glutes_r: 0.45, hamstrings_l: 0.05, hamstrings_r: 0.05 } },
+  { id: "45-degree-back-extension-glute-bias", name: "45° Back Extension (Glute Bias)", aliases: ["45 Degree Back Extension Glute Bias", "Glute Biased Back Extension", "Glute-Focused Back Extension"], weights: { glutes_l: 0.3, glutes_r: 0.3, hamstrings_l: 0.15, hamstrings_r: 0.15, lower_back_l: 0.05, lower_back_r: 0.05 } },
+  { id: "cable-hip-abduction", name: "Cable Hip Abduction", aliases: ["Standing Cable Hip Abduction", "Cable Leg Abduction"], weights: { glutes_l: 0.5, glutes_r: 0.5 } },
+  { id: "reverse-hyperextension", name: "Reverse Hyperextension", aliases: ["Reverse Hyper", "Reverse Hyper Extension"], weights: { glutes_l: 0.22, glutes_r: 0.22, hamstrings_l: 0.18, hamstrings_r: 0.18, lower_back_l: 0.1, lower_back_r: 0.1 } },
+  { id: "donkey-calf-raise", name: "Donkey Calf Raise", aliases: ["Donkey Calf Raises", "Donkey Calf Raise Machine"], weights: { calves_l: 0.5, calves_r: 0.5 } },
+  { id: "single-leg-standing-calf-raise", name: "Single-Leg Standing Calf Raise", aliases: ["Single Leg Standing Calf Raise", "One Leg Standing Calf Raise"], weights: { calves_l: 0.5, calves_r: 0.5 } },
+  { id: "dumbbell-shrug", name: "Dumbbell Shrug", aliases: ["Dumbbell Shrugs", "DB Shrug"], weights: { traps_back_l: 0.46, traps_back_r: 0.46, forearm_l: 0.04, forearm_r: 0.04 } },
+  { id: "wrist-roller", name: "Wrist Roller", aliases: ["Forearm Wrist Roller"], weights: { forearm_l: 0.5, forearm_r: 0.5 } },
+  { id: "forearm-pronation-supination", name: "Forearm Pronation/Supination", aliases: ["Forearm Pronation Supination", "Dumbbell Pronation Supination", "Wrist Pronation Supination"], weights: { forearm_l: 0.425, forearm_r: 0.425, biceps_l: 0.075, biceps_r: 0.075 } },
+  { id: "cable-shrug", name: "Cable Shrug", aliases: ["Cable Shrugs", "Standing Cable Shrug"], weights: { traps_back_l: 0.46, traps_back_r: 0.46, forearm_l: 0.04, forearm_r: 0.04 } },
+  { id: "reverse-crunch", name: "Reverse Crunch", aliases: ["Reverse Crunches", "Lying Reverse Crunch"], logMode: "reps_only", weights: { abs: 0.85, obliques_l: 0.075, obliques_r: 0.075 } },
 ] as Exercise[];
 
 export const REPS_OPTIONS = Array.from({ length: 50 }, (_, i) => i + 1);
@@ -385,6 +425,9 @@ export const NICE_NAME: Record<string, string> = {
   abs: "Abs",
   obliques_l: "Obliques (L)",
   obliques_r: "Obliques (R)",
+  adductors: "Adductors",
+  adductors_l: "Adductors (L)",
+  adductors_r: "Adductors (R)",
   quads_l: "Quads (L)",
   quads_r: "Quads (R)",
   calves_l: "Calves (L)",
@@ -404,6 +447,9 @@ export const NICE_NAME: Record<string, string> = {
   rhomboid_r: "Rhomboids (R)",
   rhomboid: "Rhomboids",
   rhomboids: "Rhomboids",
+  infraspinatus_l: "Infraspinatus (L)",
+  infraspinatus_r: "Infraspinatus (R)",
+  infraspinatus: "Infraspinatus",
   glutes_l: "Glutes (L)",
   glutes_r: "Glutes (R)",
   glutes: "Glutes",
@@ -501,6 +547,7 @@ export const FEATURED_SEARCH_EXERCISES_BY_MUSCLE: Record<string, string[]> = {
 };
 
 export const FEATURED_EXERCISES_BY_MUSCLE: Record<string, string[]> = {
+  infraspinatus: ["cable-external-rotation"],
   upper_chest: [
     "incline-barbell-bench-press",
     "incline-db-press",

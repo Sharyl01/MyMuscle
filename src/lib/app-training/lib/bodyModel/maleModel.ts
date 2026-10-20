@@ -39,15 +39,30 @@ export const BODY_MODEL_MUSCLE_IDS = [
   "upper_chest_r",
 ] as const;
 
-export type BodyModelMuscleId = (typeof BODY_MODEL_MUSCLE_IDS)[number];
+// The shipped GLBs still use rhomboid_* for the superficial scapular meshes.
+// Translate asset names at the model boundary; exercise rhomboid loads stay distinct.
+export const muscleIdForModelMesh = (name: string): string =>
+  name.replace(/^rhomboid(?=_[lr]$)/u, "infraspinatus");
 
-const BODY_MODEL_MUSCLE_SET = new Set<string>(BODY_MODEL_MUSCLE_IDS);
+export type BodyModelMuscleId = (typeof BODY_MODEL_MUSCLE_IDS)[number] | "infraspinatus_l" | "infraspinatus_r";
+
+const BODY_MODEL_MUSCLE_SET = new Set<string>([...BODY_MODEL_MUSCLE_IDS, "infraspinatus_l", "infraspinatus_r"]);
 
 export const isBodyModelMuscle = (name: string): name is BodyModelMuscleId =>
   BODY_MODEL_MUSCLE_SET.has(name);
 
+export function modelSelectionMembers(bodyType: "male" | "female", selected: string | null, members: string[], differentParts: boolean): string[] {
+  const targets = differentParts && selected ? [selected] : members;
+  if (bodyType === "male") return targets;
+  return [...new Set(targets.flatMap(id => {
+    const base = id.replace(/_stroke$/u, "").replace(/_[lr]$/u, "");
+    const pair = [`${base}_l`, `${base}_r`].filter(isBodyModelMuscle);
+    return pair.length === 2 ? pair : [id];
+  }))];
+}
+
 export const baseMuscleIdForModelMesh = (name: BodyModelMuscleId) =>
-  name.replace(/_(l|r)$/u, "");
+  muscleIdForModelMesh(name).replace(/_(l|r)$/u, "");
 
 /**
  * Color keys are ordered from generic to specific. This lets a bilateral app
@@ -55,6 +70,7 @@ export const baseMuscleIdForModelMesh = (name: BodyModelMuscleId) =>
  * side-specific override when one exists.
  */
 export const colorKeysForModelMesh = (name: BodyModelMuscleId) => {
+  name = muscleIdForModelMesh(name) as BodyModelMuscleId;
   const base = baseMuscleIdForModelMesh(name);
   return Array.from(new Set([base, `${base}_stroke`, name, `${name}_stroke`]));
 };
@@ -62,7 +78,8 @@ export const colorKeysForModelMesh = (name: BodyModelMuscleId) => {
 export const bodyModelTypeForProfile = (profile?: {
   gender?: "Male" | "Female" | "Other" | "PreferNotToSay";
   sex?: "male" | "female" | "other";
-}): "male" | "female" => {
+}, preference?: "auto" | "male" | "female"): "male" | "female" => {
+  if (preference === "male" || preference === "female") return preference;
   if (profile?.gender !== undefined) {
     return profile.gender === "Female" ? "female" : "male";
   }

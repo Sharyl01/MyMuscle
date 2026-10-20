@@ -14,7 +14,14 @@ const server = spawn(
   ],
   {
     stdio: "inherit",
-    env: { ...process.env, MYMUSCLE_E2E: "1" },
+    env: { ...process.env, MYMUSCLE_E2E: "1",
+      // The preload intercepts every backend request; never require real keys
+      // merely to reach the isolated server-action fixtures.
+      SUPABASE_SERVICE_ROLE_KEY: "fixture-only-not-a-real-key",
+      ADMIN_2FA_SECRET: "fixture-only-website-ingress-secret-for-tests",
+      ...(process.env.MYMUSCLE_CAPTCHA_E2E === "1" ? {
+      ADMIN_LOGIN_ALIASES: JSON.stringify({ testadmin: "test-admin@example.invalid" }),
+    } : {}) },
   },
 );
 for (const signal of ["SIGINT", "SIGTERM"])

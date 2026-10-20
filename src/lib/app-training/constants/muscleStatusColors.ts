@@ -1,5 +1,7 @@
 // Cool greens with brightness balanced against the existing Perfect blue (#2AA9E6).
 // Keep the blue and the model's lighting/material settings independent of this palette.
+export const NEUTRAL_MUSCLE_COLOR = "#b8b5ac";
+
 export const MUSCLE_STATUS_GREENS = {
   building: "#57B98D",
   ready: "#35B88A",

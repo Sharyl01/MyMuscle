@@ -1,7 +1,7 @@
 {
-  "version": "2026-10-15-publicatie-v1",
+  "version": "2026-10-20-publicatie-v1",
   "status": "Privacyverklaring",
-  "updatedAt": "2026-10-15",
+  "updatedAt": "2026-10-20",
   "language": "nl",
   "sections": [
     {
@@ -71,8 +71,8 @@
       "title": "8. Website en wachtlijst",
       "body": [
         "Als je je aanmeldt voor de wachtlijst, gebruiken we je e-mailadres voor de gevraagde bevestiging en informatie over de lancering van MyMuscle. Je kunt je toestemming intrekken en verwijdering vragen via support@mymuscle.app. Wachtlijstgegevens worden niet automatisch gebruikt voor andere marketingcampagnes.",
-        "De website telt paginaweergaven en browsersessies met een willekeurige sessiecode. Daarvoor wordt een code in sessionStorage van je browser geplaatst. De eigen bezoekentabel bevat geen rechtstreeks IP-adres of user-agent. Voor het beperken van misbruik verwerkt de server wel het IP-adres en maakt daarvan een dagelijks wisselende beveiligingscode. De code en verzoekaantallen worden maximaal twee dagen in de beveiligingstabel bewaard. Dit maakt de verwerking niet automatisch anoniem.",
-        "Hosting- en beveiligingsdiensten kunnen technische verbindingsgegevens, waaronder IP-adressen en verzoekinformatie, verwerken. Beperkte eigen bezoekersmetingen worden gebruikt voor inzicht in het bereik van de website; bij verwerking op basis van gerechtvaardigd belang kun je bezwaar maken. Waar voor opslag of uitlezing op je toestel toestemming vereist is, wordt die vooraf gevraagd."
+        "Alleen als je bij Website statistics kiest voor Allow statistics telt de website paginaweergaven en browsersessies met een willekeurige sessiecode in sessionStorage. Zonder toestemming maken we die sessiecode niet aan en versturen we geen eigen bezoekersmetingen. Je kunt even gemakkelijk No statistics kiezen en je keuze via Website statistics in de voettekst wijzigen. We onthouden uitsluitend je toestemmingskeuze maximaal zes maanden in een eigen cookie, zodat we die kunnen respecteren. Bij intrekking stopt de meting en verwijderen we de sessiecode uit die browser. Eerdere bezoekmetingen worden uiterlijk na 90 dagen bij de dagelijkse opruiming verwijderd.",
+        "De eigen bezoekentabel bevat geen rechtstreeks IP-adres of user-agent. Voor het beperken van misbruik verwerkt de server wel het IP-adres en maakt daarvan een dagelijks wisselende beveiligingscode. De code en verzoekaantallen worden maximaal twee dagen in de beveiligingstabel bewaard. Hosting- en beveiligingsdiensten kunnen technische verbindingsgegevens, waaronder IP-adressen en verzoekinformatie, verwerken om de website te leveren en beveiligen. Deze noodzakelijke beveiliging staat los van je keuze voor optionele bezoekmetingen. De verwerking is daarmee niet automatisch anoniem."
       ]
     },
     {

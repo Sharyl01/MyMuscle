@@ -19,6 +19,7 @@ import {
 } from "@/lib/admin/two-factor";
 import { sendAdminVerificationCode } from "@/lib/email/admin-verification";
 import { createClient } from "@/lib/supabase/server";
+import { CAPTCHA_ERROR, readCaptchaToken } from "@/lib/security/turnstile";
 
 export type LoginState = {
   error: string | null;
@@ -46,6 +47,8 @@ export async function login(
 ): Promise<LoginState> {
   const username = normalizeAdminUsername(formData.get("username"));
   const password = formData.get("password");
+  const captchaToken = readCaptchaToken(formData);
+  if (!captchaToken) return { error: CAPTCHA_ERROR, username, verificationPending: false };
 
   if (
     !isValidAdminUsername(username) ||
@@ -64,11 +67,11 @@ export async function login(
   const supabase = await createClient();
   const email = resolveAdminEmail(username);
   const { data: signInData, error: signInError } =
-    await supabase.auth.signInWithPassword({ email, password });
+    await supabase.auth.signInWithPassword({ email, password, options: { captchaToken } });
 
   if (signInError || !signInData.user || !signInData.session) {
     return {
-      error: INVALID_LOGIN_MESSAGE,
+      error: signInError?.code === "captcha_failed" ? CAPTCHA_ERROR : INVALID_LOGIN_MESSAGE,
       username,
       verificationPending: false,
     };
@@ -221,6 +224,8 @@ export async function requestPasswordReset(
   formData: FormData,
 ): Promise<PasswordResetRequestState> {
   const username = normalizeAdminUsername(formData.get("username"));
+  const captchaToken = readCaptchaToken(formData);
+  if (!captchaToken) return { error: CAPTCHA_ERROR, sent: false };
 
   // Keep the response the same for unknown usernames so this endpoint does not
   // reveal which private administrator accounts exist.
@@ -236,6 +241,7 @@ export async function requestPasswordReset(
   const supabase = await createClient();
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: "https://mymuscle.app/admin/login",
+    captchaToken,
   });
 
   if (error) {

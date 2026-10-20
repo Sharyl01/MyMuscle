@@ -12,6 +12,7 @@ import {
   type VerificationState,
 } from "@/app/admin/actions";
 import { createClient } from "@/lib/supabase/client";
+import { CaptchaForm } from "./captcha-form";
 
 const initialState: LoginState = {
   error: null,
@@ -277,7 +278,7 @@ export function LoginForm({
 
   if (showResetRequest) {
     return (
-      <form action={resetAction} className="mt-8 space-y-5">
+      <CaptchaForm action={resetAction} className="mt-8 space-y-5">
         <div>
           <label htmlFor="resetUsername" className="text-sm font-semibold text-slate-200">
             Gebruikersnaam
@@ -325,12 +326,12 @@ export function LoginForm({
         >
           Terug naar inloggen
         </button>
-      </form>
+      </CaptchaForm>
     );
   }
 
   return (
-    <form action={formAction} className="mt-8 space-y-5">
+    <CaptchaForm action={formAction} className="mt-8 space-y-5">
       {passwordUpdated ? (
         <p
           role="status"
@@ -416,6 +417,6 @@ export function LoginForm({
       >
         Wachtwoord vergeten?
       </button>
-    </form>
+    </CaptchaForm>
   );
 }

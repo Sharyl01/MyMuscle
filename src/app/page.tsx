@@ -46,7 +46,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className={s.site}>
-      <WebsiteVisitTracker />
       <a className={s.skipLink} href="#main-content">
         Skip to content
       </a>
@@ -76,6 +75,7 @@ export default function Home() {
           <Link href="/terms">Terms</Link>
           <a href="mailto:support@mymuscle.app">Get in touch ↗</a>
         </nav>
+        <WebsiteVisitTracker />
       </footer>
     </div>
   );

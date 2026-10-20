@@ -309,8 +309,11 @@ test("waitlist validation, keyboard focus, success, and duplicate response", asy
     .getByRole("button", { name: "Join the waitlist" })
     .click();
   await expect(page.getByRole("dialog").getByRole("status")).toContainText(
-    "already on the waitlist",
+    "You’re on the list.",
   );
+  // Duplicate addresses receive the same public response; do not disclose
+  // whether someone else has already registered this email address.
+  await expect(page.getByRole("dialog").getByRole("status")).not.toContainText("already");
 });
 
 test("waitlist backend error is recoverable and dialog traps focus", async ({
@@ -339,7 +342,7 @@ test("waitlist backend error is recoverable and dialog traps focus", async ({
 test("countdown retains UTC boundaries and ticks in the browser", async ({
   page,
 }) => {
-  expect(new Date(LAUNCH_AT_UTC_MS).toISOString()).toBe("2026-09-25T18:00:00.000Z");
+  expect(new Date(LAUNCH_AT_UTC_MS).toISOString()).toBe("2026-10-21T14:00:00.000Z");
   expect(getTimeRemaining(LAUNCH_AT_UTC_MS)).toBeNull();
   expect(getTimeRemaining(LAUNCH_AT_UTC_MS + 1)).toBeNull();
   expect(

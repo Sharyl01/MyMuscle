@@ -6,7 +6,7 @@ import path from "node:path";
 const root = fileURLToPath(new URL("../", import.meta.url));
 const app = path.resolve(root, process.env.MYMUSCLE_APP_SOURCE || "../Fitnessapp28-11-2025");
 const target = path.join(root, "src/lib/app-training");
-const files = ["lib/training/constants.ts", "lib/training/utils.ts", "lib/training/loadSpectrum.ts", "constants/muscleStatusColors.ts", "lib/bodyModel/maleModel.ts"];
+const files = ["lib/training/constants.ts", "lib/training/utils.ts", "lib/training/setMeasurement.ts", "lib/training/muscleMapping.ts", "lib/training/loadSpectrum.ts", "constants/muscleStatusColors.ts", "lib/bodyModel/maleModel.ts"];
 const manifest = {};
 for (const file of files) {
   const source = await readFile(path.join(app, file));

@@ -1,4 +1,6 @@
+import { normalizeKnownMuscleMapping } from "./muscleMapping";
 import { MUSCLE_CFG, type LogEntry, type SetEntry } from "./constants";
+import { isTimedExercise, isTimedSet, isValidTrainingSet } from "./setMeasurement";
 
 export const uid = () => Math.random().toString(36).slice(2, 11);
 
@@ -114,12 +116,17 @@ const repQualityFactor = (reps: number) => {
   return 0.8;
 };
 
-export const effRepsOfSet = ({ reps, effort }: SetEntry) => {
-  if (reps <= 0) return 0;
+export const effRepsOfSet = (set: SetEntry, hold = false) => {
+  if (!isValidTrainingSet(set)) return 0;
+  const { reps, effort } = set;
+  const timed = hold || isTimedSet(set);
+  if (!timed && reps <= 0) return 0;
   const safeEffort = Number.isFinite(effort) ? Math.round(effort) : 0;
   const idx = Math.max(0, Math.min(EFFORT_SET_MULTIPLIER.length - 1, safeEffort));
   const effortFactor = EFFORT_SET_MULTIPLIER[idx] ?? 0;
-  return HARD_SET_STIMULUS_UNIT * effortFactor * repQualityFactor(reps);
+  // A recorded hold counts as a set. Seconds are neither repetitions nor a
+  // validated duration-to-fatigue conversion; effort supplies the model weight.
+  return HARD_SET_STIMULUS_UNIT * effortFactor * (timed ? 1 : repQualityFactor(reps));
 };
 
 // Jeff-style muscle set accounting:
@@ -139,8 +146,8 @@ export const sumStimulusForDate = (logs: LogEntry[], targetTs: number) => {
   const acc: Record<string, number> = {};
   for (const log of logs) {
     if (!inSameDay(log.ts, targetTs)) continue;
-    const setEff = log.sets.reduce((sum, st) => sum + effRepsOfSet(st), 0);
-    for (const [m, w] of Object.entries(log.weights)) {
+    const setEff = log.sets.reduce((sum, st) => sum + effRepsOfSet(st, isTimedExercise(log.exerciseId)), 0);
+    for (const [m, w] of Object.entries(normalizeKnownMuscleMapping(log).weights)) {
       const credit = setCreditForMuscleWeight(w);
       if (credit <= 0) continue;
       acc[m] = (acc[m] || 0) + setEff * credit;

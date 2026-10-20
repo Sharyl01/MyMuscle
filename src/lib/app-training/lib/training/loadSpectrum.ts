@@ -25,14 +25,14 @@ export const MUSCLE_LOAD_LABELS = [
   "Zeer laag",
   "Licht",
   "Licht-matig",
-  "Opbouwend",
-  "Goed",
-  "Sterk",
-  "Perfect",
-  "Boven doel",
+  "Matig",
+  "Matig-hoog",
+  "Hoog binnen modelzone",
+  "Bovenzijde modelzone",
+  "Boven modelzone",
   "Hoog",
   "Zeer hoog",
-  "Overbelasting",
+  "Hoogste modelzone",
 ] as const;
 
 export type MuscleLoadSpectrumStep = (typeof MUSCLE_LOAD_SPECTRUM)[number] & { index: number };

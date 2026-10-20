@@ -1,7 +1,9 @@
 {
-  "lib/training/constants.ts": "738b8f2bdc29fef696060f9f1ae1b538be3ec924acc60e92134185a15ebd8cff",
-  "lib/training/utils.ts": "06594874d3c5ff0e9af2406a23f831ea238c232188b8b9b49147fec13daf4a92",
-  "lib/training/loadSpectrum.ts": "abb2611160617ae9a869ff6c28780f34213a0da83264a0d67a56a4eeea655840",
-  "constants/muscleStatusColors.ts": "83ade1ce3636ad468627826e1c9408adc441b5b94d14645c693674ab6b38b8c3",
-  "lib/bodyModel/maleModel.ts": "9714a49ef0f3deb6fd4c11689905ccee1d3cb967cd64f421d88d20162fdff6fa"
+  "lib/training/constants.ts": "9ced1424fe955d4609f34493e0676ce900d9a2b86f9a0b8afc66079fef00af4e",
+  "lib/training/utils.ts": "3402c87e2bd2687a8cb31f76f3683c71f75eb7317a37bb59beea6ee317512dcb",
+  "lib/training/setMeasurement.ts": "901496b20d5e08988bfc060ef7af944bba80855c8d6e94b92e086dc25c2687be",
+  "lib/training/muscleMapping.ts": "e11b2169214cdbd124d5647d0d4d4475fb37dd4fb6d303a116dbcf10a40ae2cb",
+  "lib/training/loadSpectrum.ts": "bfebb04533dc8309a6f15c3a8a886248ae4ceec9cac184813529426492001286",
+  "constants/muscleStatusColors.ts": "e0d0df8dd767800320963281f6a94327c56205c3d74e6e7341257e909935f754",
+  "lib/bodyModel/maleModel.ts": "f8f95a200f5d15926626ea7667b84be3dd4d2ab24752a9370da9e1e79c6f2d08"
 }

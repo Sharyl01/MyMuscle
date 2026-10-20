@@ -129,7 +129,7 @@
 .clock b { font-size:42px; font-weight:500; letter-spacing:-.05em; font-variant-numeric:tabular-nums; line-height:1.2; }
 .clock small { text-transform:uppercase; font-size:10px; color:#b1bea4; letter-spacing:.14em; margin-top:8px; }
 .finalWatermark { position:absolute; bottom:-6vw; left:50%; transform:translateX(-50%); color:#51432108; font-weight:600; font-size:19.5vw; letter-spacing:-.08em; pointer-events:none; white-space:nowrap; line-height:1; }
-.footer { max-width:1700px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:35px 4.5%; border-top:1px solid var(--line); gap:24px; }
+.footer { max-width:1700px; margin:auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; padding:35px 4.5%; border-top:1px solid var(--line); gap:24px; }
 .footer>div { display:flex; flex-direction:column; gap:10px; }
 .footer .brand { font-size:20px; }
 .footer small { font-size:11px; line-height:1.7; color:#a6b19b; }

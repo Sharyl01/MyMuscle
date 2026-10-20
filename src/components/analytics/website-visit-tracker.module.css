@@ -1,0 +1,10 @@
+.preferences { border:0; padding:0; background:none; color:inherit; font:inherit; cursor:pointer; text-align:left; min-height:44px; }
+.panel { width:min(420px,100%); padding:20px; border:1px solid #58605a; border-radius:16px; background:#111713; color:#f5f7f5; font-size:13px; line-height:1.6; }
+.panel strong { display:block; font-size:16px; }
+.panel p { margin:8px 0 16px; }
+.panel a { text-decoration:underline; }
+.actions { display:flex; flex-wrap:wrap; gap:8px; }
+.actions button { flex:1 1 140px; min-height:44px; border:1px solid #819487; border-radius:8px; padding:10px 14px; background:#223128; color:#fff; cursor:pointer; font:inherit; font-weight:600; }
+.actions button:hover { background:#344b3d; }
+.preferences:focus-visible,.panel a:focus-visible,.actions button:focus-visible { outline:3px solid #9de2aa; outline-offset:3px; }
+.container { width:100%; min-width:0; flex-basis:100%; }
