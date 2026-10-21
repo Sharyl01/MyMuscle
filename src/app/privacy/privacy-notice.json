@@ -1,7 +1,7 @@
 {
-  "version": "2026-10-20-publicatie-v1",
+  "version": "2026-10-22-directe-profielfoto-v1",
   "status": "Privacyverklaring",
-  "updatedAt": "2026-10-20",
+  "updatedAt": "2026-10-22",
   "language": "nl",
   "sections": [
     {
@@ -51,7 +51,7 @@
     {
       "title": "6. Profielfoto's, meldingen en moderatie",
       "body": [
-        "Nieuwe profielfoto's worden eerst privé in Supabase opgeslagen. Alleen jij en bevoegde moderators kunnen een nog niet goedgekeurde foto bekijken. Een foto wordt pas gepubliceerd na goedkeuring; je eerdere goedgekeurde foto blijft tijdens de beoordeling staan. Bestandscontrole controleert ondersteunde formaten, niet of een foto naaktbeelden bevat. We sturen foto's niet naar een externe AI-detectiedienst en gebruiken ze niet voor biometrische identificatie.",
+        "Je profielfoto wordt na het uploaden direct zichtbaar voor andere gebruikers, zonder voorafgaande moderatorgoedkeuring. We slaan foto's op in Supabase en gebruiken toegangscontroles voor het bekijken ervan. Bestandscontrole controleert ondersteunde formaten, niet de inhoud. We gebruiken geen externe AI-detectiedienst of biometrische identificatie. Bevoegde moderators kunnen een gemelde foto achteraf verwijderen.",
         "Een beperkte automatische tekstfilter kan bepaalde expliciete teksten en links blokkeren. Bevoegde moderators beoordelen meldingen en kunnen inhoud verwijderen, profielinhoud verbergen of het plaatsen van nieuwe community-inhoud tijdelijk beperken. De communityregels leggen uit welke inhoud niet is toegestaan en hoe je kunt melden, blokkeren of bezwaar maken.",
         "Bij een melding bewaren we de reden, toelichting, relevante identificatoren, een kopie van de gemelde inhoud, het contactadres van de melder en diens verklaring dat de melding naar beste weten juist en volledig is. Dit gebruiken we om de melding te beoordelen, besluiten uit te leggen en misbruik of bezwaar te behandelen. Alleen bevoegde personen krijgen toegang. De identiteit van de melder en interne notities worden niet aan de betrokken gebruiker getoond.",
         "Na het opslaan kan de app een ingevulde supportmail openen. Jij kiest of je deze mail verstuurt. MyMuscle verzendt die mail niet automatisch; de opgeslagen melding blijft ook zonder mail beschikbaar voor beoordeling. Er wordt geen foto of privaat bericht als e-mailbijlage toegevoegd.",
