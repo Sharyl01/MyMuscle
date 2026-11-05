@@ -117,6 +117,7 @@
 .finalCta .cta:hover { background:#344431; border-color:#43513b; box-shadow:0 12px 28px #29362726; }
 .finalCta .cta span { background:#ffffff0d; }
 .finalCta .countdownLabel,.finalCta .countdownLabel small,.finalCta .clock small { color:#62654f; }
+.downloadBadges { justify-content:center; align-items:center; flex-wrap:wrap; margin-top:26px; position:relative; z-index:1; }
 .finalNote { font-size:14px; color:#575d4c; margin-top:22px!important; }
 .demoSummary { max-width:490px; margin:-14px auto 34px!important; }
 .demoSummary strong { display:block; font-size:20px; line-height:1.4; font-weight:550; letter-spacing:-.035em; color:#354936; }

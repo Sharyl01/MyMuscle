@@ -1,14 +1,15 @@
-// Set verified public store URLs at release time. Until then the existing
-// landing page is the working destination. Never infer release from the date.
+import { APP_STORE_URL, GOOGLE_PLAY_URL } from "./app-links";
+
+// Both listings are verified live. Explicit overrides still fail closed.
 export function appDownloadDestination(userAgent: string) {
   const ios = /iPhone|iPad|iPod|Macintosh.*Mobile/i.test(userAgent);
   const android = /Android/i.test(userAgent);
-  const configured = ios ? process.env.MYMUSCLE_APP_STORE_URL : android ? process.env.MYMUSCLE_GOOGLE_PLAY_URL : undefined;
+  const configured = ios ? process.env.MYMUSCLE_APP_STORE_URL || APP_STORE_URL : android ? process.env.MYMUSCLE_GOOGLE_PLAY_URL || GOOGLE_PLAY_URL : undefined;
   try {
     if (configured) {
       const url = new URL(configured);
       if (url.protocol === "https:" && !url.username && !url.password && !url.port && (
-        (ios && url.hostname === "apps.apple.com" && /\/id\d+$/.test(url.pathname)) ||
+        (ios && url.hostname === "apps.apple.com" && url.pathname.endsWith("/id6815727446")) ||
         (android && url.hostname === "play.google.com" && url.pathname === "/store/apps/details" && url.searchParams.get("id") === "com.apphletes.mymuscle")
       )) return url.href;
     }

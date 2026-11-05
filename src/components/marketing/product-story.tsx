@@ -2,7 +2,7 @@ import Image from "next/image";
 import { RecordCollection } from "./record-collection";
 import { ProductScreen } from "./product-screen";
 import { LaunchCountdown } from "./launch-countdown";
-import { WaitlistCta } from "./waitlist-cta";
+import { StoreBadges } from "./store-badges";
 import { BadgeGallery } from "./badge-gallery";
 import { OverviewExperience } from "./overview-experience";
 import s from "./marketing.module.css";
@@ -142,8 +142,8 @@ export function FinalCta() {
       </h2>
       <p className={s.demoSummary}><strong>A preview of what’s possible.</strong><span>This website is an interactive demo. Discover more tools, deeper insights and the full MyMuscle experience in the app.</span></p>
       <LaunchCountdown />
-      <WaitlistCta />
-      <p className={s.finalNote}>Be first to hear what’s next for MyMuscle.</p>
+      <StoreBadges className={s.downloadBadges} />
+      <p className={s.finalNote}>Download MyMuscle and start your first workout.</p>
       <span className={s.finalWatermark} aria-hidden="true">
         MYMUSCLE
       </span>

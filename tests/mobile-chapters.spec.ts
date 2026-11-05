@@ -105,10 +105,9 @@ test("snap releases focused inputs and keeps expanded workout controls reachable
   await expect(page.getByRole("group", { name: /^Interactive muscle model/ })).toBeVisible();
   await page.getByRole("button", { name: "Gold Bench Press badge requirements" }).click();
   await expect(page.locator("#badge-requirements")).toContainText("80 kg");
-  await page.getByRole("button", { name: "Join Waitlist" }).click();
-  await expect(page.getByRole("dialog")).toBeVisible();
-  expect(await page.evaluate(() => getComputedStyle(document.documentElement).scrollSnapType)).toBe("none");
-  await page.getByRole("button", { name: "Close waitlist form" }).click();
+  const download = page.locator("#waitlist").getByRole("link", { name: "Download MyMuscle on the App Store" });
+  await download.focus();
+  await expect(download).toBeFocused();
 });
 
 test("vertical touch swipes over the model settle on the next chapter and can return", async ({ browser, browserName }) => {

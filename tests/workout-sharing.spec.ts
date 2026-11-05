@@ -24,7 +24,7 @@ test("public link renders a limited premium preview, safe social metadata and lo
   expect(response.headers()["cache-control"]).toContain("no-store");
   expect(response.headers()["referrer-policy"]).toBe("no-referrer");
   const download = await request.get(`/workout/${token}/download`, { maxRedirects: 0, headers: { "user-agent": "iPhone" } });
-  expect(download.status()).toBe(302); expect(download.headers().location).toBe("https://mymuscle.app/#waitlist");
+  expect(download.status()).toBe(302); expect(download.headers().location).toBe("https://apps.apple.com/nl/app/mymuscle-workout-tracker/id6815727446");
 });
 test("invalid and revoked share links reveal nothing and association routes are public JSON", async ({ request }) => {
   for (const id of ["not-a-token", "22222222-2222-4222-8222-222222222222"]) {

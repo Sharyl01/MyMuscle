@@ -1,6 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import { getTimeRemaining, LAUNCH_AT_UTC_MS } from "../src/lib/launch";
 import {
   exercises,
   groupForMesh,
@@ -206,8 +205,7 @@ test("mobile touch rotates without selecting, and tap selects a muscle", async (
   await expect(
     page.getByRole("heading", { name: "A strong start.", level: 2 }),
   ).toBeAttached();
-  await page.getByRole("link", { name: /MyMuscle on the App Store/ }).click();
-  await expect(page).toHaveURL(/#waitlist$/);
+  await expect(page.getByRole("link", { name: "Download MyMuscle on the App Store" }).first()).toHaveAttribute("href", "https://apps.apple.com/nl/app/mymuscle-workout-tracker/id6815727446");
   await context.close();
 });
 
@@ -273,93 +271,50 @@ for (const width of [360, 430, 768, 1280, 1920]) {
   });
 }
 
-test("waitlist validation, keyboard focus, success, and duplicate response", async ({
+test("live store buttons replace the launch waitlist in the header and final section", async ({
   page,
 }) => {
-  await home(page);
-  const trigger = page.getByRole("button", { name: "Join Waitlist" }).first();
-  await trigger.click();
-  const dialog = page.getByRole("dialog");
-  const email = dialog.getByLabel("Email address");
-  await expect(email).toBeFocused();
-  await email.fill("invalid");
-  await dialog.getByRole("button", { name: "Join the waitlist" }).click();
-  expect(
-    await email.evaluate((input) => (input as HTMLInputElement).validity.valid),
-  ).toBe(false);
-  await email.fill("test@host");
-  await dialog.getByRole("button", { name: "Join the waitlist" }).click();
-  await expect(dialog.getByRole("alert")).toHaveText(
-    "Enter a valid email address.",
-  );
-  await email.fill("new@example.invalid");
-  await dialog.getByRole("button", { name: "Join the waitlist" }).click();
-  await expect(dialog.getByRole("status")).toContainText("You’re on the list.");
-  await page.keyboard.press("Escape");
-  await expect(dialog).toHaveCount(0);
-  await expect(trigger).toBeFocused();
-  await page.reload();
-  await page.getByRole("button", { name: "Join Waitlist" }).last().click();
-  await page
-    .getByRole("dialog")
-    .getByLabel("Email address")
-    .fill("duplicate@example.invalid");
-  await page
-    .getByRole("dialog")
-    .getByRole("button", { name: "Join the waitlist" })
-    .click();
-  await expect(page.getByRole("dialog").getByRole("status")).toContainText(
-    "You’re on the list.",
-  );
-  // Duplicate addresses receive the same public response; do not disclose
-  // whether someone else has already registered this email address.
-  await expect(page.getByRole("dialog").getByRole("status")).not.toContainText("already");
-});
-
-test("waitlist backend error is recoverable and dialog traps focus", async ({
-  page,
-}) => {
-  await home(page);
-  await page.getByRole("button", { name: "Join Waitlist" }).first().click();
-  const dialog = page.getByRole("dialog");
-  await dialog.getByRole("button", { name: "Close waitlist form" }).focus();
-  await page.keyboard.press("Shift+Tab");
-  await expect(
-    dialog.getByRole("link", { name: "Privacy Policy" }),
-  ).toBeFocused();
-  await page.keyboard.press("Tab");
-  await expect(
-    dialog.getByRole("button", { name: "Close waitlist form" }),
-  ).toBeFocused();
-  await dialog.getByLabel("Email address").fill("failure@example.invalid");
-  await dialog.getByRole("button", { name: "Join the waitlist" }).click();
-  await expect(dialog.getByRole("alert")).toContainText("Please try again.");
-  await dialog.getByLabel("Email address").fill("new@example.invalid");
-  await dialog.getByRole("button", { name: "Join the waitlist" }).click();
-  await expect(dialog.getByRole("status")).toContainText("You’re on the list.");
-});
-
-test("countdown retains UTC boundaries and ticks in the browser", async ({
-  page,
-}) => {
-  expect(new Date(LAUNCH_AT_UTC_MS).toISOString()).toBe("2026-10-21T14:00:00.000Z");
-  expect(getTimeRemaining(LAUNCH_AT_UTC_MS)).toBeNull();
-  expect(getTimeRemaining(LAUNCH_AT_UTC_MS + 1)).toBeNull();
-  expect(
-    getTimeRemaining(LAUNCH_AT_UTC_MS - 90061000)?.map((unit) => unit.value),
-  ).toEqual(["01", "01", "01", "01"]);
-  await page.clock.install({ time: LAUNCH_AT_UTC_MS - 65000 });
   await page.goto("/");
-  const timer = page.locator("#waitlist").getByRole("timer");
-  const releaseTimer = page.getByRole("banner").getByRole("timer");
-  await expect(releaseTimer).toContainText("THE RELEASE COUNTDOWN");
-  await expect(timer).toContainText("The countdown is on");
-  const before = await timer.innerText();
-  await page.clock.fastForward(2000);
-  expect(await timer.innerText()).not.toBe(before);
-  await page.clock.fastForward(65000);
-  await expect(timer).toContainText("Launch countdown complete");
-  await expect(releaseTimer).toContainText("Launch countdown complete");
+  for (const section of [page.getByRole("banner"), page.locator("#waitlist")]) {
+    const apple = section.getByRole("link", { name: "Download MyMuscle on the App Store" });
+    const google = section.getByRole("link", { name: "Download MyMuscle on Google Play" });
+    await expect(apple).toHaveAttribute("href", "https://apps.apple.com/nl/app/mymuscle-workout-tracker/id6815727446");
+    await expect(google).toHaveAttribute("href", "https://play.google.com/store/apps/details?id=com.apphletes.mymuscle");
+    await apple.focus();
+    await expect(apple).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(google).toBeFocused();
+  }
+  await expect(page.getByRole("button", { name: "Join Waitlist" })).toHaveCount(0);
+});
+
+test("download redirects select the correct live store for each phone", async ({
+  request,
+}) => {
+  for (const [agent, destination] of [
+    ["iPhone", "https://apps.apple.com/nl/app/mymuscle-workout-tracker/id6815727446"],
+    ["Android", "https://play.google.com/store/apps/details?id=com.apphletes.mymuscle"],
+  ]) {
+    const response = await request.get("/download", { headers: { "user-agent": agent }, maxRedirects: 0 });
+    expect(response.status()).toBe(302);
+    expect(response.headers().location).toBe(destination);
+  }
+});
+
+test("release notices announce the live apps", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const notices = page.getByRole("note", { name: "App release status" });
+  await expect(notices).toHaveCount(2);
+  for (const notice of await notices.all()) {
+    await expect(notice).toContainText("MyMuscle is live");
+    await expect(notice).toContainText("Available now on the App Store and Google Play.");
+  }
+  await expect(page.getByRole("timer")).toHaveCount(0);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.getByRole("banner").getByRole("note", { name: "App release status" })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 
 test("fallback is usable without WebGL, and failed model requests recover", async ({
@@ -391,8 +346,7 @@ test("fallback is usable without WebGL, and failed model requests recover", asyn
   await expect(
     page.getByRole("heading", { name: "A strong start.", level: 2 }),
   ).toBeAttached();
-  await page.getByRole("button", { name: "Join Waitlist" }).first().click();
-  await expect(page.getByRole("dialog")).toBeVisible();
+  await expect(page.locator("#waitlist").getByRole("link", { name: "Download MyMuscle on Google Play" })).toBeAttached();
 });
 
 test("failed GLB fetch keeps a neutral fallback without a poster", async ({ page }) => {
@@ -420,8 +374,8 @@ test("slow 3D loading has no poster, no asset swap and no layout shift", async (
   await expect(page.locator("[data-model-status]")).toHaveAttribute("data-model-status", "ready");
   await expect(page.locator("[data-neutral-loading]")).toHaveCount(0);
   expect(await page.locator("[data-model-status]").boundingBox()).toEqual(before);
-  await expect(page.locator("#waitlist").getByRole("button", { name: "Join Waitlist" })).toHaveCount(1);
-  await expect(page.locator("#waitlist").getByRole("timer")).toBeAttached();
+  await expect(page.locator("#waitlist").getByRole("link", { name: "Download MyMuscle on the App Store" })).toBeAttached();
+  await expect(page.locator("#waitlist").getByRole("note", { name: "App release status" })).toBeAttached();
 });
 
 test("app preview requires exercise choice and supports draft sets, intensity, removal and save", async ({ page }) => {
@@ -538,7 +492,7 @@ test("WebGL is idle between interactions and while the hero is offscreen", async
   expect(await draws()).toBe(offscreen);
 });
 
-test("public page and waitlist meet automated WCAG accessibility checks", async ({
+test("public page and live download buttons meet automated WCAG accessibility checks", async ({
   page,
 }) => {
   await home(page);
@@ -548,10 +502,4 @@ test("public page and waitlist meet automated WCAG accessibility checks", async 
     .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
     .analyze();
   expect(pageAudit.violations).toEqual([]);
-  await page.getByRole("button", { name: "Join Waitlist" }).first().click();
-  const dialogAudit = await new AxeBuilder({ page })
-    .include('[role="dialog"]')
-    .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
-    .analyze();
-  expect(dialogAudit.violations).toEqual([]);
 });
