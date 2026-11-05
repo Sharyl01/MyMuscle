@@ -24,4 +24,15 @@ from `MyMuscle <noreply@mymuscle.app>`, with reply-to `support@mymuscle.app` and
 the same two store URLs. The current waitlist query returned 11 distinct email
 addresses. Recipient data, sending credentials and detailed receipts stay outside
 Git. Per-recipient idempotency keys prevent duplicate sends on identical retries.
-Publication and sending results are recorded after execution.
+Production deployment `dpl_CTKdrb5hvQdudBXB7G7Nvy2FkXyJ` is READY and aliased to
+`mymuscle.app` and `www.mymuscle.app`. The deployed homepage was checked for the
+live announcement, both pairs of direct store links and the absence of old
+pending-review badges. Live `/download` checks returned the correct 302 location
+for both iPhone and Android user agents.
+
+Resend accepted all 11 individual launch messages on 5 November 2026 at 10:05 CET,
+with an individual message ID for every recipient and no failed/unknown responses.
+Subject: `Good news: MyMuscle is live!`. Provider acceptance is confirmed; inbox
+delivery and opens have not been independently verified. The protected one-off
+sender used production credentials without exposing them locally and was removed
+after sending. Its deployment had no public domain alias.
