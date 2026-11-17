@@ -16,6 +16,9 @@ export function appDownloadDestination(userAgent: string) {
   } catch { /* fail closed to the real landing page */ }
   return "https://mymuscle.app/#waitlist";
 }
+// Public Play App Signing certificate, verified against generated APKs for
+// released version 15 and version 18 through Google Play's read-only API.
+export const ANDROID_PLAY_SIGNING_CERTIFICATE = "7F:A5:11:E4:4E:42:47:02:4F:36:4B:E0:4A:F9:FD:74:05:01:AC:DC:E2:35:5A:E8:87:AD:E1:DB:EF:DE:13:7D";
 export function androidFingerprints() {
-  return (process.env.MYMUSCLE_ANDROID_CERT_SHA256 ?? "").split(",").map(s => s.trim().toUpperCase()).filter(s => /^(?:[0-9A-F]{2}:){31}[0-9A-F]{2}$/.test(s));
+  return (process.env.MYMUSCLE_ANDROID_CERT_SHA256 ?? ANDROID_PLAY_SIGNING_CERTIFICATE).split(",").map(s => s.trim().toUpperCase()).filter(s => /^(?:[0-9A-F]{2}:){31}[0-9A-F]{2}$/.test(s));
 }

@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import { appDownloadDestination, androidFingerprints } from "../src/lib/app-destinations";
+import { appDownloadDestination, androidFingerprints, ANDROID_PLAY_SIGNING_CERTIFICATE } from "../src/lib/app-destinations";
 const token = "11111111-1111-4111-8111-111111111111";
 test("public link renders a limited premium preview, safe social metadata and locked sessions", async ({ page, request }) => {
   for (const width of [320, 390, 1100]) {
@@ -34,11 +34,18 @@ test("invalid and revoked share links reveal nothing and association routes are 
   const apple = await request.get("/.well-known/apple-app-site-association");
   expect(apple.status()).toBe(200); expect(apple.headers()["content-type"]).toContain("application/json");
   expect(await apple.json()).toMatchObject({ applinks: { details: [{ appIDs: ["3KX3R7T584.com.apphletes.mymuscle"] }] } });
-  const android = await request.get("/.well-known/assetlinks.json"); expect(android.status()).toBe(200); expect(await android.json()).toEqual([]);
+  const android = await request.get("/.well-known/assetlinks.json"); expect(android.status()).toBe(200);
+  expect(await android.json()).toEqual([{ relation: ["delegate_permission/common.handle_all_urls"], target: {
+    namespace: "android_app", package_name: "com.apphletes.mymuscle", sha256_cert_fingerprints: [ANDROID_PLAY_SIGNING_CERTIFICATE],
+  } }]);
 });
 test("only configured verified platform stores are selected; malformed destinations and certificates fail closed", () => {
   const original = { ios: process.env.MYMUSCLE_APP_STORE_URL, android: process.env.MYMUSCLE_GOOGLE_PLAY_URL, cert: process.env.MYMUSCLE_ANDROID_CERT_SHA256 };
   try {
+    delete process.env.MYMUSCLE_ANDROID_CERT_SHA256;
+    expect(androidFingerprints()).toEqual([ANDROID_PLAY_SIGNING_CERTIFICATE]);
+    process.env.MYMUSCLE_ANDROID_CERT_SHA256 = "not-a-cert";
+    expect(androidFingerprints()).toEqual([]);
     process.env.MYMUSCLE_APP_STORE_URL = "https://apps.apple.com/nl/app/mymuscle/id6815727446";
     process.env.MYMUSCLE_GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.apphletes.mymuscle";
     expect(appDownloadDestination("iPhone")).toBe(process.env.MYMUSCLE_APP_STORE_URL);
